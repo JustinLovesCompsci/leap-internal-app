@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mZr-yk-nl8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qqw-Ow-sh5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -11,18 +12,9 @@
             <objects>
                 <tableViewController id="apj-De-hlU" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="Lqn-PS-z2V">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HDc-zd-aIH">
-                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.38412586581413505" blue="0.76872238005050508" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" title="Register">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <sections>
                             <tableViewSection id="8ej-yI-YbL">
                                 <cells>
@@ -130,6 +122,36 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="x67-QC-cig">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x67-QC-cig" id="V7k-lL-GXg">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDc-zd-aIH">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.38412586581413505" blue="0.76872238005050508" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" title="Register">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
+                                                    </variation>
+                                                </button>
+                                            </subviews>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="HDc-zd-aIH"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="HDc-zd-aIH"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -147,7 +169,8 @@
         <!--Navigation Controller-->
         <scene sceneID="c9i-hO-6xQ">
             <objects>
-                <navigationController id="mZr-yk-nl8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationVC" id="mZr-yk-nl8" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="smp-hf-bNy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -169,6 +192,7 @@
                         <viewControllerLayoutGuide type="bottom" id="P8N-qH-Xyu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="omo-lt-qqc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-gU-gzx">
@@ -187,8 +211,7 @@
                                         <exclude reference="mrv-nv-gjx"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="53" y="277" width="295" height="126"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="mrv-nv-gjx"/>
                                     </mask>
@@ -214,8 +237,7 @@
                                         <exclude reference="rdl-po-wmi"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="40" y="692" width="320" height="58"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="FF6-MG-lLn"/>
                                         <include reference="rdl-po-wmi"/>
@@ -244,14 +266,14 @@
                                 <exclude reference="7nt-zP-2Q5"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="WDW-jl-d5L"/>
+                                <exclude reference="2Pf-wj-T2B"/>
+                                <exclude reference="HeO-2s-8bb"/>
                                 <exclude reference="Vvc-Sa-PJI"/>
                                 <exclude reference="Xds-ps-CMZ"/>
                                 <exclude reference="hkD-uT-gYi"/>
                                 <exclude reference="pgV-Ko-kVT"/>
                                 <exclude reference="y2N-EC-AKs"/>
-                                <exclude reference="WDW-jl-d5L"/>
-                                <exclude reference="HeO-2s-8bb"/>
-                                <exclude reference="2Pf-wj-T2B"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -261,14 +283,14 @@
                                 <include reference="7nt-zP-2Q5"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="WDW-jl-d5L"/>
+                                <include reference="2Pf-wj-T2B"/>
+                                <include reference="HeO-2s-8bb"/>
                                 <include reference="Vvc-Sa-PJI"/>
                                 <include reference="Xds-ps-CMZ"/>
                                 <include reference="hkD-uT-gYi"/>
                                 <include reference="pgV-Ko-kVT"/>
                                 <include reference="y2N-EC-AKs"/>
-                                <include reference="WDW-jl-d5L"/>
-                                <include reference="HeO-2s-8bb"/>
-                                <include reference="2Pf-wj-T2B"/>
                             </mask>
                         </variation>
                     </view>
@@ -281,8 +303,9 @@
         <!--Login-->
         <scene sceneID="5MI-j0-LAz">
             <objects>
-                <tableViewController id="RIo-8k-ori" sceneMemberID="viewController">
+                <tableViewController id="RIo-8k-ori" customClass="LoginViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="Pxn-lf-pvg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -297,9 +320,6 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="15" y="8" width="377" height="53"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -341,9 +361,6 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="14" y="8" width="374" height="53"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -389,6 +406,9 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="loginPressed:" destination="RIo-8k-ori" eventType="touchUpInside" id="NAa-rF-mi1"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -430,6 +450,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Login" id="MIT-9m-EfX"/>
+                    <connections>
+                        <outlet property="emailField" destination="C7k-fO-TdI" id="frq-tW-Ahb"/>
+                        <outlet property="loginButton" destination="G5a-kO-8s4" id="w9O-9f-eud"/>
+                        <outlet property="passwordField" destination="Fr1-FB-h4U" id="ZXD-us-5FC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afp-iT-3zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -454,11 +479,12 @@
             </objects>
             <point key="canvasLocation" x="-501" y="1389"/>
         </scene>
-        <!--Root View Controller-->
+        <!--ToDo's-->
         <scene sceneID="mTE-Rt-ocv">
             <objects>
-                <tableViewController id="gkQ-RX-mLC" sceneMemberID="viewController">
+                <tableViewController id="gkQ-RX-mLC" customClass="TodoListViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4x3-eo-P2E">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -474,7 +500,7 @@
                             <outlet property="delegate" destination="gkQ-RX-mLC" id="G5Q-Xz-vP0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="CpL-zi-Bq8"/>
+                    <navigationItem key="navigationItem" title="ToDo's" id="86p-io-iv9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aqo-Wl-tCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -484,7 +510,7 @@
         <scene sceneID="jRO-r8-1FP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RdR-RV-TMa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="KhF-WL-ait"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="KG2-Gh-hHw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fES-Fe-yQB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -497,11 +523,12 @@
             </objects>
             <point key="canvasLocation" x="418.5" y="1322.25"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Profile-->
         <scene sceneID="O0K-bS-ZJa">
             <objects>
                 <tableViewController id="VRv-2z-RMX" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BuI-wn-y7X">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -517,7 +544,7 @@
                             <outlet property="delegate" destination="VRv-2z-RMX" id="yaS-92-Eod"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="WKe-6y-Y4y"/>
+                    <navigationItem key="navigationItem" title="Profile" id="sYW-aA-8Bb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

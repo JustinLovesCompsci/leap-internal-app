@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
-		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
 		81BA81521A49DA1800E65899 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BA81511A49DA1800E65899 /* Images.xcassets */; };
 		81BA81701A49DB6800E65899 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA816B1A49DB6800E65899 /* Bolts.framework */; };
@@ -21,14 +20,20 @@
 		81BA817D1A49E0EA00E65899 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817C1A49E0EA00E65899 /* MobileCoreServices.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
+		AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */; };
 		AABB02DA1AFF3E9F006C212C /* welcome.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AABB02D91AFF3E9F006C212C /* welcome.JPG */; };
+		AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */; };
+		AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DF1B0057FD006C212C /* LoginViewController.swift */; };
+		AABB02E31B005971006C212C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E21B005971006C212C /* Utilities.swift */; };
+		AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E41B005AE1006C212C /* TodoListViewController.swift */; };
+		AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E61B005B2C006C212C /* ProfileViewController.swift */; };
+		AABB02E91B006827006C212C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E81B006827006C212C /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		81BA81451A49DA1800E65899 /* Leap Internal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Leap Internal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81BA814C1A49DA1800E65899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		81BA814F1A49DA1800E65899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81BA81511A49DA1800E65899 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81BA816B1A49DB6800E65899 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -42,7 +47,14 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* ParseStarterProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		AABB02D91AFF3E9F006C212C /* welcome.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.JPG; sourceTree = "<group>"; };
+		AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		AABB02DF1B0057FD006C212C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AABB02E21B005971006C212C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		AABB02E41B005AE1006C212C /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		AABB02E61B005B2C006C212C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AABB02E81B006827006C212C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				AABB02D81AFF3E79006C212C /* resources */,
-				81BA81471A49DA1800E65899 /* ParseStarterProject */,
+				81BA81471A49DA1800E65899 /* DevCode */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
 			);
@@ -84,15 +96,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
+		81BA81471A49DA1800E65899 /* DevCode */ = {
 			isa = PBXGroup;
 			children = (
+				AAD609B51B01D9E400145F56 /* images */,
+				AABB02E11B005957006C212C /* Utils */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
-				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
+				AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */,
+				AABB02DF1B0057FD006C212C /* LoginViewController.swift */,
+				AABB02E41B005AE1006C212C /* TodoListViewController.swift */,
+				AABB02E61B005B2C006C212C /* ProfileViewController.swift */,
 			);
+			name = DevCode;
 			path = ParseStarterProject;
 			sourceTree = "<group>";
 		};
@@ -136,6 +154,23 @@
 				AABB02D91AFF3E9F006C212C /* welcome.JPG */,
 			);
 			name = resources;
+			sourceTree = "<group>";
+		};
+		AABB02E11B005957006C212C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AABB02E21B005971006C212C /* Utilities.swift */,
+				AABB02E81B006827006C212C /* Constants.swift */,
+				AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		AAD609B51B01D9E400145F56 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,8 +262,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */,
+				AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */,
+				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
+				AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */,
+				AABB02E31B005971006C212C /* Utilities.swift in Sources */,
+				AABB02E91B006827006C212C /* Constants.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +304,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zihao Zhang (53UUQ9EN73)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zihao Zhang (53UUQ9EN73)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -306,7 +348,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zihao Zhang (53UUQ9EN73)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zihao Zhang (53UUQ9EN73)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -331,6 +374,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -338,6 +382,7 @@
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Leap Internal";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
 			};
 			name = Debug;
@@ -348,6 +393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -355,6 +401,7 @@
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Leap Internal";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
 			};
 			name = Release;
