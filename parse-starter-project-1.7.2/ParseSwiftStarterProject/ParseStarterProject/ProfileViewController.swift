@@ -194,6 +194,18 @@ class ProfileViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 { /* General */
+            var item = generalItems[indexPath.row]
+            
+            switch (item) {
+            case NAME:
+                showAskAdminForChangeInfoDialog(NAME)
+            case EMAIL:
+                showAskAdminForChangeInfoDialog(EMAIL)
+            case PASSWORD:
+                showResetPasswordConfirmDialog()
+            default:
+                println("no valid general item selected")
+            }
             
         } else { /* Financials */
             
@@ -204,6 +216,25 @@ class ProfileViewController: UITableViewController {
         if segue.identifier == "detailSegue" {
 //            let createVC = segue.destinationViewController as! TodoDetailViewController
         }
+    }
+    
+    func showResetPasswordConfirmDialog(){
+        var alert = UIAlertController(title: "Reset Password?", message:"You will receive an email to reset password. Your password will be encrypted and secured.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Reset", style: .Default, handler: { (action:UIAlertAction!) in
+            PFUser.requestPasswordResetForEmailInBackground(PFUser.currentUser()!.email!)
+            //TODO: display HUD to show email sent to xxx@xxx.com
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showAskAdminForChangeInfoDialog(attribute:String) {
+        var alert = UIAlertController(title: "Oops...", message:"Please email to admin@leap-usa.com to request changing your \(attribute.lowercaseString).", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:{ (action:UIAlertAction!) in
+        }))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
 }

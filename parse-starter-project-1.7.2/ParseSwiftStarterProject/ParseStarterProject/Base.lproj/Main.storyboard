@@ -500,7 +500,13 @@
                             <outlet property="delegate" destination="gkQ-RX-mLC" id="G5Q-Xz-vP0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDo's" id="86p-io-iv9"/>
+                    <navigationItem key="navigationItem" title="ToDo's" id="86p-io-iv9">
+                        <barButtonItem key="rightBarButtonItem" title="New" id="uiC-yy-9HU">
+                            <connections>
+                                <action selector="newPressed:" destination="gkQ-RX-mLC" id="yzF-Z4-5ij"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="nQ1-Lh-9g8" kind="show" identifier="detailSegue" id="Xmb-ig-AjI"/>
                     </connections>
