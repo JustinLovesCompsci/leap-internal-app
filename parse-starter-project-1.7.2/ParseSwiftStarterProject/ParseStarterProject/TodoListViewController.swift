@@ -30,7 +30,6 @@ class TodoListViewController: UITableViewController {
             Utilities.loginUser(self)
         }
         else {
-            println("Current user is \(PFUser.currentUser()?.objectId)")
             if Utilities.isExecUser() {
                 loadExecTodos()
             }

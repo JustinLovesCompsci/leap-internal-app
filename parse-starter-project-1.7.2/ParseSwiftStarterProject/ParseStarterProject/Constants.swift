@@ -60,6 +60,7 @@ let PF_GAINS_UPDATED_AT                 = "updatedAt"               //  Date
 let PF_GAINS_START_DATE                 = "StartDate"               //  Date
 let PF_GAINS_END_DATE                   = "EndDate"                 //  Date
 let PF_GAINS_USER_LIST                  = "UserList"                //  Array
+let PF_GAINS_AMOUNT                     = "Amount"                  //  Number
 
 /* Losses */
 let PF_LOSSES_CLASS_NAME                 = "Losses"                  //  Class name
@@ -69,6 +70,7 @@ let PF_LOSSES_UPDATED_AT                 = "updatedAt"               //  Date
 let PF_LOSSES_START_DATE                 = "StartDate"               //  Date
 let PF_LOSSES_END_DATE                   = "EndDate"                 //  Date
 let PF_LOSSES_USER_LIST                  = "UserList"                //  Array
+let PF_LOSSES_AMOUNT                     = "Amount"                  //  Number
 
 /* Reimburse */
 let PF_REIMBURSE_CLASS_NAME              = "Reimburse"               //  Class name
@@ -78,6 +80,7 @@ let PF_REIMBURSE_UPDATED_AT              = "updatedAt"               //  Date
 let PF_REIMBURSE_START_DATE              = "StartDate"               //  Date
 let PF_REIMBURSE_END_DATE                = "EndDate"                 //  Date
 let PF_REIMBURSE_USER_LIST               = "UserList"                //  Array
+let PF_REIMBURSE_AMOUNT                  = "Amount"                  //  Number
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"

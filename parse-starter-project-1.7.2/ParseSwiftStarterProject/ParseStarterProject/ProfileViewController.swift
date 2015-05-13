@@ -8,10 +8,114 @@
 
 import Foundation
 import UIKit
+import Parse
 
 class ProfileViewController: UITableViewController {
     
-    let generalItems = []
+    let generalItems = [NAME, EMAIL, PASSWORD]
+    let financialItems = [TOTAL_GAIN, TOTAL_LOSS, TOTAL_REIMBURSE, TOTAL_NET]
+    
+    var gains:[PFObject] = []
+    var losses:[PFObject] = []
+    var reimburses:[PFObject] = []
+    
+    var totalGains = 0
+    var totalLosses = 0
+    var totalReimburses = 0
+    var totalNet = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadGains()
+        loadLosses()
+        loadReimburse()
+    }
+    
+    @IBAction func logOutPressed(sender: AnyObject) {
+        PFUser.logOut()
+        Utilities.loginUser(self)
+    }
+    
+    func loadGains() {
+        var query = PFQuery(className: PF_GAINS_CLASS_NAME)
+        query.whereKey(PF_GAINS_USER_LIST, equalTo: PFUser.currentUser()!)
+        query.orderByDescending(PF_GAINS_START_DATE)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                self.gains.removeAll(keepCapacity: false)
+                if objects != nil && objects?.count > 0 {
+                    self.gains.extend(objects as! [PFObject]!)
+                }
+                self.calculateNet()
+                self.tableView.reloadData()
+            } else {
+                //TODO: show error
+                println(error)
+            }
+        }
+    }
+    
+    func loadLosses() {
+        var query = PFQuery(className: PF_LOSSES_CLASS_NAME)
+        query.whereKey(PF_LOSSES_USER_LIST, equalTo: PFUser.currentUser()!)
+        query.orderByDescending(PF_LOSSES_START_DATE)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                self.losses.removeAll(keepCapacity: false)
+                if objects != nil && objects?.count > 0 {
+                    self.losses.extend(objects as! [PFObject]!)
+                }
+                self.calculateNet()
+                self.tableView.reloadData()
+            } else {
+                //TODO: show error
+                println(error)
+            }
+        }
+    }
+    
+    func loadReimburse() {
+        var query = PFQuery(className: PF_REIMBURSE_CLASS_NAME)
+        query.whereKey(PF_REIMBURSE_USER_LIST, equalTo: PFUser.currentUser()!)
+        query.orderByDescending(PF_REIMBURSE_START_DATE)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                self.reimburses.removeAll(keepCapacity: false)
+                if objects != nil && objects?.count > 0 {
+                    self.reimburses.extend(objects as! [PFObject]!)
+                }
+                self.calculateNet()
+                self.tableView.reloadData()
+            } else {
+                //TODO: show error
+                println(error)
+            }
+        }
+    }
+    
+    func resetFinancialStats() {
+        totalGains = 0
+        totalLosses = 0
+        totalReimburses = 0
+        totalNet = 0
+    }
+    
+    func calculateNet() {
+        resetFinancialStats()
+        for gain in gains {
+            totalGains += gain[PF_GAINS_AMOUNT] as! Int
+        }
+        for loss in losses {
+            totalLosses += loss[PF_LOSSES_AMOUNT] as! Int
+        }
+        for reimburse in reimburses {
+            totalReimburses += reimburse[PF_REIMBURSE_AMOUNT] as! Int
+        }
+        totalNet = totalGains - totalLosses + totalReimburses
+    }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -22,7 +126,7 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.01
+        return 40
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -42,19 +146,63 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        if indexPath.section == 0 { /* General */
+            var item = generalItems[indexPath.row]
+            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
+            cell.textLabel?.text = item
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            var user:PFObject = PFUser.currentUser()!
+            
+            switch (item) {
+            case NAME:
+                if let name = user[PF_USER_NAME] as? String {
+                    cell.detailTextLabel?.text = name
+                }
+            case EMAIL:
+                if let email = user[PF_USER_EMAIL] as? String {
+                    cell.detailTextLabel?.text = email
+                }
+            default:
+                cell.detailTextLabel?.text = ""
+            }
+            
+            return cell
+            
+        } else { /* Financials */
+            var item = financialItems[indexPath.row]
+            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
+            cell.textLabel?.text = item
+            cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+            
+            switch (item) {
+            case TOTAL_GAIN:
+                cell.detailTextLabel?.text = totalGains.description
+            case TOTAL_LOSS:
+                cell.detailTextLabel?.text = totalLosses.description
+            case TOTAL_REIMBURSE:
+                cell.detailTextLabel?.text = totalReimburses.description
+            case TOTAL_NET:
+                cell.detailTextLabel?.text = totalNet.description
+            default:
+                cell.detailTextLabel?.text = ""
+            }
+            
+            return cell
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        toShowTodo = genTodos[indexPath.row]
-        performSegueWithIdentifier("detailSegue", sender: self)
+        if indexPath.section == 0 { /* General */
+            
+        } else { /* Financials */
+            
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "detailSegue" {
-            let createVC = segue.destinationViewController as! TodoDetailViewController
-            createVC.todo = toShowTodo
+//            let createVC = segue.destinationViewController as! TodoDetailViewController
         }
     }
     
