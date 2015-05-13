@@ -14,6 +14,7 @@ class TodoListViewController: UITableViewController {
     
     var genTodos: [PFObject]! = []
     var execTodos: [PFObject]! = []
+    var toShowTodo: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ class TodoListViewController: UITableViewController {
 //    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 0.01
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -110,10 +111,15 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        toShowTodo = genTodos[indexPath.row]
+        performSegueWithIdentifier("detailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
+        if segue.identifier == "detailSegue" {
+            let createVC = segue.destinationViewController as! TodoDetailViewController
+            createVC.todo = toShowTodo
+        }
     }
     
 }

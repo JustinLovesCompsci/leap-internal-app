@@ -42,7 +42,7 @@ class Utilities {
             return false
         }
         let currentUser = PFUser.currentUser()
-//        return currentUser[PF_USER_IS_EXEC] as! BooleanType
+//        return currentUser[PF_USER_IS_EXEC] as! boolean_t
         return false
     }
     
