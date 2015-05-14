@@ -41,8 +41,30 @@ class Utilities {
         if PFUser.currentUser() == nil {
             return false
         }
-        let currentUser = PFUser.currentUser()
-//        return currentUser[PF_USER_IS_EXEC] as! boolean_t
+        var user:PFObject = PFUser.currentUser()!
+        var category = user[PF_USER_CATEGORY] as? Int
+        return category == PF_IS_EXEC
+    }
+    
+    class func isMentorUser() -> Bool {
+        if PFUser.currentUser() == nil {
+            return false
+        }
+        var user:PFObject = PFUser.currentUser()!
+        if let category = user[PF_USER_CATEGORY] as? Int {
+            return category == PF_IS_MENTOR
+        }
+        return false
+    }
+    
+    class func isStudentRepUser() -> Bool {
+        if PFUser.currentUser() == nil {
+            return false
+        }
+        var user:PFObject = PFUser.currentUser()!
+        if let category = user[PF_USER_CATEGORY] as? Int {
+            return category == PF_IS_STUDENT_REP
+        }
         return false
     }
     

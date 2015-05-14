@@ -10,6 +10,11 @@ import Foundation
 
 let DEFAULT_TAB							= 0
 
+/* User Category */
+let PF_IS_EXEC                          = 1
+let PF_IS_MENTOR                        = 2
+let PF_IS_STUDENT_REP                   = 3
+
 /* Installation */
 let PF_INSTALLATION_CLASS_NAME			= "_Installation"           //	Class name
 let PF_INSTALLATION_OBJECTID			= "objectId"				//	String
@@ -21,7 +26,7 @@ let PF_USER_USERNAME					= "username"				//	String
 let PF_USER_PASSWORD					= "password"				//	String
 let PF_USER_NAME                        = "Name"                    //  String
 let PF_USER_EMAIL                       = "email"                   //  String
-let PF_USER_IS_EXEC                     = "IsExec"                  //  Boolean
+let PF_USER_CATEGORY                    = "Category"                //  Number
 
 /* Todos */
 let PF_TODOS_SUMMARY                    = "Summary"                 //  String
@@ -60,6 +65,7 @@ let PF_RECORD_START_DATE                 = "StartDate"               //  Date
 let PF_RECORD_END_DATE                   = "EndDate"                 //  Date
 let PF_RECORD_USER_LIST                  = "UserList"                //  Array
 let PF_RECORD_AMOUNT                     = "Amount"                  //  Number
+let PF_RECORD_CREATED_BY                 = "createdBy"               //  String
 
 /* Gains */
 let PF_GAINS_CLASS_NAME                 = "Gains"                   //  Class name
@@ -70,6 +76,7 @@ let PF_GAINS_START_DATE                 = "StartDate"               //  Date
 let PF_GAINS_END_DATE                   = "EndDate"                 //  Date
 let PF_GAINS_USER_LIST                  = "UserList"                //  Array
 let PF_GAINS_AMOUNT                     = "Amount"                  //  Number
+let PF_GAINS_CREATED_BY                 = "createdBy"               //  String
 
 /* Losses */
 let PF_LOSSES_CLASS_NAME                 = "Losses"                  //  Class name
@@ -80,6 +87,7 @@ let PF_LOSSES_START_DATE                 = "StartDate"               //  Date
 let PF_LOSSES_END_DATE                   = "EndDate"                 //  Date
 let PF_LOSSES_USER_LIST                  = "UserList"                //  Array
 let PF_LOSSES_AMOUNT                     = "Amount"                  //  Number
+let PF_LOSSES_CREATED_BY                 = "createdBy"               //  String
 
 /* Reimburse */
 let PF_REIMBURSE_CLASS_NAME              = "Reimburse"               //  Class name
@@ -90,6 +98,7 @@ let PF_REIMBURSE_START_DATE              = "StartDate"               //  Date
 let PF_REIMBURSE_END_DATE                = "EndDate"                 //  Date
 let PF_REIMBURSE_USER_LIST               = "UserList"                //  Array
 let PF_REIMBURSE_AMOUNT                  = "Amount"                  //  Number
+let PF_REIMBURSE_CREATED_BY                 = "createdBy"               //  String
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"

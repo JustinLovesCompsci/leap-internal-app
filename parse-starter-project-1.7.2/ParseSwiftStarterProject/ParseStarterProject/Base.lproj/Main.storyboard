@@ -508,6 +508,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="navBar" destination="86p-io-iv9" id="rB5-bK-1pR"/>
                         <segue destination="nQ1-Lh-9g8" kind="show" identifier="detailSegue" id="Xmb-ig-AjI"/>
                     </connections>
                 </tableViewController>
@@ -738,6 +739,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="6Rj-8n-ieg">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="owg-RR-wuO"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="DueDateField" destination="WYF-cn-jGa" id="VRW-6H-sD1"/>
                         <outlet property="createByField" destination="vlt-hN-qWn" id="w66-XM-Bgt"/>
@@ -790,6 +794,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Profile" id="sYW-aA-8Bb">
+                        <barButtonItem key="leftBarButtonItem" title="New" id="KHB-4f-eFR">
+                            <connections>
+                                <action selector="newPressed:" destination="VRv-2z-RMX" id="DMK-sc-c9p"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="ygN-bR-nTt">
                             <connections>
                                 <action selector="logOutPressed:" destination="VRv-2z-RMX" id="h0K-xf-oP7"/>
@@ -797,6 +806,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="navBar" destination="sYW-aA-8Bb" id="Jaj-Wb-KjS"/>
                         <segue destination="h5P-Ks-ck6" kind="show" identifier="amountDetailSegue" id="lhp-Pq-K87"/>
                     </connections>
                 </tableViewController>

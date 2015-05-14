@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import Parse
 
-class ProfileViewController: UITableViewController {
+class ProfileViewController: UITableViewController, UIActionSheetDelegate {
+    
+    @IBOutlet weak var navBar: UINavigationItem!
     
     let generalItems = [NAME, EMAIL, PASSWORD]
     let financialItems = [TOTAL_GAIN, TOTAL_LOSS, TOTAL_REIMBURSE, TOTAL_NET]
@@ -28,9 +30,31 @@ class ProfileViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navBar.leftBarButtonItem?.enabled = false
+        if Utilities.isExecUser() {
+            self.navBar.leftBarButtonItem?.enabled = true
+        }
+        
         loadGains()
         loadLosses()
         loadReimburse()
+    }
+    
+    @IBAction func newPressed(sender: AnyObject) {
+        showNewActionSheet()
+    }
+    
+    func showNewActionSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Post New Record", "Edit Existing Record")
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            //            switch buttonIndex {
+            //
+            //            }
+        }
     }
     
     @IBAction func logOutPressed(sender: AnyObject) {

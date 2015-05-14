@@ -10,18 +10,40 @@ import Foundation
 import UIKit
 import Parse
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: UITableViewController, UIActionSheetDelegate {
+    
+    @IBOutlet weak var navBar: UINavigationItem!
     
     var genTodos: [PFObject]! = []
     var execTodos: [PFObject]! = []
     var toShowTodo: PFObject!
     
     @IBAction func newPressed(sender: AnyObject) {
-        
+        showNewActionSheet()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Utilities.isExecUser() {
+            println ("current user is Exec")
+            self.navBar.rightBarButtonItem?.enabled = true
+        } else {
+            println ("current user is not Exec")
+            self.navBar.rightBarButtonItem?.enabled = false
+        }
+    }
+    
+    func showNewActionSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Post New Todo", "Edit Existing Todo")
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+//            switch buttonIndex {
+//            
+//            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
