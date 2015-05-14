@@ -105,7 +105,7 @@ class TodoListViewController: UITableViewController {
     
     func getGenTodoCell(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "todoCell")
-        cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         let todo:PFObject = genTodos[indexPath.row]
         cell.textLabel?.text = todo[PF_GEN_TODOS_SUMMARY] as? String
         cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(todo[PF_GEN_TODOS_DUE_DATE] as! NSDate)

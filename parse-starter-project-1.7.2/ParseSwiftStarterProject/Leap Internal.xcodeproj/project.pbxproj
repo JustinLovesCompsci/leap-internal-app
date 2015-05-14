@@ -29,6 +29,7 @@
 		AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E61B005B2C006C212C /* ProfileViewController.swift */; };
 		AABB02E91B006827006C212C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E81B006827006C212C /* Constants.swift */; };
 		AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B61B03025600145F56 /* TodoDetailViewController.swift */; };
+		AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		AABB02E61B005B2C006C212C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AABB02E81B006827006C212C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AAD609B61B03025600145F56 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
+		AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		81BA81471A49DA1800E65899 /* DevCode */ = {
 			isa = PBXGroup;
 			children = (
+				AAD609B81B044A5400145F56 /* ProfileSubViews */,
 				AAD609B51B01D9E400145F56 /* images */,
 				AABB02E11B005957006C212C /* Utils */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
@@ -174,6 +177,15 @@
 			children = (
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		AAD609B81B044A5400145F56 /* ProfileSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */,
+			);
+			name = ProfileSubViews;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +285,7 @@
 				AABB02E91B006827006C212C /* Constants.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */,
+				AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */,
 				AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

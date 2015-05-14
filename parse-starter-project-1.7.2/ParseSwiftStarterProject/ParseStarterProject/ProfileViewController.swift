@@ -24,6 +24,8 @@ class ProfileViewController: UITableViewController {
     var totalReimburses = 0
     var totalNet = 0
     
+    var toShowFinanceCategory = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadGains()
@@ -146,9 +148,11 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
+        cell.textLabel?.textColor = UIColor.blackColor()
+        
         if indexPath.section == 0 { /* General */
             var item = generalItems[indexPath.row]
-            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
             cell.textLabel?.text = item
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             var user:PFObject = PFUser.currentUser()!
@@ -166,33 +170,36 @@ class ProfileViewController: UITableViewController {
                 cell.detailTextLabel?.text = ""
             }
             
-            return cell
-            
         } else { /* Financials */
             var item = financialItems[indexPath.row]
-            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
             cell.textLabel?.text = item
-            cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             
             switch (item) {
             case TOTAL_GAIN:
                 cell.detailTextLabel?.text = totalGains.description
+                cell.textLabel?.textColor = UIColor.greenColor() //TODO: change to dark green color
             case TOTAL_LOSS:
                 cell.detailTextLabel?.text = totalLosses.description
+                cell.textLabel?.textColor = UIColor.redColor()
             case TOTAL_REIMBURSE:
                 cell.detailTextLabel?.text = totalReimburses.description
             case TOTAL_NET:
                 cell.detailTextLabel?.text = totalNet.description
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.textLabel?.textColor = UIColor.blueColor()
             default:
                 cell.detailTextLabel?.text = ""
             }
-            
-            return cell
+
         }
+        
+        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         if indexPath.section == 0 { /* General */
             var item = generalItems[indexPath.row]
             
@@ -208,18 +215,34 @@ class ProfileViewController: UITableViewController {
             }
             
         } else { /* Financials */
-            
+            toShowFinanceCategory = financialItems[indexPath.row]
+            if toShowFinanceCategory != TOTAL_NET {
+                performSegueWithIdentifier("amountDetailSegue", sender: self)
+            }
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "detailSegue" {
-//            let createVC = segue.destinationViewController as! TodoDetailViewController
+        if segue.identifier == "amountDetailSegue" {
+            let createVC = segue.destinationViewController as! AmountDetailViewController
+            createVC.category = toShowFinanceCategory
+            createVC.records.removeAll(keepCapacity: false)
+            
+            switch (toShowFinanceCategory) {
+            case TOTAL_GAIN:
+                createVC.records.extend(gains)
+            case TOTAL_LOSS:
+                createVC.records.extend(losses)
+            case TOTAL_REIMBURSE:
+                createVC.records.extend(reimburses)
+            default:
+               createVC.records.extend(gains)
+            }
         }
     }
     
     func showResetPasswordConfirmDialog(){
-        var alert = UIAlertController(title: "Reset Password?", message:"You will receive an email to reset password. Your password will be encrypted and secured.", preferredStyle: UIAlertControllerStyle.Alert)
+        var alert = UIAlertController(title: "Reset Password?", message:"You will receive an email to reset password. Your password will be encrypted.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
         }))
         

@@ -52,6 +52,15 @@ let PF_GEN_TODOS_UPDATED_AT             = "updatedAt"               //  Date
 let PF_GEN_TODOS_CREATED_BY_PERSON      = "createdByPerson"         //  String
 let PF_GEN_TODOS_CREATED_BY_EMAIL       = "createdByEmail"          //  String
 
+/* Financial Records */
+let PF_RECORD_SUMMARY                    = "Summary"                 //  String
+let PF_RECORD_CREATED_AT                 = "createdAt"               //  Date
+let PF_RECORD_UPDATED_AT                 = "updatedAt"               //  Date
+let PF_RECORD_START_DATE                 = "StartDate"               //  Date
+let PF_RECORD_END_DATE                   = "EndDate"                 //  Date
+let PF_RECORD_USER_LIST                  = "UserList"                //  Array
+let PF_RECORD_AMOUNT                     = "Amount"                  //  Number
+
 /* Gains */
 let PF_GAINS_CLASS_NAME                 = "Gains"                   //  Class name
 let PF_GAINS_SUMMARY                    = "Summary"                 //  String

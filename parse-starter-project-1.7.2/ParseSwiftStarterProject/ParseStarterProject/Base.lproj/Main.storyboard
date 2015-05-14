@@ -796,20 +796,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="h5P-Ks-ck6" kind="show" identifier="amountDetailSegue" id="lhp-Pq-K87"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1162.5" y="2021.25"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Title-->
         <scene sceneID="Roh-Dq-3W0">
             <objects>
-                <tableViewController id="h5P-Ks-ck6" sceneMemberID="viewController">
+                <tableViewController id="h5P-Ks-ck6" customClass="AmountDetailViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9sr-iH-uga">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Xhz-3y-noL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="amountCell" id="Xhz-3y-noL">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xhz-3y-noL" id="QzA-oX-sfI">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -821,6 +824,10 @@
                             <outlet property="delegate" destination="h5P-Ks-ck6" id="HdE-YC-Tzg"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="OGz-nE-I1U"/>
+                    <connections>
+                        <outlet property="navBar" destination="OGz-nE-I1U" id="nKf-WK-xTc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz1-rg-9n7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
