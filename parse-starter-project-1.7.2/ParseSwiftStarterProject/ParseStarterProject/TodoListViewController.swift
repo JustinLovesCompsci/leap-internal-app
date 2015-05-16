@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate, PFLogInViewControllerDelegate {
+class TodoListViewController: UITableViewController, PFLogInViewControllerDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -20,28 +20,7 @@ class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate,
     var toShowTodo: PFObject!
     
     @IBAction func newPressed(sender: AnyObject) {
-        showNewActionSheet()
-    }
-    
-    override init(style: UITableViewStyle, className: String!) {
-        super.init(style: style, className: className)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.parseClassName = PF_GEN_TODOS_CLASS_NAME
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-    }
-    
-    override func queryForTable() -> PFQuery {
-        var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
-        query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
-        //TODO: check below logic
-        query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
-        query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
-        return query
+        performSegueWithIdentifier("addTodoSegue", sender: self)
     }
 
     override func viewDidLoad() {
@@ -54,19 +33,6 @@ class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate,
             self.navBar.rightBarButtonItem?.enabled = true
         } else {
             self.navBar.rightBarButtonItem?.enabled = false
-        }
-    }
-    
-    func showNewActionSheet() {
-        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Post New Todo", "Edit Existing Todo")
-        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex != actionSheet.cancelButtonIndex {
-//            switch buttonIndex {
-//            
-//            }
         }
     }
     
@@ -92,13 +58,13 @@ class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate,
         if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
             presentLogIn()
         }
-//        else {
-//            if Utilities.isExecUser() {
-//                loadExecTodos()
-//            }
-//            loadGenTodos()
-//            tableView.reloadData()
-//        }
+        else {
+            if Utilities.isExecUser() {
+                loadExecTodos()
+            }
+            loadGenTodos()
+            tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,6 +90,10 @@ class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate,
                 println(error)
             }
         }
+    }
+    
+    func loadExecTodos() {
+        
     }
     
 //    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -177,6 +147,16 @@ class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate,
         if segue.identifier == "detailSegue" {
             let createVC = segue.destinationViewController as! TodoDetailViewController
             createVC.todo = toShowTodo
+            
+        } else if segue.identifier == "addTodoSegue" {
+            var newTodo = PFObject(className: PF_GEN_TODOS_CLASS_NAME)
+            newTodo[PF_TODOS_DUE_DATE] = NSDate()
+            let current_user:PFObject = PFUser.currentUser()!
+            let user_name = current_user[PF_USER_NAME] as? String
+            newTodo[PF_TODOS_CREATED_BY_PERSON] = user_name
+            
+            let createVC = segue.destinationViewController as! EditTodoViewController
+            createVC.editObject = newTodo
         }
     }
     

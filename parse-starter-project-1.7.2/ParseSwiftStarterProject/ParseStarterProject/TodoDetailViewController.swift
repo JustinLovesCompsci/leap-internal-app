@@ -48,6 +48,13 @@ class TodoDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editTodoSegue" {
+            let createVC = segue.destinationViewController as! EditTodoViewController
+            createVC.editObject = todo
+        }
+    }
+    
     /* only support portrait */
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.Portrait.rawValue)

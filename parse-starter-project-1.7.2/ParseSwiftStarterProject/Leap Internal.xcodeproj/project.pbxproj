@@ -24,6 +24,10 @@
 		AA83EA9C1B071129002A6B5F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9B1B071129002A6B5F /* Accounts.framework */; };
 		AA83EA9E1B07112F002A6B5F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9D1B07112F002A6B5F /* Social.framework */; };
 		AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */; };
+		AA83EAA61B072C6B002A6B5F /* EditTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAA51B072C6B002A6B5F /* EditTodoViewController.swift */; };
+		AA83EAAA1B072D63002A6B5F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAA91B072D63002A6B5F /* EditTextViewController.swift */; };
+		AA83EAAC1B072D6F002A6B5F /* EditNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAAB1B072D6F002A6B5F /* EditNumberViewController.swift */; };
+		AA83EAAE1B072D7A002A6B5F /* EditDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAAD1B072D7A002A6B5F /* EditDateViewController.swift */; };
 		AABB02DA1AFF3E9F006C212C /* welcome.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AABB02D91AFF3E9F006C212C /* welcome.JPG */; };
 		AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */; };
 		AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DF1B0057FD006C212C /* LoginViewController.swift */; };
@@ -56,6 +60,10 @@
 		AA83EA9B1B071129002A6B5F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		AA83EA9D1B07112F002A6B5F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPFLogInViewController.swift; sourceTree = "<group>"; };
+		AA83EAA51B072C6B002A6B5F /* EditTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTodoViewController.swift; sourceTree = "<group>"; };
+		AA83EAA91B072D63002A6B5F /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
+		AA83EAAB1B072D6F002A6B5F /* EditNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNumberViewController.swift; sourceTree = "<group>"; };
+		AA83EAAD1B072D7A002A6B5F /* EditDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDateViewController.swift; sourceTree = "<group>"; };
 		AABB02D91AFF3E9F006C212C /* welcome.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.JPG; sourceTree = "<group>"; };
 		AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AABB02DF1B0057FD006C212C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +119,8 @@
 		81BA81471A49DA1800E65899 /* DevCode */ = {
 			isa = PBXGroup;
 			children = (
+				AA83EAA71B072D48002A6B5F /* GenEdit */,
+				AA83EAA41B072C43002A6B5F /* TodoEdit */,
 				AAD609B81B044A5400145F56 /* ProfileSubViews */,
 				AAD609B51B01D9E400145F56 /* images */,
 				AABB02E11B005957006C212C /* Utils */,
@@ -163,6 +173,24 @@
 				81BA81761A49E0D500E65899 /* libsqlite3.dylib */,
 			);
 			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
+		AA83EAA41B072C43002A6B5F /* TodoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				AA83EAA51B072C6B002A6B5F /* EditTodoViewController.swift */,
+			);
+			name = TodoEdit;
+			sourceTree = "<group>";
+		};
+		AA83EAA71B072D48002A6B5F /* GenEdit */ = {
+			isa = PBXGroup;
+			children = (
+				AA83EAA91B072D63002A6B5F /* EditTextViewController.swift */,
+				AA83EAAB1B072D6F002A6B5F /* EditNumberViewController.swift */,
+				AA83EAAD1B072D7A002A6B5F /* EditDateViewController.swift */,
+			);
+			name = GenEdit;
 			sourceTree = "<group>";
 		};
 		AABB02D81AFF3E79006C212C /* resources */ = {
@@ -291,13 +319,17 @@
 				AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */,
 				AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */,
 				AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */,
+				AA83EAAC1B072D6F002A6B5F /* EditNumberViewController.swift in Sources */,
 				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
+				AA83EAAA1B072D63002A6B5F /* EditTextViewController.swift in Sources */,
 				AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */,
 				AABB02E31B005971006C212C /* Utilities.swift in Sources */,
 				AABB02E91B006827006C212C /* Constants.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */,
+				AA83EAAE1B072D7A002A6B5F /* EditDateViewController.swift in Sources */,
 				AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */,
+				AA83EAA61B072C6B002A6B5F /* EditTodoViewController.swift in Sources */,
 				AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
