@@ -525,6 +525,7 @@
                         <viewControllerLayoutGuide type="bottom" id="1H8-FA-wOu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ASo-EG-ofM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary: FS问答" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbQ-r7-Tbp">
@@ -551,9 +552,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="346" width="368" height="35"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created By:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlt-hN-qWn">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -568,8 +566,7 @@
                                         <exclude reference="hTk-sS-UUn"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="389" width="368" height="35"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="hTk-sS-UUn"/>
                                     </mask>
@@ -583,9 +580,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="465" width="368" height="44"/>
-                                </variation>
                                 <connections>
                                     <action selector="saveCalendarPressed:" destination="nQ1-Lh-9g8" eventType="touchUpInside" id="taa-u5-Lmk"/>
                                 </connections>
@@ -629,8 +623,7 @@
                                         <exclude reference="TRX-LR-RgY"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="178" width="368" height="160"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="TRX-LR-RgY"/>
                                     </mask>
@@ -641,9 +634,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="135" width="368" height="35"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -696,9 +686,9 @@
                                 <exclude reference="sEs-ha-P1B"/>
                                 <exclude reference="ts3-2N-3tC"/>
                                 <exclude reference="v0Q-tc-xsb"/>
-                                <exclude reference="Vuf-5s-4T4"/>
                                 <exclude reference="TWJ-Jd-pVk"/>
                                 <exclude reference="a9c-wz-mYx"/>
+                                <exclude reference="Vuf-5s-4T4"/>
                                 <exclude reference="wrH-fi-bUm"/>
                                 <exclude reference="Eli-bF-og4"/>
                                 <exclude reference="Jca-op-7Gf"/>
@@ -730,9 +720,9 @@
                                 <include reference="sEs-ha-P1B"/>
                                 <include reference="ts3-2N-3tC"/>
                                 <include reference="v0Q-tc-xsb"/>
-                                <include reference="Vuf-5s-4T4"/>
                                 <include reference="TWJ-Jd-pVk"/>
                                 <include reference="a9c-wz-mYx"/>
+                                <include reference="Vuf-5s-4T4"/>
                                 <include reference="wrH-fi-bUm"/>
                                 <include reference="Eli-bF-og4"/>
                                 <include reference="Jca-op-7Gf"/>
@@ -819,6 +809,7 @@
             <objects>
                 <tableViewController id="h5P-Ks-ck6" customClass="AmountDetailViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9sr-iH-uga">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

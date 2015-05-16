@@ -59,7 +59,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
     
     @IBAction func logOutPressed(sender: AnyObject) {
         PFUser.logOut()
-        Utilities.loginUser(self)
+        self.tabBarController?.selectedIndex = 0
     }
     
     func loadGains() {
@@ -173,7 +173,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
-        cell.textLabel?.textColor = UIColor.blackColor()
+        cell.detailTextLabel?.textColor = UIColor.blackColor()
         
         if indexPath.section == 0 { /* General */
             var item = generalItems[indexPath.row]
@@ -202,16 +202,16 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
             switch (item) {
             case TOTAL_GAIN:
                 cell.detailTextLabel?.text = totalGains.description
-                cell.textLabel?.textColor = UIColor.greenColor() //TODO: change to dark green color
+                cell.detailTextLabel?.textColor = UIColor.greenColor() //TODO: change to dark green color
             case TOTAL_LOSS:
                 cell.detailTextLabel?.text = totalLosses.description
-                cell.textLabel?.textColor = UIColor.redColor()
+                cell.detailTextLabel?.textColor = UIColor.redColor()
             case TOTAL_REIMBURSE:
                 cell.detailTextLabel?.text = totalReimburses.description
             case TOTAL_NET:
                 cell.detailTextLabel?.text = totalNet.description
                 cell.accessoryType = UITableViewCellAccessoryType.None
-                cell.textLabel?.textColor = UIColor.blueColor()
+                cell.detailTextLabel?.textColor = UIColor.blueColor()
             default:
                 cell.detailTextLabel?.text = ""
             }

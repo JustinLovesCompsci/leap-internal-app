@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import Parse
+import ParseUI
 
-class TodoListViewController: UITableViewController, UIActionSheetDelegate {
+class TodoListViewController: PFQueryTableViewController, UIActionSheetDelegate, PFLogInViewControllerDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -22,13 +23,36 @@ class TodoListViewController: UITableViewController, UIActionSheetDelegate {
         showNewActionSheet()
     }
     
+    override init(style: UITableViewStyle, className: String!) {
+        super.init(style: style, className: className)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.parseClassName = PF_GEN_TODOS_CLASS_NAME
+        self.pullToRefreshEnabled = true
+        self.paginationEnabled = true
+    }
+    
+    override func queryForTable() -> PFQuery {
+        var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
+        query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
+        //TODO: check below logic
+        query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+        query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+        return query
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if Utilities.isExecUser() {
-            println ("current user is Exec")
             self.navBar.rightBarButtonItem?.enabled = true
         } else {
-            println ("current user is not Exec")
             self.navBar.rightBarButtonItem?.enabled = false
         }
     }
@@ -46,6 +70,19 @@ class TodoListViewController: UITableViewController, UIActionSheetDelegate {
         }
     }
     
+    func presentLogIn() {
+        var logInController = MyPFLogInViewController()
+        logInController.fields = (PFLogInFields.UsernameAndPassword
+                                | PFLogInFields.LogInButton
+                                | PFLogInFields.PasswordForgotten)
+        logInController.delegate = self
+        self.presentViewController(logInController, animated: true, completion: nil)
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -53,15 +90,15 @@ class TodoListViewController: UITableViewController, UIActionSheetDelegate {
         self.tableView.estimatedRowHeight = 70.0;
         
         if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
-            Utilities.loginUser(self)
+            presentLogIn()
         }
-        else {
-            if Utilities.isExecUser() {
-                loadExecTodos()
-            }
-            loadGenTodos()
-            tableView.reloadData()
-        }
+//        else {
+//            if Utilities.isExecUser() {
+//                loadExecTodos()
+//            }
+//            loadGenTodos()
+//            tableView.reloadData()
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,10 +124,6 @@ class TodoListViewController: UITableViewController, UIActionSheetDelegate {
                 println(error)
             }
         }
-    }
-    
-    func loadExecTodos() {
-        
     }
     
 //    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

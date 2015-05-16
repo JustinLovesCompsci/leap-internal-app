@@ -21,6 +21,9 @@
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
 		AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */; };
+		AA83EA9C1B071129002A6B5F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9B1B071129002A6B5F /* Accounts.framework */; };
+		AA83EA9E1B07112F002A6B5F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9D1B07112F002A6B5F /* Social.framework */; };
+		AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */; };
 		AABB02DA1AFF3E9F006C212C /* welcome.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AABB02D91AFF3E9F006C212C /* welcome.JPG */; };
 		AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */; };
 		AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DF1B0057FD006C212C /* LoginViewController.swift */; };
@@ -50,6 +53,9 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* ParseStarterProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		AA83EA9B1B071129002A6B5F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		AA83EA9D1B07112F002A6B5F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPFLogInViewController.swift; sourceTree = "<group>"; };
 		AABB02D91AFF3E9F006C212C /* welcome.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.JPG; sourceTree = "<group>"; };
 		AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AABB02DF1B0057FD006C212C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA83EA9E1B07112F002A6B5F /* Social.framework in Frameworks */,
+				AA83EA9C1B071129002A6B5F /* Accounts.framework in Frameworks */,
 				81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */,
 				81BA817D1A49E0EA00E65899 /* MobileCoreServices.framework in Frameworks */,
 				81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */,
@@ -115,6 +123,7 @@
 				AABB02E41B005AE1006C212C /* TodoListViewController.swift */,
 				AABB02E61B005B2C006C212C /* ProfileViewController.swift */,
 				AAD609B61B03025600145F56 /* TodoDetailViewController.swift */,
+				AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */,
 			);
 			name = DevCode;
 			path = ParseStarterProject;
@@ -132,6 +141,8 @@
 		81BA816A1A49DB5600E65899 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA83EA9D1B07112F002A6B5F /* Social.framework */,
+				AA83EA9B1B071129002A6B5F /* Accounts.framework */,
 				81BA816B1A49DB6800E65899 /* Bolts.framework */,
 				81BA816C1A49DB6800E65899 /* Parse.framework */,
 				81BA816D1A49DB6800E65899 /* ParseCrashReporting.framework */,
@@ -277,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */,
 				AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */,
 				AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */,
 				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
