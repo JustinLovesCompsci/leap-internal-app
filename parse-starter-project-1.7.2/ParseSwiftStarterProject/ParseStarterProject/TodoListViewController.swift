@@ -34,6 +34,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         } else {
             self.navBar.rightBarButtonItem?.enabled = false
         }
+        tableView.reloadData()
     }
     
     func presentLogIn() {
@@ -150,7 +151,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             
         } else if segue.identifier == "addTodoSegue" {
             var newTodo = PFObject(className: PF_GEN_TODOS_CLASS_NAME)
-            newTodo[PF_TODOS_SUMMARY] = "New ToDo"
+            newTodo[PF_TODOS_SUMMARY] = NEW_TODO_SUMMARY
             newTodo[PF_TODOS_DUE_DATE] = NSDate()
             let current_user:PFObject = PFUser.currentUser()!
             let user_name = current_user[PF_USER_NAME] as? String

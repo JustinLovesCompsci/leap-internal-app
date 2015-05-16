@@ -538,9 +538,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="jiG-fA-hgg">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="sdx-u1-wnX"/>
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="sdx-u1-wnX">
+                            <connections>
+                                <action selector="deletePressed:" destination="kaB-S3-Km4" id="t58-bO-6ft"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="sdx-u1-wnX" id="abk-IK-7qV"/>
                         <segue destination="hxJ-s7-vRv" kind="show" identifier="editTodoTextSegue" id="Hda-nZ-fh2"/>
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editTodoDateSegue" id="RWp-yF-gaP"/>
                     </connections>

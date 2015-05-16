@@ -24,6 +24,16 @@ class EditTextViewController: UIViewController {
     
     @IBAction func savePressed(sender: AnyObject) {
         var attribute = textField.text
+        
+        if editAttribute == PF_TODOS_SUMMARY && attribute == NEW_TODO_SUMMARY {
+            var alert = UIAlertController(title: "Oops...", message: "Summary cannot be 'New ToDo'", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action:UIAlertAction!) in
+            }))
+            
+            presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         if count(attribute) > 0 {
             editObject[editAttribute] = attribute as String
             editObject.saveEventually()

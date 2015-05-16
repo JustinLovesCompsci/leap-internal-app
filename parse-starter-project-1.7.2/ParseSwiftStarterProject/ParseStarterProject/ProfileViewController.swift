@@ -58,8 +58,17 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
     }
     
     @IBAction func logOutPressed(sender: AnyObject) {
-        PFUser.logOut()
-        self.tabBarController?.selectedIndex = 0
+        var logOutAlert = UIAlertController(title: "Log Out", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+            NSLog("Cancelled log out")
+        }))
+        
+        logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction!) in
+            PFUser.logOut()
+            self.tabBarController?.selectedIndex = 0
+        }))
+
+        presentViewController(logOutAlert, animated: true, completion: nil)
     }
     
     func loadGains() {

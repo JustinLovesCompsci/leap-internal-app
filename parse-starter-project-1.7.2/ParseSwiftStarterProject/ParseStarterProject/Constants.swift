@@ -111,6 +111,8 @@ let NAME                                 = "Name"
 let EMAIL                                = "Email"
 let PASSWORD                             = "Password"
 
+/* New ToDo */
+let NEW_TODO_SUMMARY                     = "New ToDo"
 
 
 
