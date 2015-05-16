@@ -547,27 +547,66 @@
             </objects>
             <point key="canvasLocation" x="2595" y="1322.25"/>
         </scene>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="2LV-rh-M8H">
             <objects>
-                <viewController id="13B-Yj-fdm" sceneMemberID="viewController">
+                <viewController id="13B-Yj-fdm" customClass="EditDateViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dou-31-71w"/>
                         <viewControllerLayoutGuide type="bottom" id="zfd-GZ-O1k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tQw-qz-Hya">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XPR-jd-OOA">
+                                <rect key="frame" x="-160" y="-81" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="453491517.09542799">
+                                    <!--2015-05-16 17:51:57 +0000-->
+                                </date>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="141" width="400" height="162"/>
+                                </variation>
+                            </datePicker>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XPR-jd-OOA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dou-31-71w" secondAttribute="bottom" constant="80" id="dFw-Op-8VS"/>
+                            <constraint firstAttribute="trailing" secondItem="XPR-jd-OOA" secondAttribute="trailing" id="uc1-ew-12t"/>
+                            <constraint firstItem="XPR-jd-OOA" firstAttribute="leading" secondItem="tQw-qz-Hya" secondAttribute="leading" id="zex-YT-Ub7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="XPR-jd-OOA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="dFw-Op-8VS"/>
+                                <exclude reference="uc1-ew-12t"/>
+                                <exclude reference="zex-YT-Ub7"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="XPR-jd-OOA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="dFw-Op-8VS"/>
+                                <include reference="uc1-ew-12t"/>
+                                <include reference="zex-YT-Ub7"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="cnu-g6-O7Y">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="3D1-Ac-IPc"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4s-7D-OAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3514.5" y="1724.25"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Number View Controller-->
         <scene sceneID="oaa-gN-aes">
             <objects>
-                <viewController id="QTh-C1-A2P" sceneMemberID="viewController">
+                <viewController id="QTh-C1-A2P" customClass="EditNumberViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cVd-15-AXU"/>
                         <viewControllerLayoutGuide type="bottom" id="3jS-Og-nsZ"/>
@@ -581,18 +620,56 @@
             </objects>
             <point key="canvasLocation" x="3514.5" y="2389.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="icy-OC-xHk">
             <objects>
-                <viewController id="hxJ-s7-vRv" sceneMemberID="viewController">
+                <viewController id="hxJ-s7-vRv" customClass="EditTextViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rgy-vV-7ie"/>
                         <viewControllerLayoutGuide type="bottom" id="eyP-r0-vWg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y6H-QZ-Pac">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UwV-47-Vgx">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="16" y="144" width="368" height="30"/>
+                                </variation>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UwV-47-Vgx" firstAttribute="leading" secondItem="Y6H-QZ-Pac" secondAttribute="leadingMargin" id="4xS-yA-CQn"/>
+                            <constraint firstItem="UwV-47-Vgx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rgy-vV-7ie" secondAttribute="bottom" constant="80" id="JjQ-DY-YCo"/>
+                            <constraint firstItem="UwV-47-Vgx" firstAttribute="trailing" secondItem="Y6H-QZ-Pac" secondAttribute="trailingMargin" id="OqY-ow-3x7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="UwV-47-Vgx"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="4xS-yA-CQn"/>
+                                <exclude reference="JjQ-DY-YCo"/>
+                                <exclude reference="OqY-ow-3x7"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="UwV-47-Vgx"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="4xS-yA-CQn"/>
+                                <include reference="JjQ-DY-YCo"/>
+                                <include reference="OqY-ow-3x7"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="4TA-jS-aVP">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="KL1-zH-aNM"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3H-0s-bN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -683,7 +760,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="16" y="554" width="368" height="44"/>
+                                    <rect key="frame" x="16" y="554" width="368" height="34"/>
                                     <mask key="constraints">
                                         <include reference="Cne-1i-ne2"/>
                                     </mask>
@@ -822,6 +899,7 @@
                         <outlet property="DueDateField" destination="WYF-cn-jGa" id="VRW-6H-sD1"/>
                         <outlet property="createByField" destination="vlt-hN-qWn" id="w66-XM-Bgt"/>
                         <outlet property="descriptionField" destination="Tu3-8j-Qfh" id="s2u-zw-96H"/>
+                        <outlet property="navBar" destination="6Rj-8n-ieg" id="lRh-dA-fw2"/>
                         <outlet property="summaryField" destination="DbQ-r7-Tbp" id="m53-U7-xA2"/>
                     </connections>
                 </viewController>

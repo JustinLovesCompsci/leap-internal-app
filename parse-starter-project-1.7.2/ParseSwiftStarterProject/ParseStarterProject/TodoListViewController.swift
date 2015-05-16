@@ -150,10 +150,12 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             
         } else if segue.identifier == "addTodoSegue" {
             var newTodo = PFObject(className: PF_GEN_TODOS_CLASS_NAME)
+            newTodo[PF_TODOS_SUMMARY] = "New ToDo"
             newTodo[PF_TODOS_DUE_DATE] = NSDate()
             let current_user:PFObject = PFUser.currentUser()!
             let user_name = current_user[PF_USER_NAME] as? String
             newTodo[PF_TODOS_CREATED_BY_PERSON] = user_name
+            newTodo[PF_TODOS_CREATED_BY_EMAIL] = current_user[PF_USER_EMAIL] as? String
             
             let createVC = segue.destinationViewController as! EditTodoViewController
             createVC.editObject = newTodo

@@ -74,8 +74,9 @@ class EditTodoViewController: UITableViewController {
         
         if segue.identifier == "editTodoTextSegue" {
 //            let createVC = segue.destinationViewController as! AmountDetailViewController
-//            createVC.category = toShowFinanceCategory
-//            createVC.records.removeAll(keepCapacity: false)
+
+            
+        } else if segue.identifier == "editTodoDateSegue" {
             
         }
     }

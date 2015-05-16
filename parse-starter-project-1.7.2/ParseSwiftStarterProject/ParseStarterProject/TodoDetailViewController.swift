@@ -13,6 +13,7 @@ class TodoDetailViewController: UIViewController {
     
     var todo: PFObject!
     
+    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var summaryField: UILabel!
     @IBOutlet weak var descriptionField: UILabel!
     @IBOutlet weak var DueDateField: UILabel!
@@ -28,6 +29,13 @@ class TodoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Utilities.isExecUser() {
+            self.navBar.rightBarButtonItem?.enabled = true
+        } else {
+            self.navBar.rightBarButtonItem?.enabled = false
+        }
+        
+        
         summaryField.text = "Summary: \(todo[PF_TODOS_SUMMARY] as! String)"
         if let descrip = todo[PF_TODOS_DESCRIPTION] as? String {
             descriptionField.text = descrip
