@@ -12,6 +12,12 @@ import Parse
 
 class EditTodoViewController: UITableViewController {
     var editObject: PFObject!
+    var toEditAttribute: String!
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        tableView.reloadData()
+    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
@@ -58,12 +64,16 @@ class EditTodoViewController: UITableViewController {
         
         switch (indexPath.row) {
         case 0:
+            toEditAttribute = PF_TODOS_SUMMARY
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         case 1:
+            toEditAttribute = PF_TODOS_DESCRIPTION
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         case 2:
+            toEditAttribute = PF_TODOS_DUE_DATE
             performSegueWithIdentifier("editTodoDateSegue", sender: self)
         case 3:
+            toEditAttribute = PF_TODOS_CREATED_BY_EMAIL
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         default:
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
@@ -73,11 +83,16 @@ class EditTodoViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "editTodoTextSegue" {
-//            let createVC = segue.destinationViewController as! AmountDetailViewController
-
+            let createVC = segue.destinationViewController as! EditTextViewController
+            createVC.editObject = editObject
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.editAttribute = toEditAttribute
             
         } else if segue.identifier == "editTodoDateSegue" {
-            
+            let createVC = segue.destinationViewController as! EditDateViewController
+            createVC.editObject = editObject
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.editAttribute = toEditAttribute
         }
     }
     

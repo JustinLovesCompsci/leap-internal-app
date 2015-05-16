@@ -537,7 +537,9 @@
                             <outlet property="delegate" destination="kaB-S3-Km4" id="iug-lb-jyr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2Fb-AK-jcA"/>
+                    <navigationItem key="navigationItem" id="jiG-fA-hgg">
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="sdx-u1-wnX"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="hxJ-s7-vRv" kind="show" identifier="editTodoTextSegue" id="Hda-nZ-fh2"/>
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editTodoDateSegue" id="RWp-yF-gaP"/>
@@ -547,7 +549,7 @@
             </objects>
             <point key="canvasLocation" x="2595" y="1322.25"/>
         </scene>
-        <!--Title-->
+        <!--Edit Date View Controller-->
         <scene sceneID="2LV-rh-M8H">
             <objects>
                 <viewController id="13B-Yj-fdm" customClass="EditDateViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
@@ -595,9 +597,17 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="cnu-g6-O7Y">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="3D1-Ac-IPc"/>
+                    <navigationItem key="navigationItem" id="cnu-g6-O7Y">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="3D1-Ac-IPc">
+                            <connections>
+                                <action selector="savePressed:" destination="13B-Yj-fdm" id="JkC-P1-Yvl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="XPR-jd-OOA" id="zba-9L-Rkq"/>
+                        <outlet property="navBar" destination="cnu-g6-O7Y" id="5zQ-8D-96p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4s-7D-OAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -620,7 +630,7 @@
             </objects>
             <point key="canvasLocation" x="3514.5" y="2389.5"/>
         </scene>
-        <!--Title-->
+        <!--Edit Text View Controller-->
         <scene sceneID="icy-OC-xHk">
             <objects>
                 <viewController id="hxJ-s7-vRv" customClass="EditTextViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
@@ -667,9 +677,17 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="4TA-jS-aVP">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="KL1-zH-aNM"/>
+                    <navigationItem key="navigationItem" id="4TA-jS-aVP">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="KL1-zH-aNM">
+                            <connections>
+                                <action selector="savePressed:" destination="hxJ-s7-vRv" id="8gY-Qb-Odd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navBar" destination="4TA-jS-aVP" id="gf6-SI-o1V"/>
+                        <outlet property="textField" destination="UwV-47-Vgx" id="LGP-fn-fSz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3H-0s-bN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
