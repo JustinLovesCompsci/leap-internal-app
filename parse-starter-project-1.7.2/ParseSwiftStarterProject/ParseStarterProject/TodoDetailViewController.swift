@@ -56,8 +56,10 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
         } else {
             self.navBar.rightBarButtonItem?.enabled = false
         }
-        
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         summaryField.text = "Summary: \(todo[PF_TODOS_SUMMARY] as! String)"
         if let descrip = todo[PF_TODOS_DESCRIPTION] as? String {
             descriptionField.text = descrip
@@ -70,7 +72,6 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
     }
     
     override func didReceiveMemoryWarning() {
