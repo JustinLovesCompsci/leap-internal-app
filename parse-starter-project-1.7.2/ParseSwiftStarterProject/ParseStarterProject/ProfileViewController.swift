@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class ProfileViewController: UITableViewController, UIActionSheetDelegate {
+class ProfileViewController: UITableViewController, UIActionSheetDelegate, SelectMultipleDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -27,6 +27,11 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
     var totalNet = 0
     
     var toShowFinanceCategory = ""
+    
+    func didSelectMultipleUsers(record: PFObject) {
+        println("Select multiple delegate called back to profile view")
+        //TODO: check if do nothing here
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +58,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
         if buttonIndex != actionSheet.cancelButtonIndex {
             switch buttonIndex {
             case 1:
-                performSegueWithIdentifier("addRecordSegue", sender: self)
+                performSegueWithIdentifier("selectMultipleSegue", sender: self)
             case 2:
                 performSegueWithIdentifier("editRecordSegue", sender: self)
             default:
@@ -275,6 +280,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
             default:
                createVC.records.extend(gains)
             }
+        } else if segue.identifier == "selectMultipleSegue" {
+            let createVC = segue.destinationViewController as! SelectMultipleViewController
+            createVC.isNewRecord = true
         }
     }
     

@@ -1070,14 +1070,15 @@
                         <outlet property="navBar" destination="sYW-aA-8Bb" id="Jaj-Wb-KjS"/>
                         <segue destination="h5P-Ks-ck6" kind="show" identifier="amountDetailSegue" id="lhp-Pq-K87"/>
                         <segue destination="kCi-8y-bKZ" kind="show" identifier="editRecordSegue" id="dFg-YL-ue5"/>
-                        <segue destination="QvI-Tw-QHZ" kind="show" identifier="addRecordSegue" id="XBA-z5-wnW"/>
+                        <segue destination="QvI-Tw-QHZ" kind="show" identifier="selectMultipleSegue" id="XBA-z5-wnW"/>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="addRecordSegue" id="Mzz-OE-leD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1162.5" y="2021.25"/>
         </scene>
-        <!--Title-->
+        <!--Details-->
         <scene sceneID="Roh-Dq-3W0">
             <objects>
                 <tableViewController id="h5P-Ks-ck6" customClass="AmountDetailViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
@@ -1086,11 +1087,92 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="amountCell" id="Xhz-3y-noL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="Xhz-3y-noL" customClass="RecordCell" customModule="Leap_Internal" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xhz-3y-noL" id="QzA-oX-sfI">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辅导分成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWH-Oi-wpe">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="8" width="269" height="30"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from May 20 to Aug 31" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-si-Lnh">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="37" width="269" height="21"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OP7-Vs-yL2">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="285" y="17" width="74" height="30"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="OP7-Vs-yL2" firstAttribute="centerY" secondItem="QzA-oX-sfI" secondAttribute="centerY" id="5Rb-HF-mfO"/>
+                                        <constraint firstItem="OP7-Vs-yL2" firstAttribute="trailing" secondItem="QzA-oX-sfI" secondAttribute="trailingMargin" id="IfR-35-8GU"/>
+                                        <constraint firstItem="sWH-Oi-wpe" firstAttribute="leading" secondItem="QzA-oX-sfI" secondAttribute="leadingMargin" constant="-7" id="JiP-4e-G7G"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="sWH-Oi-wpe" secondAttribute="bottom" id="QiC-wm-WXO"/>
+                                        <constraint firstItem="sWH-Oi-wpe" firstAttribute="top" secondItem="QzA-oX-sfI" secondAttribute="topMargin" id="X0E-dG-3Z5"/>
+                                        <constraint firstItem="OP7-Vs-yL2" firstAttribute="leading" secondItem="sWH-Oi-wpe" secondAttribute="trailing" constant="8" symbolic="YES" id="ezb-tJ-WNk"/>
+                                        <constraint firstItem="sWH-Oi-wpe" firstAttribute="leading" secondItem="dtM-si-Lnh" secondAttribute="leading" id="ghP-Mm-eu6"/>
+                                        <constraint firstItem="sWH-Oi-wpe" firstAttribute="trailing" secondItem="dtM-si-Lnh" secondAttribute="trailing" id="oZL-mq-44i"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dtM-si-Lnh" secondAttribute="bottom" id="rO5-Yj-WnF"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="sWH-Oi-wpe"/>
+                                            <exclude reference="dtM-si-Lnh"/>
+                                            <exclude reference="OP7-Vs-yL2"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="JiP-4e-G7G"/>
+                                            <exclude reference="QiC-wm-WXO"/>
+                                            <exclude reference="X0E-dG-3Z5"/>
+                                            <exclude reference="ghP-Mm-eu6"/>
+                                            <exclude reference="oZL-mq-44i"/>
+                                            <exclude reference="rO5-Yj-WnF"/>
+                                            <exclude reference="5Rb-HF-mfO"/>
+                                            <exclude reference="IfR-35-8GU"/>
+                                            <exclude reference="ezb-tJ-WNk"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="sWH-Oi-wpe"/>
+                                            <include reference="dtM-si-Lnh"/>
+                                            <include reference="OP7-Vs-yL2"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="JiP-4e-G7G"/>
+                                            <include reference="QiC-wm-WXO"/>
+                                            <include reference="X0E-dG-3Z5"/>
+                                            <include reference="ghP-Mm-eu6"/>
+                                            <include reference="oZL-mq-44i"/>
+                                            <include reference="rO5-Yj-WnF"/>
+                                            <include reference="5Rb-HF-mfO"/>
+                                            <include reference="IfR-35-8GU"/>
+                                            <include reference="ezb-tJ-WNk"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="amountField" destination="OP7-Vs-yL2" id="S4W-bc-U9e"/>
+                                    <outlet property="dateRangeField" destination="dtM-si-Lnh" id="vz5-ns-XoV"/>
+                                    <outlet property="summaryField" destination="sWH-Oi-wpe" id="m9Q-hs-2PI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1098,7 +1180,7 @@
                             <outlet property="delegate" destination="h5P-Ks-ck6" id="HdE-YC-Tzg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="OGz-nE-I1U"/>
+                    <navigationItem key="navigationItem" title="Details" id="OGz-nE-I1U"/>
                     <connections>
                         <outlet property="navBar" destination="OGz-nE-I1U" id="nKf-WK-xTc"/>
                         <segue destination="tMz-RA-jEZ" kind="show" identifier="showRecordDetailSegue" id="b93-eg-Bhn"/>
@@ -1106,7 +1188,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz1-rg-9n7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="2021.25"/>
+            <point key="canvasLocation" x="2115" y="2021.25"/>
         </scene>
         <!--Select Single-->
         <scene sceneID="ZDn-Y5-A6W">

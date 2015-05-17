@@ -10,14 +10,19 @@ import Foundation
 import Parse
 import UIKit
 
-
+protocol SelectMultipleDelegate {
+    func didSelectMultipleUsers(record: PFObject)
+}
 
 class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate {
     
     var users = [PFUser]()
     var selection = [String]()
     var selectedUsers = [PFUser]()
-    var newRecord: PFObject!
+    var record: PFObject!
+    var isNewRecord = false
+    
+    var delegate: SelectMultipleDelegate!
     
     @IBAction func donePressed(sender: AnyObject) {
         if selection.count == 0 {
@@ -29,7 +34,13 @@ class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate
                     selectedUsers.append(user)
                 }
             }
-            showNewRecordSheet()
+            if isNewRecord {
+                showNewRecordSheet()
+            } else {
+                addSelectedUsersToRecord()
+                delegate.didSelectMultipleUsers(record)
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
         }
     }
     
@@ -107,7 +118,7 @@ class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editNewRecordSegue" {
             let createVC = segue.destinationViewController as! EditRecordViewController
-            createVC.record = newRecord
+            createVC.record = record
             createVC.isEditingMode = true
         }
     }
@@ -119,25 +130,34 @@ class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
+            
             switch buttonIndex {
             case 1:
-                newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
+                record = PFObject(className: PF_GAINS_CLASS_NAME)
             case 2:
-                newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
+                record = PFObject(className: PF_LOSSES_CLASS_NAME)
             case 3:
-                newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
+                record = PFObject(className: PF_REIMBURSE_CLASS_NAME)
             default:
                 println("No new type of record selected")
             }
-            newRecord[PF_RECORD_START_DATE] = NSDate()
-            newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
-            newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
-            newRecord[PF_RECORD_AMOUNT] = 0
             
-            for user in selectedUsers {
-                newRecord.addObject(user, forKey: PF_RECORD_USER_LIST)
-            }
+            record[PF_RECORD_START_DATE] = NSDate()
+            record[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
+            record[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
+            record[PF_RECORD_AMOUNT] = 0
+            addSelectedUsersToRecord()
+            
             performSegueWithIdentifier("editNewRecordSegue", sender: self)
+        }
+    }
+    
+    func addSelectedUsersToRecord() {
+        if !isNewRecord {
+            record.removeObjectForKey(PF_RECORD_USER_LIST)
+        }
+        for user in selectedUsers {
+            record.addObject(user, forKey: PF_RECORD_USER_LIST)
         }
     }
 

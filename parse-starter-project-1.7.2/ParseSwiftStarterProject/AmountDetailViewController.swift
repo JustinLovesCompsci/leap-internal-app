@@ -22,6 +22,10 @@ class AmountDetailViewController: UITableViewController {
         self.navBar.title = category
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -38,13 +42,16 @@ class AmountDetailViewController: UITableViewController {
         return records.count
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let item = records[indexPath.row]
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "profileCell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! RecordCell
+        cell.clear()
+        cell.bindDate(item)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.text = item[PF_RECORD_SUMMARY] as? String
-        let amount = item[PF_RECORD_AMOUNT] as? Int
-        cell.detailTextLabel?.text = amount?.description
         return cell
     }
     
