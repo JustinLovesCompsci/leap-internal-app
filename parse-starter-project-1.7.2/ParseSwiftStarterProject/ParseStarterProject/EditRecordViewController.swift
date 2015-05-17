@@ -34,9 +34,9 @@ class EditRecordViewController: UITableViewController {
     }
     
     @IBAction func savePressed(sender: AnyObject) {
-        //update createBy, etc.
         if !allFieldsFilled() {
             popIncorrectFieldsAlert()
+            return
         }
         let user = PFUser.currentUser()!
         record[PF_RECORD_CREATED_BY] = user[PF_USER_NAME] as? String
@@ -52,16 +52,9 @@ class EditRecordViewController: UITableViewController {
     }
     
     func allFieldsFilled() -> Bool {
-        if let summary = record[PF_RECORD_SUMMARY] as? String {
-            let amount = record[PF_RECORD_AMOUNT] as? Int
-            let startDate = record[PF_RECORD_START_DATE] as? NSDate
-            let endDate = record[PF_RECORD_END_DATE] as? NSDate
-            let countUsers = getNumUsers()
+        if let summary = record[PF_RECORD_SUMMARY] as? String, startDate = record[PF_RECORD_START_DATE] as? NSDate,  endDate = record[PF_RECORD_END_DATE] as? NSDate, amount = record[PF_RECORD_AMOUNT] as? Int {
             
-            //TODO: check logic below
-            if amount == nil || startDate == nil || endDate == nil {
-                return false
-            }
+            let countUsers = getNumUsers()
             if count(summary) == 0 || amount <= 0 || countUsers == 0 {
                 return false
             }

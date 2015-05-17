@@ -17,6 +17,13 @@ class EditTodoViewController: UITableViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
     @IBAction func savePressed(sender: AnyObject) {
+        if !allFieldsFilled() {
+            popIncorrectFieldsAlert()
+            return
+        }
+        let user = PFUser.currentUser()!
+        editObject[PF_TODOS_CREATED_BY_PERSON] = user[PF_USER_NAME] as? String
+        editObject[PF_TODOS_CREATED_BY_EMAIL] = user.email
         editObject.saveEventually()
         navigationController?.popViewControllerAnimated(true)
     }
@@ -24,6 +31,25 @@ class EditTodoViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    func popIncorrectFieldsAlert() {
+        var alert = UIAlertController(title: "Incorrect Fields", message:"Please fill in all fields correctly", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{ (action:UIAlertAction!) in
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func allFieldsFilled() -> Bool {
+        if let summary = editObject[PF_TODOS_SUMMARY] as? String, descrip = editObject[PF_TODOS_DESCRIPTION] as? String, dueDate = editObject[PF_TODOS_DUE_DATE] as? NSDate {
+            
+            if count(summary) == 0 || count(descrip) == 0 || Utilities.isSmallerThanDate(dueDate, dateTo: NSDate()) {
+                return false
+            }
+            return true
+        } else {
+            return false
+        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

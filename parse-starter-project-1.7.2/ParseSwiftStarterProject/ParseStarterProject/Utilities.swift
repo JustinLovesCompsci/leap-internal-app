@@ -75,4 +75,16 @@ class Utilities {
         return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
     }
     
+    class func isGreaterThanDate(dateFrom: NSDate, dateTo: NSDate) -> Bool {
+        return dateFrom.compare(dateTo) == NSComparisonResult.OrderedDescending
+    }
+    
+    class func isSmallerThanDate(dateFrom: NSDate, dateTo: NSDate) -> Bool {
+        return dateFrom.compare(dateTo) == NSComparisonResult.OrderedAscending
+    }
+    
+    class func isSameAsDate(dateFrom: NSDate, dateTo: NSDate) -> Bool {
+        return dateFrom.compare(dateTo) == NSComparisonResult.OrderedSame
+    }
+    
 }
