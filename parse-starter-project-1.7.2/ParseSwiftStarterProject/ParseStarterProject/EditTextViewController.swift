@@ -36,8 +36,17 @@ class EditTextViewController: UIViewController {
         
         if count(attribute) > 0 {
             editObject[editAttribute] = attribute as String
-            editObject.saveEventually()
             self.navigationController?.popViewControllerAnimated(true)
+        } else {
+            popEmptyAttributeAlert()
         }
+    }
+    
+    func popEmptyAttributeAlert() {
+        var alert = UIAlertController(title: "Oops...", message: "Field cannot be empty", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action:UIAlertAction!) in
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
 }

@@ -20,7 +20,6 @@ class EditDateViewController: UIViewController {
     
     @IBAction func savePressed(sender: AnyObject) {
         editObject[editAttribute] = datePicker.date
-        editObject.saveEventually()
         self.navigationController?.popViewControllerAnimated(true)
     }
     

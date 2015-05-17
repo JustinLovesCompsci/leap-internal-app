@@ -114,6 +114,15 @@ let PASSWORD                             = "Password"
 /* New ToDo */
 let NEW_TODO_SUMMARY                     = "New ToDo"
 
+/* Edit Record */
+let RECORD_SUMMARY                          = "Summary"
+let RECORD_START_DATE                       = "Start Date"
+let RECORD_END_DATE                         = "End Date"
+let RECORD_USER_LIST                        = "Recipients"
+let RECORD_AMOUNT                           = "Amount"
+
+/* New Record */
+let DEFAULT_RECORD_SUMMARY                  = "New Record"
 
 
 

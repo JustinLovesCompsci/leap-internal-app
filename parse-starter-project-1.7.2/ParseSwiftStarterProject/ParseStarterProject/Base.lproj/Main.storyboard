@@ -538,14 +538,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="jiG-fA-hgg">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="sdx-u1-wnX">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sdx-u1-wnX">
                             <connections>
-                                <action selector="deletePressed:" destination="kaB-S3-Km4" id="t58-bO-6ft"/>
+                                <action selector="savePressed:" destination="kaB-S3-Km4" id="yRq-S9-XPR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="deleteButton" destination="sdx-u1-wnX" id="abk-IK-7qV"/>
+                        <outlet property="saveButton" destination="sdx-u1-wnX" id="R9t-FD-w8p"/>
                         <segue destination="hxJ-s7-vRv" kind="show" identifier="editTodoTextSegue" id="Hda-nZ-fh2"/>
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editTodoDateSegue" id="RWp-yF-gaP"/>
                     </connections>
@@ -603,7 +603,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="cnu-g6-O7Y">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="3D1-Ac-IPc">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="3D1-Ac-IPc">
                             <connections>
                                 <action selector="savePressed:" destination="13B-Yj-fdm" id="JkC-P1-Yvl"/>
                             </connections>
@@ -617,6 +617,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4s-7D-OAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3514.5" y="1724.25"/>
+        </scene>
+        <!--Edit Record View Controller-->
+        <scene sceneID="b1w-rN-zjX">
+            <objects>
+                <tableViewController id="tMz-RA-jEZ" customClass="EditRecordViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hxb-7h-YoZ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="3RY-3f-qCI">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3RY-3f-qCI" id="Yz9-FH-R7h">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tMz-RA-jEZ" id="hM6-tN-Ygg"/>
+                            <outlet property="delegate" destination="tMz-RA-jEZ" id="gEM-xC-gLm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="HpX-Lu-ojV">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Yt0-7m-c5Z">
+                            <connections>
+                                <action selector="savePressed:" destination="tMz-RA-jEZ" id="W9D-Pd-j5O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButto" destination="Yt0-7m-c5Z" id="qN9-iK-s2Y"/>
+                        <segue destination="hxJ-s7-vRv" kind="show" identifier="editTextSegue" id="IYO-Ok-K1C"/>
+                        <segue destination="13B-Yj-fdm" kind="show" identifier="editDateSegue" id="p9v-dL-Uhr"/>
+                        <segue destination="QTh-C1-A2P" kind="show" identifier="editNumSegue" id="0L2-A2-bXY"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TAM-hw-0EM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2815.5" y="3413.25"/>
         </scene>
         <!--Edit Number View Controller-->
         <scene sceneID="oaa-gN-aes">
@@ -683,7 +721,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="4TA-jS-aVP">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="KL1-zH-aNM">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="KL1-zH-aNM">
                             <connections>
                                 <action selector="savePressed:" destination="hxJ-s7-vRv" id="8gY-Qb-Odd"/>
                             </connections>
@@ -912,9 +950,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="6Rj-8n-ieg">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="owg-RR-wuO">
+                        <barButtonItem key="rightBarButtonItem" title="Change" id="owg-RR-wuO">
                             <connections>
-                                <segue destination="kaB-S3-Km4" kind="show" identifier="editTodoSegue" id="wLr-jR-CGm"/>
+                                <action selector="changePressed:" destination="nQ1-Lh-9g8" id="mLk-lc-oOL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -924,6 +962,7 @@
                         <outlet property="descriptionField" destination="Tu3-8j-Qfh" id="s2u-zw-96H"/>
                         <outlet property="navBar" destination="6Rj-8n-ieg" id="lRh-dA-fw2"/>
                         <outlet property="summaryField" destination="DbQ-r7-Tbp" id="m53-U7-xA2"/>
+                        <segue destination="kaB-S3-Km4" kind="show" identifier="editTodoSegue" id="09P-hh-33n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7KE-25-vbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -985,6 +1024,8 @@
                     <connections>
                         <outlet property="navBar" destination="sYW-aA-8Bb" id="Jaj-Wb-KjS"/>
                         <segue destination="h5P-Ks-ck6" kind="show" identifier="amountDetailSegue" id="lhp-Pq-K87"/>
+                        <segue destination="kCi-8y-bKZ" kind="show" identifier="editRecordSegue" id="dFg-YL-ue5"/>
+                        <segue destination="QvI-Tw-QHZ" kind="show" identifier="addRecordSegue" id="XBA-z5-wnW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1015,11 +1056,82 @@
                     <navigationItem key="navigationItem" title="Title" id="OGz-nE-I1U"/>
                     <connections>
                         <outlet property="navBar" destination="OGz-nE-I1U" id="nKf-WK-xTc"/>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="showRecordDetailSegue" id="b93-eg-Bhn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz1-rg-9n7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="2021.25"/>
+            <point key="canvasLocation" x="1917" y="2021.25"/>
+        </scene>
+        <!--Select Single-->
+        <scene sceneID="ZDn-Y5-A6W">
+            <objects>
+                <tableViewController id="kCi-8y-bKZ" customClass="SelectSingleViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ggf-TJ-hsa">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="4Vq-zv-ZKP">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="personCell" id="Gvx-xa-0gi">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gvx-xa-0gi" id="k6X-fN-xez">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kCi-8y-bKZ" id="mFG-Xb-NV7"/>
+                            <outlet property="delegate" destination="kCi-8y-bKZ" id="BGl-0J-GAm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Single" id="SWS-wc-fJA"/>
+                    <connections>
+                        <outlet property="searchBar" destination="4Vq-zv-ZKP" id="5sE-0L-T0p"/>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editExistingRecordSegue" id="Mas-18-1pc"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Na-tn-prw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2205" y="2691"/>
+        </scene>
+        <!--Select Multiple-->
+        <scene sceneID="vQ2-XR-yIM">
+            <objects>
+                <tableViewController id="QvI-Tw-QHZ" customClass="SelectMultipleViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6i6-SV-RAu">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="RTq-hZ-QCp">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTq-hZ-QCp" id="CTu-Is-GFg">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QvI-Tw-QHZ" id="w7V-eE-YvK"/>
+                            <outlet property="delegate" destination="QvI-Tw-QHZ" id="O0G-du-TPg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Multiple" id="0Mw-CX-cno">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="AwO-SA-y2y">
+                            <connections>
+                                <action selector="donePressed:" destination="QvI-Tw-QHZ" id="OAY-y9-pC8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="xhq-WU-qfO"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BBI-xp-jKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935" y="3413.25"/>
         </scene>
         <!--Profile-->
         <scene sceneID="EVO-Gs-aGa">
@@ -1053,6 +1165,9 @@
         <image name="welcome.JPG" width="3648" height="2736"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wLr-jR-CGm"/>
+        <segue reference="09P-hh-33n"/>
+        <segue reference="Hda-nZ-fh2"/>
+        <segue reference="RWp-yF-gaP"/>
+        <segue reference="b93-eg-Bhn"/>
     </inferredMetricsTieBreakers>
 </document>

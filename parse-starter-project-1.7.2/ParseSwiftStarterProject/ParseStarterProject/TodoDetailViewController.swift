@@ -9,7 +9,7 @@
 import Foundation
 import Parse
 
-class TodoDetailViewController: UIViewController {
+class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     
     var todo: PFObject!
     
@@ -25,6 +25,28 @@ class TodoDetailViewController: UIViewController {
     
     @IBAction func askPressed(sender: AnyObject) {
         
+    }
+    
+    @IBAction func changePressed(sender: AnyObject) {
+        showChangeActionSheet()
+    }
+    
+    func showChangeActionSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Edit", "Delete")
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            switch buttonIndex {
+            case 1:
+                performSegueWithIdentifier("editTodoSegue", sender: self)
+            case 2:
+                popDeleteAlert()
+            default:
+                println("No record action selected")
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -63,8 +85,16 @@ class TodoDetailViewController: UIViewController {
         }
     }
     
-    /* only support portrait */
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    func popDeleteAlert() {
+        var deleteAlert = UIAlertController(title: "Delete This ToDo", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action:UIAlertAction!) in
+            NSLog("Cancelled log out")
+        }))
+        deleteAlert.addAction(UIAlertAction(title: "Remove", style: .Default, handler: { (action:UIAlertAction!) in
+            self.todo.deleteEventually()
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
+        
+        presentViewController(deleteAlert, animated: true, completion: nil)
     }
 }

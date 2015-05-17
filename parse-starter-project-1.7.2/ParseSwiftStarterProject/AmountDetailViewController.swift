@@ -15,6 +15,7 @@ class AmountDetailViewController: UITableViewController {
     @IBOutlet weak var navBar: UINavigationItem!
     var category = ""
     var records:[PFObject] = []
+    var toShowRecord:PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +49,16 @@ class AmountDetailViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let item = records[indexPath.row]
+        toShowRecord = records[indexPath.row]
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //TODO
+        performSegueWithIdentifier("showRecordDetailSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showRecordDetailSegue" {
+            let createVC = segue.destinationViewController as! EditRecordViewController
+            createVC.record = toShowRecord
+        }
     }
     
 }

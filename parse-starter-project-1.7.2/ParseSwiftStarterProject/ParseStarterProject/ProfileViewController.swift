@@ -51,16 +51,20 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
-            //            switch buttonIndex {
-            //
-            //            }
+            switch buttonIndex {
+            case 1:
+                performSegueWithIdentifier("addRecordSegue", sender: self)
+            case 2:
+                performSegueWithIdentifier("editRecordSegue", sender: self)
+            default:
+                println("No record action selected")
+            }
         }
     }
     
     @IBAction func logOutPressed(sender: AnyObject) {
         var logOutAlert = UIAlertController(title: "Log Out", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
         logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
-            NSLog("Cancelled log out")
         }))
         
         logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction!) in

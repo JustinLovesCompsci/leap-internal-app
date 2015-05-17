@@ -14,28 +14,15 @@ class EditTodoViewController: UITableViewController {
     var editObject: PFObject!
     var toEditAttribute: String!
     
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
-    
-    @IBAction func deletePressed(sender: AnyObject) {
-        var deleteAlert = UIAlertController(title: "Delete This ToDo", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action:UIAlertAction!) in
-            NSLog("Cancelled log out")
-        }))
-        deleteAlert.addAction(UIAlertAction(title: "Remove", style: .Default, handler: { (action:UIAlertAction!) in
-            self.editObject.deleteEventually()
-            self.navigationController?.popViewControllerAnimated(true)
-        }))
-        
-        presentViewController(deleteAlert, animated: true, completion: nil)
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+
+    @IBAction func savePressed(sender: AnyObject) {
+        editObject.saveEventually()
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if editObject[PF_TODOS_SUMMARY] as? String == NEW_TODO_SUMMARY {
-            deleteButton.enabled = false
-        } else {
-            deleteButton.enabled = true
-        }
         tableView.reloadData()
     }
     

@@ -8,7 +8,10 @@
 
 import Foundation
 import UIKit
+import Parse
 
 class EditNumberViewController: UIViewController {
-    
+    var editObject: PFObject!
+    var objectClass: String!
+    var editAttribute: String!
 }
