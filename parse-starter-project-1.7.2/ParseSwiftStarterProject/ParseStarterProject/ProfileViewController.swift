@@ -160,7 +160,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate {
         if section == 0 {
             return "General"
         } else {
-            return "Financials"
+            return "Financial Records"
         }
     }
     

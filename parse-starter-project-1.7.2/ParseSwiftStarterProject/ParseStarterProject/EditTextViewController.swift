@@ -17,6 +17,7 @@ class EditTextViewController: UIViewController {
     
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.text = editObject[editAttribute] as? String

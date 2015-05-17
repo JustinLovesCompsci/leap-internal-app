@@ -666,8 +666,53 @@
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EqC-0a-hUX">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-Wg-xOb">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="186" width="368" height="30"/>
+                                </variation>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="q0b-Wg-xOb" firstAttribute="trailing" secondItem="EqC-0a-hUX" secondAttribute="trailingMargin" id="Ety-Sb-qb7"/>
+                            <constraint firstItem="q0b-Wg-xOb" firstAttribute="leading" secondItem="EqC-0a-hUX" secondAttribute="leadingMargin" id="ULM-2v-HZh"/>
+                            <constraint firstItem="q0b-Wg-xOb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cVd-15-AXU" secondAttribute="bottom" constant="80" id="vRJ-By-9T2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="q0b-Wg-xOb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Ety-Sb-qb7"/>
+                                <exclude reference="ULM-2v-HZh"/>
+                                <exclude reference="vRJ-By-9T2"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="q0b-Wg-xOb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Ety-Sb-qb7"/>
+                                <include reference="ULM-2v-HZh"/>
+                                <include reference="vRJ-By-9T2"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="c4M-zI-Eta">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="hqu-SI-sUt">
+                            <connections>
+                                <action selector="donePressed:" destination="QTh-C1-A2P" id="Co0-4w-AgD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="numberField" destination="q0b-Wg-xOb" id="0PZ-0g-vye"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POk-zo-mNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1010,7 +1055,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Profile" id="sYW-aA-8Bb">
-                        <barButtonItem key="leftBarButtonItem" title="New" id="KHB-4f-eFR">
+                        <barButtonItem key="leftBarButtonItem" title="Change" id="KHB-4f-eFR">
                             <connections>
                                 <action selector="newPressed:" destination="VRv-2z-RMX" id="DMK-sc-c9p"/>
                             </connections>

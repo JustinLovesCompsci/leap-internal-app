@@ -28,6 +28,11 @@ class EditRecordViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     @IBAction func savePressed(sender: AnyObject) {
         //update createBy, etc.
         if !allFieldsFilled() {
@@ -36,6 +41,7 @@ class EditRecordViewController: UITableViewController {
         let user = PFUser.currentUser()!
         record[PF_RECORD_CREATED_BY] = user[PF_USER_NAME] as? String
         record.saveEventually()
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func popIncorrectFieldsAlert() {
