@@ -1103,7 +1103,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from May 20 to Aug 31" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-si-Lnh">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -1253,7 +1253,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="xhq-WU-qfO"/>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="nPc-GT-Gl2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBI-xp-jKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1295,6 +1295,6 @@
         <segue reference="09P-hh-33n"/>
         <segue reference="Hda-nZ-fh2"/>
         <segue reference="RWp-yF-gaP"/>
-        <segue reference="b93-eg-Bhn"/>
+        <segue reference="nPc-GT-Gl2"/>
     </inferredMetricsTieBreakers>
 </document>
