@@ -16,6 +16,7 @@ class AmountDetailViewController: UITableViewController {
     var category = ""
     var records:[PFObject] = []
     var toShowRecord:PFObject!
+    var isEditingMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,9 @@ class AmountDetailViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
+    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -65,6 +68,7 @@ class AmountDetailViewController: UITableViewController {
         if segue.identifier == "showRecordDetailSegue" {
             let createVC = segue.destinationViewController as! EditRecordViewController
             createVC.record = toShowRecord
+            createVC.isEditingMode = self.isEditingMode
         }
     }
     

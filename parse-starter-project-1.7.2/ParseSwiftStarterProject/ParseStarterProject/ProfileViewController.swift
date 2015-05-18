@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class ProfileViewController: UITableViewController, UIActionSheetDelegate, SelectMultipleDelegate {
+class ProfileViewController: UITableViewController, UIActionSheetDelegate, SelectMultipleDelegate, SelectSingleDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -27,9 +27,16 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     var totalNet = 0
     
     var toShowFinanceCategory = ""
-    var isToCreateNewRecord = false
+    var isToEditRecord = false
+    var isToCreateRecord = false
+    
+    //SelectMultipleDelegate
     var newRecord: PFObject!
     var selectedNewUsers = [PFUser]()
+    
+    //SelectSingleDelegate
+    var selectedUser: PFUser!
+    var records: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,41 +59,80 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         showNewRecordSheet()
     }
     
+    func didSelectSingleUser(user: PFUser) {
+        selectedUser = user
+        showEditRecordSheet()
+    }
+    
     func showNewActionSheet() {
         var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Post New Record", "Edit Existing Record")
-        isToCreateNewRecord = false
+        isToEditRecord  = false
+        isToCreateRecord = false
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
     
     func showNewRecordSheet() {
         var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "New Gain", "New Loss", "New Reimburse")
-        isToCreateNewRecord = true
+        isToEditRecord  = true
+        isToCreateRecord = true
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func showEditRecordSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Edit Gain", "Edit Loss", "Edit Reimburse")
+        isToEditRecord = true
+        isToCreateRecord = false
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func isToAddNewRecord() -> Bool {
+        return isToEditRecord && isToCreateRecord
+    }
+    
+    func isToEditOtherRecords() -> Bool {
+        return isToEditRecord && !isToCreateRecord
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
             
-            if isToCreateNewRecord {
-                switch buttonIndex {
-                case 1:
-                    newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
-                case 2:
-                    newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
-                case 3:
-                    newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
-                default:
-                    println("No new type of record selected")
-                }
+            if isToEditRecord {
                 
-                newRecord[PF_RECORD_START_DATE] = NSDate()
-                newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
-                newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
-                newRecord[PF_RECORD_AMOUNT] = 0
-                for user in selectedNewUsers {
-                    newRecord.addObject(user, forKey: PF_RECORD_USER_LIST)
+                if isToCreateRecord {
+                    switch buttonIndex {
+                    case 1:
+                        newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
+                    case 2:
+                        newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
+                    case 3:
+                        newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
+                    default:
+                        println("No new type of record selected")
+                    }
+                    
+                    newRecord[PF_RECORD_START_DATE] = NSDate()
+                    newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
+                    newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
+                    newRecord[PF_RECORD_AMOUNT] = 0
+                    for user in selectedNewUsers {
+                        newRecord.addObject(user, forKey: PF_RECORD_USER_LIST)
+                    }
+                    performSegueWithIdentifier("editNewRecordSegue", sender: self)
+                    
+                } else {
+                    switch buttonIndex {
+                    case 1:
+                        toShowFinanceCategory = TOTAL_GAIN
+                    case 2:
+                        toShowFinanceCategory = TOTAL_LOSS
+                    case 3:
+                        toShowFinanceCategory = TOTAL_REIMBURSE
+                    default:
+                        println("No new type of record selected")
+                    }
+                    
+                    loadSelectUserRecords()
                 }
-                performSegueWithIdentifier("editNewRecordSegue", sender: self)
                 
             } else {
                 
@@ -263,7 +309,6 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 cell.detailTextLabel?.text = totalReimburses.description
             case TOTAL_NET:
                 cell.detailTextLabel?.text = totalNet.description
-                cell.accessoryType = UITableViewCellAccessoryType.None
                 cell.detailTextLabel?.textColor = UIColor.blueColor()
             default:
                 cell.detailTextLabel?.text = ""
@@ -305,15 +350,21 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             createVC.category = toShowFinanceCategory
             createVC.records.removeAll(keepCapacity: false)
             
-            switch (toShowFinanceCategory) {
-            case TOTAL_GAIN:
-                createVC.records.extend(gains)
-            case TOTAL_LOSS:
-                createVC.records.extend(losses)
-            case TOTAL_REIMBURSE:
-                createVC.records.extend(reimburses)
-            default:
-               createVC.records.extend(gains)
+            if isToEditOtherRecords() {
+                createVC.records.extend(records)
+                createVC.isEditingMode = true
+                
+            } else {
+                switch (toShowFinanceCategory) {
+                case TOTAL_GAIN:
+                    createVC.records.extend(gains)
+                case TOTAL_LOSS:
+                    createVC.records.extend(losses)
+                case TOTAL_REIMBURSE:
+                    createVC.records.extend(reimburses)
+                default:
+                    createVC.records.extend(gains)
+                }
             }
             
         } else if segue.identifier == "selectMultipleSegue" {
@@ -324,6 +375,44 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             let createVC = segue.destinationViewController as! EditRecordViewController
             createVC.record = newRecord
             createVC.isEditingMode = true
+            
+        } else if segue.identifier == "editRecordSegue" {
+            let createVC = segue.destinationViewController as! SelectSingleViewController
+            createVC.delegate = self
+            
+        }
+    }
+    
+    func loadSelectUserRecords() {
+        println("load selected user records")
+        var query: PFQuery!
+        
+        switch (toShowFinanceCategory) {
+        case TOTAL_GAIN:
+            query = PFQuery(className: PF_GAINS_CLASS_NAME)
+        case TOTAL_LOSS:
+            query = PFQuery(className: PF_LOSSES_CLASS_NAME)
+        case TOTAL_REIMBURSE:
+            query = PFQuery(className: PF_REIMBURSE_CLASS_NAME)
+        default:
+            println("should not reach here")
+        }
+
+        query.whereKey(PF_LOSSES_USER_LIST, equalTo: selectedUser)
+        query.orderByDescending(PF_RECORD_START_DATE)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            println("selected user records fetched")
+            if error == nil {
+                self.records.removeAll(keepCapacity: false)
+                if objects != nil && objects?.count > 0 {
+                    self.records.extend(objects as! [PFObject]!)
+                }
+                self.performSegueWithIdentifier("amountDetailSegue", sender: self)
+            } else {
+                //TODO: show error
+                println(error)
+            }
         }
     }
     

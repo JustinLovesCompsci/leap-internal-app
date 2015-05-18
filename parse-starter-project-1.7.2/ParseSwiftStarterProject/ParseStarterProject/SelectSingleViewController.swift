@@ -10,13 +10,17 @@ import Foundation
 import Parse
 import UIKit
 
-class SelectSingleViewController: UITableViewController, UISearchBarDelegate, UIActionSheetDelegate  {
+protocol SelectSingleDelegate {
+    func didSelectSingleUser(user: PFUser)
+}
+
+class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     var users = [PFUser]()
-    var newUser: PFUser!
-    var newRecord: PFObject!
+    var selectedUser: PFUser!
+    var delegate: SelectSingleDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +86,8 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate, UI
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        newUser = users[indexPath.row]
-        showNewRecordSheet()
+        delegate.didSelectSingleUser(users[indexPath.row])
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     // MARK: - UISearchBar Delegate
@@ -116,45 +120,6 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate, UI
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
         self.loadUsers()
-    }
-    
-    //MARK: - Segue Transition
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editNewRecordSegue" {
-            let createVC = segue.destinationViewController as! EditRecordViewController
-            createVC.record = newRecord
-        } else if segue.identifier == "editExistingRecordSegue" {
-//            let createVC = segue.destinationViewController as! EditRecordViewController
-        }
-    }
-    
-    func showNewRecordSheet() {
-        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Edit Gain", "Edit Loss", "Edit Reimburse")
-        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex != actionSheet.cancelButtonIndex {
-            switch buttonIndex {
-            case 1:
-                newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
-            case 2:
-                newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
-            case 3:
-                newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
-            default:
-                println("No new type of record selected")
-            }
-            
-            newRecord[PF_RECORD_START_DATE] = NSDate()
-            newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
-            newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
-            newRecord[PF_RECORD_AMOUNT] = 0
-            newRecord.addObject(newUser, forKey: PF_RECORD_USER_LIST)
-            
-            performSegueWithIdentifier("editExistingRecordSegue", sender: self)
-        }
     }
     
 }

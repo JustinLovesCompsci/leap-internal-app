@@ -857,7 +857,7 @@
                                     <constraint firstAttribute="height" constant="44" id="Cne-1i-ne2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Ask Question">
+                                <state key="normal" title="Ask a Question">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1056,7 +1056,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Profile" id="sYW-aA-8Bb">
-                        <barButtonItem key="leftBarButtonItem" title="Change" id="KHB-4f-eFR">
+                        <barButtonItem key="leftBarButtonItem" title="New" id="KHB-4f-eFR">
                             <connections>
                                 <action selector="newPressed:" destination="VRv-2z-RMX" id="DMK-sc-c9p"/>
                             </connections>
@@ -1095,7 +1095,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辅导分成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWH-Oi-wpe">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -1219,12 +1219,12 @@
                     <navigationItem key="navigationItem" title="Select Single" id="SWS-wc-fJA"/>
                     <connections>
                         <outlet property="searchBar" destination="4Vq-zv-ZKP" id="5sE-0L-T0p"/>
-                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editExistingRecordSegue" id="Mas-18-1pc"/>
+                        <segue destination="h5P-Ks-ck6" kind="show" identifier="showDetailsSegue" id="eYc-cn-f1m"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Na-tn-prw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2205" y="2691"/>
+            <point key="canvasLocation" x="1743" y="2703"/>
         </scene>
         <!--Select Multiple-->
         <scene sceneID="vQ2-XR-yIM">
@@ -1291,8 +1291,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="09P-hh-33n"/>
-        <segue reference="Mzz-OE-leD"/>
-        <segue reference="yk5-W4-qzs"/>
+        <segue reference="lhp-Pq-K87"/>
+        <segue reference="XBA-z5-wnW"/>
+        <segue reference="b93-eg-Bhn"/>
         <segue reference="p9v-dL-Uhr"/>
         <segue reference="IYO-Ok-K1C"/>
     </inferredMetricsTieBreakers>

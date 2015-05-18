@@ -25,6 +25,9 @@ class EditDateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let date = editObject[editAttribute] as? NSDate {
+            datePicker.date = date
+        }
     }
     
 }

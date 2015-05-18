@@ -98,12 +98,12 @@ let PF_REIMBURSE_START_DATE              = "StartDate"               //  Date
 let PF_REIMBURSE_END_DATE                = "EndDate"                 //  Date
 let PF_REIMBURSE_USER_LIST               = "UserList"                //  Array
 let PF_REIMBURSE_AMOUNT                  = "Amount"                  //  Number
-let PF_REIMBURSE_CREATED_BY                 = "createdBy"               //  String
+let PF_REIMBURSE_CREATED_BY              = "createdBy"               //  String
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"
 let TOTAL_LOSS                           = "Total Losses"
-let TOTAL_REIMBURSE                      = "Total Reimbursements"
+let TOTAL_REIMBURSE                      = "Total Reimburse"
 let TOTAL_NET                            = "Net Income"
 
 /* General Profile */
