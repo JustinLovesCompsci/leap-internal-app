@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import UIKit
 
-class EditRecordViewController: UITableViewController {
+class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
     
     var record:PFObject!
     let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_USER_LIST]
@@ -145,7 +145,7 @@ class EditRecordViewController: UITableViewController {
                 performSegueWithIdentifier("editDateSegue", sender: self)
             case RECORD_USER_LIST:
                 toEditAttribute = PF_RECORD_USER_LIST
-//                performSegueWithIdentifier("", sender: <#AnyObject?#>)
+                performSegueWithIdentifier("editRecipientSegue", sender: self)
             default:
                 println("should not reach here")
             }
@@ -168,7 +168,18 @@ class EditRecordViewController: UITableViewController {
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
             createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+        } else if segue.identifier == "editRecipientSegue" {
+            let createVC = segue.destinationViewController as! SelectMultipleViewController
+            createVC.delegate = self
         }
+    }
+    
+    func didSelectMultipleUsers(selectedUsers: [PFUser]) {
+        record.removeObjectForKey(PF_RECORD_USER_LIST)
+        for user in selectedUsers {
+            record.addObject(user, forKey: PF_RECORD_USER_LIST)
+        }
+        tableView.reloadData()
     }
     
 }

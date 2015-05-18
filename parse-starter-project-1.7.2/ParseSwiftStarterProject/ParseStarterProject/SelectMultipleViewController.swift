@@ -11,22 +11,21 @@ import Parse
 import UIKit
 
 protocol SelectMultipleDelegate {
-    func didSelectMultipleUsers(record: PFObject)
+    func didSelectMultipleUsers(selectedUsers: [PFUser])
 }
 
-class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate {
+class SelectMultipleViewController: UITableViewController {
     
     var users = [PFUser]()
     var selection = [String]()
     var selectedUsers = [PFUser]()
-    var record: PFObject!
-    var isNewRecord = false
     
     var delegate: SelectMultipleDelegate!
     
     @IBAction func donePressed(sender: AnyObject) {
         if selection.count == 0 {
             popNonSelectedDialog()
+            
         } else {
             selectedUsers = [PFUser]()
             for user in users {
@@ -34,13 +33,9 @@ class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate
                     selectedUsers.append(user)
                 }
             }
-            if isNewRecord {
-                showNewRecordSheet()
-            } else {
-                addSelectedUsersToRecord()
-                delegate.didSelectMultipleUsers(record)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
+            
+            delegate.didSelectMultipleUsers(selectedUsers)
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -111,54 +106,6 @@ class SelectMultipleViewController: UITableViewController, UIActionSheetDelegate
         }
         
         self.tableView.reloadData()
-    }
-    
-    //MARK: - Segue Transition
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editNewRecordSegue" {
-            let createVC = segue.destinationViewController as! EditRecordViewController
-            createVC.record = record
-            createVC.isEditingMode = true
-        }
-    }
-    
-    func showNewRecordSheet() {
-        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "New Gain", "New Loss", "New Reimburse")
-        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex != actionSheet.cancelButtonIndex {
-            
-            switch buttonIndex {
-            case 1:
-                record = PFObject(className: PF_GAINS_CLASS_NAME)
-            case 2:
-                record = PFObject(className: PF_LOSSES_CLASS_NAME)
-            case 3:
-                record = PFObject(className: PF_REIMBURSE_CLASS_NAME)
-            default:
-                println("No new type of record selected")
-            }
-            
-            record[PF_RECORD_START_DATE] = NSDate()
-            record[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
-            record[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
-            record[PF_RECORD_AMOUNT] = 0
-            addSelectedUsersToRecord()
-            
-            performSegueWithIdentifier("editNewRecordSegue", sender: self)
-        }
-    }
-    
-    func addSelectedUsersToRecord() {
-        if !isNewRecord {
-            record.removeObjectForKey(PF_RECORD_USER_LIST)
-        }
-        for user in selectedUsers {
-            record.addObject(user, forKey: PF_RECORD_USER_LIST)
-        }
     }
 
 }

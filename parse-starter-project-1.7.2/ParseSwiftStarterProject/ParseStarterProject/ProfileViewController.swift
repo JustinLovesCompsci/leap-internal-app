@@ -27,11 +27,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     var totalNet = 0
     
     var toShowFinanceCategory = ""
-    
-    func didSelectMultipleUsers(record: PFObject) {
-        println("Select multiple delegate called back to profile view")
-        //TODO: check if do nothing here
-    }
+    var isToCreateNewRecord = false
+    var newRecord: PFObject!
+    var selectedNewUsers = [PFUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,20 +47,57 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         showNewActionSheet()
     }
     
+    func didSelectMultipleUsers(selectedUsers: [PFUser]) {
+        selectedNewUsers = selectedUsers
+        showNewRecordSheet()
+    }
+    
     func showNewActionSheet() {
         var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Post New Record", "Edit Existing Record")
+        isToCreateNewRecord = false
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func showNewRecordSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "New Gain", "New Loss", "New Reimburse")
+        isToCreateNewRecord = true
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != actionSheet.cancelButtonIndex {
-            switch buttonIndex {
-            case 1:
-                performSegueWithIdentifier("selectMultipleSegue", sender: self)
-            case 2:
-                performSegueWithIdentifier("editRecordSegue", sender: self)
-            default:
-                println("No record action selected")
+            
+            if isToCreateNewRecord {
+                switch buttonIndex {
+                case 1:
+                    newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
+                case 2:
+                    newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
+                case 3:
+                    newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
+                default:
+                    println("No new type of record selected")
+                }
+                
+                newRecord[PF_RECORD_START_DATE] = NSDate()
+                newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
+                newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
+                newRecord[PF_RECORD_AMOUNT] = 0
+                for user in selectedNewUsers {
+                    newRecord.addObject(user, forKey: PF_RECORD_USER_LIST)
+                }
+                performSegueWithIdentifier("editNewRecordSegue", sender: self)
+                
+            } else {
+                
+                switch buttonIndex {
+                case 1:
+                    performSegueWithIdentifier("selectMultipleSegue", sender: self)
+                case 2:
+                    performSegueWithIdentifier("editRecordSegue", sender: self)
+                default:
+                    println("No record action selected")
+                }
             }
         }
     }
@@ -280,9 +315,15 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             default:
                createVC.records.extend(gains)
             }
+            
         } else if segue.identifier == "selectMultipleSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
-            createVC.isNewRecord = true
+            createVC.delegate = self
+            
+        } else if segue.identifier == "editNewRecordSegue" {
+            let createVC = segue.destinationViewController as! EditRecordViewController
+            createVC.record = newRecord
+            createVC.isEditingMode = true
         }
     }
     

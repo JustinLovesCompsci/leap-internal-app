@@ -650,6 +650,7 @@
                         <segue destination="hxJ-s7-vRv" kind="show" identifier="editTextSegue" id="IYO-Ok-K1C"/>
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editDateSegue" id="p9v-dL-Uhr"/>
                         <segue destination="QTh-C1-A2P" kind="show" identifier="editNumSegue" id="0L2-A2-bXY"/>
+                        <segue destination="QvI-Tw-QHZ" kind="show" identifier="editRecipientSegue" id="yk5-W4-qzs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TAM-hw-0EM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1071,7 +1072,7 @@
                         <segue destination="h5P-Ks-ck6" kind="show" identifier="amountDetailSegue" id="lhp-Pq-K87"/>
                         <segue destination="kCi-8y-bKZ" kind="show" identifier="editRecordSegue" id="dFg-YL-ue5"/>
                         <segue destination="QvI-Tw-QHZ" kind="show" identifier="selectMultipleSegue" id="XBA-z5-wnW"/>
-                        <segue destination="tMz-RA-jEZ" kind="show" identifier="addRecordSegue" id="Mzz-OE-leD"/>
+                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="Mzz-OE-leD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1252,9 +1253,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="nPc-GT-Gl2"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBI-xp-jKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1293,8 +1291,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="09P-hh-33n"/>
-        <segue reference="Hda-nZ-fh2"/>
-        <segue reference="RWp-yF-gaP"/>
-        <segue reference="nPc-GT-Gl2"/>
+        <segue reference="Mzz-OE-leD"/>
+        <segue reference="yk5-W4-qzs"/>
+        <segue reference="p9v-dL-Uhr"/>
+        <segue reference="IYO-Ok-K1C"/>
     </inferredMetricsTieBreakers>
 </document>
