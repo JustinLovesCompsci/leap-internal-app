@@ -14,18 +14,7 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     var todo: PFObject!
     
     @IBOutlet weak var navBar: UINavigationItem!
-    @IBOutlet weak var summaryField: UILabel!
-    @IBOutlet weak var descriptionField: UILabel!
-    @IBOutlet weak var DueDateField: UILabel!
-    @IBOutlet weak var createByField: UILabel!
-    
-    @IBAction func saveCalendarPressed(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func askPressed(sender: AnyObject) {
-        
-    }
+    @IBOutlet weak var descriptionText: UITextView!
     
     @IBAction func changePressed(sender: AnyObject) {
         showChangeActionSheet()
@@ -60,18 +49,12 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        summaryField.text = "Summary: \(todo[PF_TODOS_SUMMARY] as! String)"
+        descriptionText.editable = false
         if let descrip = todo[PF_TODOS_DESCRIPTION] as? String {
-            descriptionField.text = descrip
+            descriptionText.text = descrip
         } else {
-            descriptionField.text = "None"
+            descriptionText.text = "None"
         }
-        DueDateField.text = "Due By \(Utilities.getFormattedTextFromDate(todo[PF_TODOS_DUE_DATE] as! NSDate))"
-        createByField.text = "Created By \(todo[PF_TODOS_CREATED_BY_PERSON] as! String)"
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,6 +66,9 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
         if segue.identifier == "editTodoSegue" {
             let createVC = segue.destinationViewController as! EditTodoViewController
             createVC.editObject = todo
+        } else if segue.identifier == "embedShowTodoSegue" {
+            let createVC = segue.destinationViewController as! TodoShowTableViewController
+            createVC.todo = todo
         }
     }
     

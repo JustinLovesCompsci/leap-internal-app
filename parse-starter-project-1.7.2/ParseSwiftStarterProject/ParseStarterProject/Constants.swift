@@ -124,6 +124,10 @@ let RECORD_AMOUNT                           = "Amount"
 /* New Record */
 let DEFAULT_RECORD_SUMMARY                  = "New Record"
 
+/* Todos Action Buttons */
+let SAVE_TO_CALENDAR = " Save to Calendar"
+let ASK_QUESTION = " Ask a Question"
+
 
 
 

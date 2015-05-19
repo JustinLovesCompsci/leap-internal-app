@@ -32,6 +32,7 @@
 		AA83EAB31B07FAF0002A6B5F /* EditRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAB21B07FAF0002A6B5F /* EditRecordViewController.swift */; };
 		AA83EAB71B080149002A6B5F /* SelectMultipleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAB61B080149002A6B5F /* SelectMultipleViewController.swift */; };
 		AA83EAB91B088E6A002A6B5F /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAB81B088E6A002A6B5F /* RecordCell.swift */; };
+		AA83EABB1B0AF9C3002A6B5F /* TodoShowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EABA1B0AF9C3002A6B5F /* TodoShowTableViewController.swift */; };
 		AABB02DA1AFF3E9F006C212C /* welcome.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AABB02D91AFF3E9F006C212C /* welcome.JPG */; };
 		AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */; };
 		AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DF1B0057FD006C212C /* LoginViewController.swift */; };
@@ -72,6 +73,7 @@
 		AA83EAB21B07FAF0002A6B5F /* EditRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecordViewController.swift; sourceTree = "<group>"; };
 		AA83EAB61B080149002A6B5F /* SelectMultipleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMultipleViewController.swift; sourceTree = "<group>"; };
 		AA83EAB81B088E6A002A6B5F /* RecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		AA83EABA1B0AF9C3002A6B5F /* TodoShowTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoShowTableViewController.swift; sourceTree = "<group>"; };
 		AABB02D91AFF3E9F006C212C /* welcome.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.JPG; sourceTree = "<group>"; };
 		AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AABB02DF1B0057FD006C212C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				AABB02E61B005B2C006C212C /* ProfileViewController.swift */,
 				AAD609B61B03025600145F56 /* TodoDetailViewController.swift */,
 				AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */,
+				AA83EABA1B0AF9C3002A6B5F /* TodoShowTableViewController.swift */,
 			);
 			name = DevCode;
 			path = ParseStarterProject;
@@ -346,6 +349,7 @@
 				AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */,
 				AABB02E31B005971006C212C /* Utilities.swift in Sources */,
 				AA83EAB11B07EB9F002A6B5F /* SelectSingleViewController.swift in Sources */,
+				AA83EABB1B0AF9C3002A6B5F /* TodoShowTableViewController.swift in Sources */,
 				AABB02E91B006827006C212C /* Constants.swift in Sources */,
 				AA83EAB91B088E6A002A6B5F /* RecordCell.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
