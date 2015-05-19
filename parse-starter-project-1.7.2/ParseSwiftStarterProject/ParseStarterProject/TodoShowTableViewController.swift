@@ -14,6 +14,7 @@ class TodoShowTableViewController: UITableViewController {
     
     var todo: PFObject!
     let items = [PF_TODOS_SUMMARY, PF_TODOS_DUE_DATE, PF_TODOS_CREATED_BY_PERSON, PF_TODOS_CREATED_BY_EMAIL, SAVE_TO_CALENDAR, ASK_QUESTION]
+    let displayTexts = [TODOS_DISPLAY_SUMMARY, TODOS_DISPLAY_DUE_DATE, TODOS_DISPLAY_CREATED_PERSON, TODOS_DISPLAY_CONTACT_EMAIL]
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -54,7 +55,7 @@ class TodoShowTableViewController: UITableViewController {
             cell.addSubview(button)
             button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
         default:
-            cell.textLabel?.text = item
+            cell.textLabel?.text = displayTexts[indexPath.row]
             if item == PF_TODOS_DUE_DATE {
                 if let date = todo[PF_TODOS_DUE_DATE] as? NSDate {
                     cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(date)

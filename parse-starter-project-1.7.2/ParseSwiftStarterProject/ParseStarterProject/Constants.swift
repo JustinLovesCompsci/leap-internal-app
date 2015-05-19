@@ -128,6 +128,12 @@ let DEFAULT_RECORD_SUMMARY                  = "New Record"
 let SAVE_TO_CALENDAR = " Save to Calendar"
 let ASK_QUESTION = " Ask a Question"
 
+/* Todos Row Display */
+let TODOS_DISPLAY_SUMMARY = "Summary"
+let TODOS_DISPLAY_DUE_DATE = "Due By"
+let TODOS_DISPLAY_CREATED_PERSON = "Created By"
+let TODOS_DISPLAY_CONTACT_EMAIL = "Contact"
+
 
 
 
