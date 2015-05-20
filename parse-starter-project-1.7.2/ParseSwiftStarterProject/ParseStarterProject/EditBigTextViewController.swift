@@ -34,6 +34,11 @@ class EditBigTextViewController: UIViewController {
         textView.text = editObject[editAttribute] as? String
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
+    }
+    
     func popEmptyAttributeAlert() {
         var alert = UIAlertController(title: "Oops...", message: "Field cannot be empty", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action:UIAlertAction!) in

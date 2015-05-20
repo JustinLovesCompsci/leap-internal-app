@@ -37,6 +37,11 @@ class EditNumberViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        numberField.becomeFirstResponder()
+    }
+    
     func popInvalidNumAlert() {
         var alert = UIAlertController(title: "Oops...", message: "Please enter a valid number", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action:UIAlertAction!) in

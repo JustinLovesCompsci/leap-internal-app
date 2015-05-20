@@ -18,9 +18,15 @@ class EditTextViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var textField: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         textField.text = editObject[editAttribute] as? String
+        textField.placeholder = "No more than 8 words"
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        textField.becomeFirstResponder()
     }
     
     @IBAction func savePressed(sender: AnyObject) {

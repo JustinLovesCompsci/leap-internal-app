@@ -18,4 +18,5 @@ class MyPFLogInViewController: PFLogInViewController {
         let logoView = UIImageView(image: UIImage(named: "Logo"))
         logInView!.logo = logoView
     }
+    
 }
