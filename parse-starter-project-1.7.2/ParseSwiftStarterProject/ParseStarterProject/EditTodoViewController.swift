@@ -78,7 +78,7 @@ class EditTodoViewController: UITableViewController {
             cell.detailTextLabel?.text = editObject[PF_TODOS_SUMMARY] as? String
         case 1:
             cell.textLabel?.text = "Description"
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = editObject[PF_TODOS_DESCRIPTION] as? String
         case 2:
             cell.textLabel?.text = "Due Date"
             cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(editObject[PF_TODOS_DUE_DATE] as! NSDate)
@@ -101,7 +101,7 @@ class EditTodoViewController: UITableViewController {
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         case 1:
             toEditAttribute = PF_TODOS_DESCRIPTION
-            performSegueWithIdentifier("editTodoTextSegue", sender: self)
+            performSegueWithIdentifier("editBigTextSegue", sender: self)
         case 2:
             toEditAttribute = PF_TODOS_DUE_DATE
             performSegueWithIdentifier("editTodoDateSegue", sender: self)
@@ -123,6 +123,11 @@ class EditTodoViewController: UITableViewController {
             
         } else if segue.identifier == "editTodoDateSegue" {
             let createVC = segue.destinationViewController as! EditDateViewController
+            createVC.editObject = editObject
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.editAttribute = toEditAttribute
+        } else if segue.identifier == "editBigTextSegue" {
+            let createVC = segue.destinationViewController as! EditBigTextViewController
             createVC.editObject = editObject
             createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
