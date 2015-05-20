@@ -134,7 +134,14 @@ let TODOS_DISPLAY_DUE_DATE                  = "Due By"
 let TODOS_DISPLAY_CREATED_PERSON            = "Created By"
 let TODOS_DISPLAY_CONTACT_EMAIL             = "Contact"
 
+/* Email Choices */
+let ADMIN_EMAIL                             = "admin@leap-usa.com"
+let MANAGE_EMAIL                            = "management@leap-usa.com"
+let SALES_EMAIL                             = "mentors@leap-usa.com"
+let SERVICE_EMAIL                           = "service@leap-usa.com"
+let MARKETING_EMAIL                         = "marketing@leap-usa.com"
 
-
+/* Picker View */
+let DEFAULT_SELECTED_ROW                    = 3
 
 

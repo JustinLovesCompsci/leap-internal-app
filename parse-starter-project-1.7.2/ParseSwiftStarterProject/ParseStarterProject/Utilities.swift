@@ -68,6 +68,16 @@ class Utilities {
         return false
     }
     
+    class func getEmailItems() -> [String] {
+        var total_items = [String]()
+        let emailItems = [ADMIN_EMAIL, MANAGE_EMAIL, SALES_EMAIL, SERVICE_EMAIL, MARKETING_EMAIL]
+        total_items += emailItems
+        if let user: PFObject = PFUser.currentUser() {
+            total_items.insert(user[PF_USER_EMAIL] as! String, atIndex: DEFAULT_SELECTED_ROW)
+        }
+        return total_items
+    }
+    
     class func getDueDateLimit() -> NSDate {
         var components = NSDateComponents()
         components.setValue(1, forComponent: NSCalendarUnit.CalendarUnitMonth);

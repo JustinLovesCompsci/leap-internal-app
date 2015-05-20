@@ -549,6 +549,7 @@
                         <segue destination="hxJ-s7-vRv" kind="show" identifier="editTodoTextSegue" id="Hda-nZ-fh2"/>
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editTodoDateSegue" id="RWp-yF-gaP"/>
                         <segue destination="hah-Iz-xMq" kind="show" identifier="editBigTextSegue" id="6R3-fD-Jdf"/>
+                        <segue destination="P1T-Gz-cBo" kind="show" identifier="editChoiceSegue" id="5lY-8A-NQ7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXf-dh-WV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1047,6 +1048,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGD-gs-guD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2650.5" y="710.625"/>
+        </scene>
+        <!--Edit Choice View Controller-->
+        <scene sceneID="B5I-17-9jv">
+            <objects>
+                <viewController id="P1T-Gz-cBo" customClass="EditChoiceViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mpY-A2-ssR"/>
+                        <viewControllerLayoutGuide type="bottom" id="LyD-S2-l3q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pIu-Nz-ZZF">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NJ-DT-pbk">
+                                <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="P1T-Gz-cBo" id="A36-PF-W6H"/>
+                                    <outlet property="delegate" destination="P1T-Gz-cBo" id="f8P-IQ-3kW"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9NJ-DT-pbk" secondAttribute="trailing" id="f0Q-Gq-rQI"/>
+                            <constraint firstItem="9NJ-DT-pbk" firstAttribute="top" secondItem="mpY-A2-ssR" secondAttribute="bottom" constant="80" id="qCa-DE-HbM"/>
+                            <constraint firstItem="9NJ-DT-pbk" firstAttribute="leading" secondItem="pIu-Nz-ZZF" secondAttribute="leading" id="uek-k7-PO0"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="9NJ-DT-pbk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="f0Q-Gq-rQI"/>
+                                <exclude reference="qCa-DE-HbM"/>
+                                <exclude reference="uek-k7-PO0"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="9NJ-DT-pbk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="f0Q-Gq-rQI"/>
+                                <include reference="qCa-DE-HbM"/>
+                                <include reference="uek-k7-PO0"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="giL-Nx-DJu">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="pIU-2n-zyD">
+                            <connections>
+                                <action selector="donePressed:" destination="P1T-Gz-cBo" id="KN2-6p-h6X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navBar" destination="giL-Nx-DJu" id="QTP-AE-7em"/>
+                        <outlet property="pickerView" destination="9NJ-DT-pbk" id="RPi-wi-hkF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="92z-RY-ZVG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3504" y="387"/>
         </scene>
         <!--ToDo's-->
         <scene sceneID="jRO-r8-1FP">

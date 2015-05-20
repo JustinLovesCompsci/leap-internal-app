@@ -23,7 +23,6 @@ class EditTodoViewController: UITableViewController {
         }
         let user = PFUser.currentUser()!
         editObject[PF_TODOS_CREATED_BY_PERSON] = user[PF_USER_NAME] as? String
-        editObject[PF_TODOS_CREATED_BY_EMAIL] = user.email
         editObject.saveEventually()
         navigationController?.popViewControllerAnimated(true)
     }
@@ -107,7 +106,7 @@ class EditTodoViewController: UITableViewController {
             performSegueWithIdentifier("editTodoDateSegue", sender: self)
         case 3:
             toEditAttribute = PF_TODOS_CREATED_BY_EMAIL
-            performSegueWithIdentifier("editTodoTextSegue", sender: self)
+            performSegueWithIdentifier("editChoiceSegue", sender: self)
         default:
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         }
@@ -131,6 +130,12 @@ class EditTodoViewController: UITableViewController {
             createVC.editObject = editObject
             createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
+        } else if segue.identifier == "editChoiceSegue" {
+            let createVC = segue.destinationViewController as! EditChoiceViewController
+            createVC.editObject = editObject
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.editAttribute = toEditAttribute
+            createVC.items += Utilities.getEmailItems()
         }
     }
     
