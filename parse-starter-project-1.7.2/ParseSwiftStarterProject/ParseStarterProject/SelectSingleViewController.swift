@@ -50,7 +50,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
         let user = PFUser.currentUser()
         var query = PFQuery(className: PF_USER_CLASS_NAME)
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
-        query.whereKey(PF_USER_NAME, containsString: searchName)
+        query.whereKey(PF_USER_NAME_LOWER_CASE, containsString: searchName.lowercaseString)
         query.orderByAscending(PF_USER_NAME)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -94,9 +94,9 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if count(searchText) > 0 {
-            self.searchUsers(searchText.lowercaseString)
+            searchUsers(searchText.lowercaseString)
         } else {
-            self.loadUsers()
+            loadUsers()
         }
     }
     
@@ -109,17 +109,17 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.searchBarCancelled()
+        searchBarCancelled()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        self.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelled() {
-        self.searchBar.text = ""
-        self.searchBar.resignFirstResponder()
-        self.loadUsers()
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        loadUsers()
     }
     
 }
