@@ -132,7 +132,7 @@ class TodoShowTableViewController: UITableViewController {
 //                    HudUtil.displayErrorHUD(self.view, displayText: "Failed", displayTime: 1.5)
                 }
             } else {
-//                HudUtil.displaySuccessHUD(self.view, displayText: "Saved", displayTime: 1.5)
+//                HudUtil.displaySuccessHUD(self.view, displayText: "Saved to Default Calendar", displayTime: 1.5)
                 println("Successfully saved to calendar")
             }
         }
