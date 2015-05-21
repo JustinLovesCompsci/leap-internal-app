@@ -67,6 +67,7 @@ let PF_RECORD_END_DATE                   = "EndDate"                 //  Date
 let PF_RECORD_USER_LIST                  = "UserList"                //  Array
 let PF_RECORD_AMOUNT                     = "Amount"                  //  Number
 let PF_RECORD_CREATED_BY                 = "createdBy"               //  String
+let PF_RECORD_CONTACT_EMAIL              = "ContactEmail"            //  String
 
 /* Gains */
 let PF_GAINS_CLASS_NAME                 = "Gains"                   //  Class name
@@ -78,6 +79,7 @@ let PF_GAINS_END_DATE                   = "EndDate"                 //  Date
 let PF_GAINS_USER_LIST                  = "UserList"                //  Array
 let PF_GAINS_AMOUNT                     = "Amount"                  //  Number
 let PF_GAINS_CREATED_BY                 = "createdBy"               //  String
+let PF_GAINS_CONTACT_EMAIL              = "ContactEmail"            //  String
 
 /* Losses */
 let PF_LOSSES_CLASS_NAME                 = "Losses"                  //  Class name
@@ -89,6 +91,7 @@ let PF_LOSSES_END_DATE                   = "EndDate"                 //  Date
 let PF_LOSSES_USER_LIST                  = "UserList"                //  Array
 let PF_LOSSES_AMOUNT                     = "Amount"                  //  Number
 let PF_LOSSES_CREATED_BY                 = "createdBy"               //  String
+let PF_LOSSES_CONTACT_EMAIL              = "ContactEmail"            //  String
 
 /* Reimburse */
 let PF_REIMBURSE_CLASS_NAME              = "Reimburse"               //  Class name
@@ -100,6 +103,7 @@ let PF_REIMBURSE_END_DATE                = "EndDate"                 //  Date
 let PF_REIMBURSE_USER_LIST               = "UserList"                //  Array
 let PF_REIMBURSE_AMOUNT                  = "Amount"                  //  Number
 let PF_REIMBURSE_CREATED_BY              = "createdBy"               //  String
+let PF_REIMBURSE_CONTACT_EMAIL           = "ContactEmail"            //  String
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"
@@ -121,6 +125,7 @@ let RECORD_START_DATE                       = "Start Date"
 let RECORD_END_DATE                         = "End Date"
 let RECORD_USER_LIST                        = "Recipients"
 let RECORD_AMOUNT                           = "Amount"
+let RECORD_EMAIL                            = "Contact Email"
 
 /* New Record */
 let DEFAULT_RECORD_SUMMARY                  = "New Record"
@@ -141,8 +146,5 @@ let MANAGE_EMAIL                            = "management@leap-usa.com"
 let SALES_EMAIL                             = "mentors@leap-usa.com"
 let SERVICE_EMAIL                           = "service@leap-usa.com"
 let MARKETING_EMAIL                         = "marketing@leap-usa.com"
-
-/* Picker View */
-let DEFAULT_SELECTED_ROW                    = 3
 
 

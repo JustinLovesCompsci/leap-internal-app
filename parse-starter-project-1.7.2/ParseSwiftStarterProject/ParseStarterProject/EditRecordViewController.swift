@@ -13,7 +13,7 @@ import UIKit
 class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
     
     var record:PFObject!
-    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_USER_LIST]
+    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_USER_LIST, RECORD_EMAIL]
     var isEditingMode = false
     var toEditAttribute: String!
     
@@ -116,6 +116,9 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
         case RECORD_USER_LIST:
             cell.textLabel?.text = RECORD_USER_LIST
             cell.detailTextLabel?.text = String(getNumUsers()) + " people"
+        case RECORD_EMAIL:
+            cell.textLabel?.text = RECORD_EMAIL
+            cell.detailTextLabel?.text = record[PF_RECORD_CONTACT_EMAIL] as? String
         default:
             println("should not reach here")
         }
@@ -146,6 +149,9 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
             case RECORD_USER_LIST:
                 toEditAttribute = PF_RECORD_USER_LIST
                 performSegueWithIdentifier("editRecipientSegue", sender: self)
+            case RECORD_EMAIL:
+                toEditAttribute = PF_RECORD_CONTACT_EMAIL
+                performSegueWithIdentifier("editChoiceSegue", sender: self)
             default:
                 println("should not reach here")
             }
@@ -171,6 +177,12 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
         } else if segue.identifier == "editRecipientSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
             createVC.delegate = self
+        } else if segue.identifier == "editChoiceSegue" {
+            let createVC = segue.destinationViewController as! EditChoiceViewController
+            createVC.editAttribute = toEditAttribute
+            createVC.editObject = record
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.items += Utilities.getEmailItems()
         }
     }
     

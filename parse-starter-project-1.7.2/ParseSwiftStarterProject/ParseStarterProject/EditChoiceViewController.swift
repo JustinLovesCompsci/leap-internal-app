@@ -26,7 +26,18 @@ class EditChoiceViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        pickerView.selectRow(DEFAULT_SELECTED_ROW, inComponent: 0, animated: true)
+        selectedAttribute = editObject[editAttribute] as? String
+        var selectedIndex = 0
+        var currentIndex = 0
+        for item in items {
+            if item == selectedAttribute {
+                selectedIndex = currentIndex
+                break
+            }
+            currentIndex += 1
+        }
+        
+        pickerView.selectRow(selectedIndex, inComponent: 0, animated: true)
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

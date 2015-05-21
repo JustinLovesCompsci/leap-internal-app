@@ -73,7 +73,7 @@ class Utilities {
         let emailItems = [ADMIN_EMAIL, MANAGE_EMAIL, SALES_EMAIL, SERVICE_EMAIL, MARKETING_EMAIL]
         total_items += emailItems
         if let user: PFObject = PFUser.currentUser() {
-            total_items.insert(user[PF_USER_EMAIL] as! String, atIndex: DEFAULT_SELECTED_ROW)
+            total_items.append(user[PF_USER_EMAIL] as! String)
         }
         return total_items
     }

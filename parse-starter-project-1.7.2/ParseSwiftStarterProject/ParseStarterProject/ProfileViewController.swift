@@ -114,6 +114,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                     newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
                     newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
                     newRecord[PF_RECORD_AMOUNT] = 0
+                    let user = PFUser.currentUser()!
+                    newRecord[PF_RECORD_CONTACT_EMAIL] = user.email
                     for user in selectedNewUsers {
                         newRecord.addObject(user, forKey: PF_RECORD_USER_LIST)
                     }
