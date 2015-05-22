@@ -12,8 +12,8 @@ import Parse
 
 class CalendarUtil {
     
-//    class func getCalendarEvent(todo: PFObject) -> EKEvent {
-//        return nil
+//    class func containsCalendarTodo(todo: PFObject) -> EKEvent {
+//        even
 //    }
     
 }
