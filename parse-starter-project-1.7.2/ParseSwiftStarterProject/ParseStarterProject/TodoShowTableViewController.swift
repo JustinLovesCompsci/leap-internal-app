@@ -10,8 +10,9 @@ import Foundation
 import Parse
 import UIKit
 import EventKit
+import MessageUI
 
-class TodoShowTableViewController: UITableViewController {
+class TodoShowTableViewController: UITableViewController, MFMailComposeViewControllerDelegate  {
     
     var todo: PFObject!
     let items = [PF_TODOS_SUMMARY, PF_TODOS_DUE_DATE, PF_TODOS_CREATED_BY_PERSON, PF_TODOS_CREATED_BY_EMAIL, SAVE_TO_CALENDAR, ASK_QUESTION]
@@ -75,6 +76,10 @@ class TodoShowTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     func makeRowButton(item:String) -> UIButton {
         let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         button.frame = CGRectMake(0, 0, 150, 44)
@@ -83,7 +88,17 @@ class TodoShowTableViewController: UITableViewController {
     }
     
     func saveCalendarAction(sender: UIButton!) {
-        println("save to calendar called")
+        var alert = UIAlertController(title: "Save to Calendar?", message:"This ToDo will be added to your default calendar", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+        }))
+            
+        alert.addAction(UIAlertAction(title: "Save", style: .Default, handler: { (action:UIAlertAction!) in
+                self.addToCalendar()
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func addToCalendar() {
         if let dueDate = todo[PF_TODOS_DUE_DATE] as? NSDate {
             let eventStore = EKEventStore()
             switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
@@ -139,11 +154,27 @@ class TodoShowTableViewController: UITableViewController {
     }
     
     func askQuestionAction(sender: UIButton!) {
-        println("ask questions called")
+        var picker = MFMailComposeViewController()
+        picker.mailComposeDelegate = self
+        var subject = "[Question]"
+        if let summary = todo[PF_TODOS_SUMMARY] as? String {
+            subject += " \(summary)"
+        }
+        picker.setSubject(subject)
+        if let user = PFUser.currentUser(), createPerson = todo[PF_TODOS_CREATED_BY_PERSON] as? String {
+            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThanks,\r\n\r\nBy \(user[PF_USER_NAME] as! String)"
+            picker.setMessageBody(messageBody, isHTML: false)
+        }
+        if let email = todo[PF_TODOS_CREATED_BY_EMAIL] as? String {
+            picker.setToRecipients([email])
+        }
+        picker.setEditing(true, animated: true)
+        presentViewController(picker, animated: true, completion: nil)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    //MARK: MFMailComposeViewController Delegate
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
