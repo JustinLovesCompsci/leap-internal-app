@@ -57,14 +57,17 @@ class SelectMultipleViewController: UITableViewController {
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
         query.limit = 1000
         query.orderByAscending(PF_USER_NAME)
+        
+        HudUtil.showProgressHUD()
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
+            HudUtil.hidHUD()
             if error == nil {
                 self.users.removeAll(keepCapacity: false)
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                //TODO: hud
+                HudUtil.showErrorHUD("Failed to load users")
             }
         }
     }

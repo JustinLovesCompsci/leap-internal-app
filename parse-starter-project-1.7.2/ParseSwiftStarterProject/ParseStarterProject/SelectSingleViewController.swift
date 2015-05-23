@@ -34,14 +34,17 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
         query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
         query.orderByAscending(PF_USER_NAME)
         query.limit = 1000
+        
+        HudUtil.showProgressHUD()
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
+            HudUtil.hidHUD()
             if error == nil {
                 self.users.removeAll(keepCapacity: false)
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                //TODO: hud
+                HudUtil.showErrorHUD("Failed to load users")
             }
         }
     }
@@ -59,7 +62,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
                 self.users += objects as! [PFUser]!
                 self.tableView.reloadData()
             } else {
-                //TODO: hud
+                // do nothing
             }
             
         }

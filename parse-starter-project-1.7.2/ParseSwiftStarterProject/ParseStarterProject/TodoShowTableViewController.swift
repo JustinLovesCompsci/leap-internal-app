@@ -169,7 +169,8 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
         presentViewController(picker, animated: true, completion: nil)
     }
     
-    //MARK: MFMailComposeViewController Delegate
+    // MARK: MFMail Delegate
+    
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         dismissViewControllerAnimated(true, completion: nil)
     }
