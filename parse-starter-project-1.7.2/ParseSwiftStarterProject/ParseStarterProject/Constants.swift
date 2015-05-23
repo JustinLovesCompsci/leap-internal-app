@@ -148,3 +148,6 @@ let SERVICE_EMAIL                           = "service@leap-usa.com"
 let MARKETING_EMAIL                         = "marketing@leap-usa.com"
 
 
+/* Local DataStore Tag */
+let TODO_DATA_TAG                               = "ToDoTag"
+

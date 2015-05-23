@@ -52,6 +52,10 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         HudUtil.hidHUD()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     @IBAction func newPressed(sender: AnyObject) {
         showNewActionSheet()
     }
@@ -384,6 +388,12 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             createVC.delegate = self
             
         }
+        resetEditÇreateMode()
+    }
+    
+    func resetEditÇreateMode() {
+        isToEditRecord = false
+        isToCreateRecord = false
     }
     
     func loadSelectUserRecords() {

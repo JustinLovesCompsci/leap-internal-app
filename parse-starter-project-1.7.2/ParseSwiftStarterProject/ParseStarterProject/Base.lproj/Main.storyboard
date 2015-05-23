@@ -14,7 +14,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="Lqn-PS-z2V">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="8ej-yI-YbL">
                                 <cells>
@@ -307,7 +307,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="Pxn-lf-pvg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="Hgg-5h-GEc">
                                 <cells>
@@ -522,6 +522,7 @@
             <objects>
                 <tableViewController id="kaB-S3-Km4" customClass="EditTodoViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OaH-Vz-CP2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -565,6 +566,7 @@
                         <viewControllerLayoutGuide type="bottom" id="zfd-GZ-O1k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tQw-qz-Hya">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XPR-jd-OOA">
@@ -622,6 +624,7 @@
             <objects>
                 <tableViewController id="tMz-RA-jEZ" customClass="EditRecordViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hxb-7h-YoZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -666,6 +669,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IPK-xF-IKE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pxT-uv-8G6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="好吧" translatesAutoresizingMaskIntoConstraints="NO" id="NSm-gD-clm">
@@ -730,6 +734,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3jS-Og-nsZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EqC-0a-hUX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-Wg-xOb">
@@ -789,6 +794,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eyP-r0-vWg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y6H-QZ-Pac">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UwV-47-Vgx">
@@ -882,8 +888,7 @@
                                         <exclude reference="JDc-V4-3q4"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="563" width="368" height="188"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="9xc-xI-3Zp"/>
                                         <exclude reference="JDc-V4-3q4"/>
@@ -896,15 +901,14 @@
                                     <constraint firstAttribute="height" constant="32" id="Pzv-dh-bma"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Pzv-dh-bma"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="523" width="368" height="32"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Pzv-dh-bma"/>
                                     </mask>
@@ -922,8 +926,7 @@
                                         <exclude reference="1zp-cz-pR9"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="451"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="1zp-cz-pR9"/>
                                     </mask>
@@ -954,10 +957,6 @@
                                 <exclude reference="id7-ep-3yn"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="4gw-Jl-qz2"/>
-                                <exclude reference="HWQ-1Y-lCH"/>
-                                <exclude reference="aYJ-LX-Ebq"/>
-                                <exclude reference="lz7-L3-EbY"/>
                                 <exclude reference="Lt5-s6-urf"/>
                                 <exclude reference="MV1-Mh-KpR"/>
                                 <exclude reference="U1Z-By-593"/>
@@ -965,6 +964,10 @@
                                 <exclude reference="jxI-Im-JGh"/>
                                 <exclude reference="1u7-aA-ywe"/>
                                 <exclude reference="gHf-3X-BmX"/>
+                                <exclude reference="4gw-Jl-qz2"/>
+                                <exclude reference="HWQ-1Y-lCH"/>
+                                <exclude reference="aYJ-LX-Ebq"/>
+                                <exclude reference="lz7-L3-EbY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -974,10 +977,6 @@
                                 <include reference="id7-ep-3yn"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="4gw-Jl-qz2"/>
-                                <include reference="HWQ-1Y-lCH"/>
-                                <include reference="aYJ-LX-Ebq"/>
-                                <include reference="lz7-L3-EbY"/>
                                 <include reference="Lt5-s6-urf"/>
                                 <include reference="MV1-Mh-KpR"/>
                                 <include reference="U1Z-By-593"/>
@@ -985,6 +984,10 @@
                                 <include reference="jxI-Im-JGh"/>
                                 <include reference="1u7-aA-ywe"/>
                                 <include reference="gHf-3X-BmX"/>
+                                <include reference="4gw-Jl-qz2"/>
+                                <include reference="HWQ-1Y-lCH"/>
+                                <include reference="aYJ-LX-Ebq"/>
+                                <include reference="lz7-L3-EbY"/>
                             </mask>
                         </variation>
                     </view>
@@ -1010,6 +1013,7 @@
             <objects>
                 <tableViewController id="gOA-g6-lbs" customClass="TodoShowTableViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0g9-LG-kte">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1021,7 +1025,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FWP-Dq-ecE">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1059,6 +1063,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LyD-S2-l3q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pIu-Nz-ZZF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NJ-DT-pbk">
@@ -1193,29 +1198,20 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辅导分成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWH-Oi-wpe">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="8" width="269" height="30"/>
-                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from May 20 to Aug 31" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-si-Lnh">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="37" width="269" height="21"/>
-                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OP7-Vs-yL2">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="285" y="17" width="74" height="30"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -1236,15 +1232,15 @@
                                             <exclude reference="OP7-Vs-yL2"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="5Rb-HF-mfO"/>
+                                            <exclude reference="IfR-35-8GU"/>
+                                            <exclude reference="ezb-tJ-WNk"/>
+                                            <exclude reference="rO5-Yj-WnF"/>
                                             <exclude reference="JiP-4e-G7G"/>
                                             <exclude reference="QiC-wm-WXO"/>
                                             <exclude reference="X0E-dG-3Z5"/>
                                             <exclude reference="ghP-Mm-eu6"/>
                                             <exclude reference="oZL-mq-44i"/>
-                                            <exclude reference="rO5-Yj-WnF"/>
-                                            <exclude reference="5Rb-HF-mfO"/>
-                                            <exclude reference="IfR-35-8GU"/>
-                                            <exclude reference="ezb-tJ-WNk"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -1254,15 +1250,15 @@
                                             <include reference="OP7-Vs-yL2"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <include reference="5Rb-HF-mfO"/>
+                                            <include reference="IfR-35-8GU"/>
+                                            <include reference="ezb-tJ-WNk"/>
+                                            <include reference="rO5-Yj-WnF"/>
                                             <include reference="JiP-4e-G7G"/>
                                             <include reference="QiC-wm-WXO"/>
                                             <include reference="X0E-dG-3Z5"/>
                                             <include reference="ghP-Mm-eu6"/>
                                             <include reference="oZL-mq-44i"/>
-                                            <include reference="rO5-Yj-WnF"/>
-                                            <include reference="5Rb-HF-mfO"/>
-                                            <include reference="IfR-35-8GU"/>
-                                            <include reference="ezb-tJ-WNk"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1293,10 +1289,11 @@
             <objects>
                 <tableViewController id="kCi-8y-bKZ" customClass="SelectSingleViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ggf-TJ-hsa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="4Vq-zv-ZKP">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
@@ -1328,6 +1325,7 @@
             <objects>
                 <tableViewController id="QvI-Tw-QHZ" customClass="SelectMultipleViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6i6-SV-RAu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1389,6 +1387,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Lwq-7p-BK1"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oaH-El-mfj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1406,6 +1405,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6Nt-kG-kb7"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ep8-Sm-cUD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

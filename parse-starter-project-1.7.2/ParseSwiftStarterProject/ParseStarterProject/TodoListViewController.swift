@@ -18,6 +18,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     var genTodos: [PFObject]! = []
     var execTodos: [PFObject]! = []
     var toShowTodo: PFObject!
+    var isRefreshing = false
     
     @IBAction func newPressed(sender: AnyObject) {
         performSegueWithIdentifier("addTodoSegue", sender: self)
@@ -25,16 +26,26 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl!)
+        loadGenTodosFromNetwork()
+    }
+    
+    func refreshData(sender: AnyObject) {
+        isRefreshing = true
+        loadGenTodosFromNetwork()
+    }
+    
+    func endRefreshData() {
+        isRefreshing = false
+        refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if Utilities.isExecUser() {
-            self.navBar.rightBarButtonItem?.enabled = true
-        } else {
-            self.navBar.rightBarButtonItem?.enabled = false
-        }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 70.0;
@@ -46,8 +57,13 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             if Utilities.isExecUser() {
                 loadExecTodos()
             }
-            loadGenTodos()
-            tableView.reloadData()
+            loadGenTodosFromLocal()
+            
+            if Utilities.isExecUser() {
+                self.navBar.rightBarButtonItem?.enabled = true
+            } else {
+                self.navBar.rightBarButtonItem?.enabled = false
+            }
         }
     }
     
@@ -64,32 +80,66 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func loadGenTodos() {
+    func loadGenTodosFromNetwork() {
         var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
         query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
-        //TODO: check below logic
+        
         query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
         query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
 
+        if !isRefreshing {
+            HudUtil.showProgressHUD()
+        }
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if !self.isRefreshing {
+                HudUtil.hidHUD()
+            }
+            if error == nil {
+                self.genTodos.removeAll(keepCapacity: false)
+                if objects?.count != 0 {
+                    self.genTodos.extend(objects as! [PFObject]!)
+                    for object in objects as! [PFObject]! {
+                        object.pinInBackgroundWithName(TODO_DATA_TAG)
+                    }
+                }
+                self.tableView.reloadData()
+            } else {
+                HudUtil.showErrorHUD("Check your network settings")
+                println(error)
+            }
+            
+            if self.isRefreshing {
+                self.endRefreshData()
+            }
+        }
+    }
+    
+    func loadGenTodosFromLocal() {
+        var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
+        query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
+        query.fromLocalDatastore()
+        
+        query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+        query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+        
         HudUtil.showProgressHUD()
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
             HudUtil.hidHUD()
             if error == nil {
                 self.genTodos.removeAll(keepCapacity: false)
-                self.genTodos.extend(objects as! [PFObject]!)
+                if objects?.count != 0 {
+                    self.genTodos.extend(objects as! [PFObject]!)
+                }
                 self.tableView.reloadData()
             } else {
-                //TODO: show error
+                HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
         }
