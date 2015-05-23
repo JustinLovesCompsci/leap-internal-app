@@ -45,9 +45,11 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             self.navBar.leftBarButtonItem?.enabled = true
         }
         
+        HudUtil.showProgressHUD()
         loadGains()
         loadLosses()
         loadReimburse()
+        HudUtil.hidHUD()
     }
     
     @IBAction func newPressed(sender: AnyObject) {
@@ -315,7 +317,6 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             default:
                 cell.detailTextLabel?.text = ""
             }
-
         }
         
         return cell
@@ -386,7 +387,6 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     }
     
     func loadSelectUserRecords() {
-        println("load selected user records")
         var query: PFQuery!
         
         switch (toShowFinanceCategory) {
@@ -400,11 +400,12 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             println("should not reach here")
         }
 
+        HudUtil.showProgressHUD()
         query.whereKey(PF_LOSSES_USER_LIST, equalTo: selectedUser)
         query.orderByDescending(PF_RECORD_START_DATE)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
-            println("selected user records fetched")
+            HudUtil.hidHUD()
             if error == nil {
                 self.records.removeAll(keepCapacity: false)
                 if objects != nil && objects?.count > 0 {
@@ -412,7 +413,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 }
                 self.performSegueWithIdentifier("amountDetailSegue", sender: self)
             } else {
-                //TODO: show error
+                HudUtil.showErrorHUD("Failed to load records")
                 println(error)
             }
         }
@@ -424,8 +425,10 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         }))
         
         alert.addAction(UIAlertAction(title: "Reset", style: .Default, handler: { (action:UIAlertAction!) in
-            PFUser.requestPasswordResetForEmailInBackground(PFUser.currentUser()!.email!)
-            //TODO: display HUD to show email sent to xxx@xxx.com
+            if let userEmail = PFUser.currentUser()?.email {
+                PFUser.requestPasswordResetForEmailInBackground(userEmail)
+                HudUtil.showSuccessHUD("Email sent to \(userEmail)")
+            }
         }))
         presentViewController(alert, animated: true, completion: nil)
     }

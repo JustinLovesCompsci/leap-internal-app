@@ -29,12 +29,26 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         if Utilities.isExecUser() {
             self.navBar.rightBarButtonItem?.enabled = true
         } else {
             self.navBar.rightBarButtonItem?.enabled = false
         }
-        tableView.reloadData()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 70.0;
+        
+        if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
+            presentLogIn()
+        }
+        else {
+            if Utilities.isExecUser() {
+                loadExecTodos()
+            }
+            loadGenTodos()
+            tableView.reloadData()
+        }
     }
     
     func presentLogIn() {
@@ -52,20 +66,6 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 70.0;
-        
-        if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
-            presentLogIn()
-        }
-        else {
-            if Utilities.isExecUser() {
-                loadExecTodos()
-            }
-            loadGenTodos()
-            tableView.reloadData()
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,8 +80,10 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
         query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
 
+        HudUtil.showProgressHUD()
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
+            HudUtil.hidHUD()
             if error == nil {
                 self.genTodos.removeAll(keepCapacity: false)
                 self.genTodos.extend(objects as! [PFObject]!)

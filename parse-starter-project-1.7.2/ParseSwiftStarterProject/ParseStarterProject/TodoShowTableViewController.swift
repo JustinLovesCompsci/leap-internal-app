@@ -106,7 +106,7 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
                 insertEvent(eventStore)
                 break
             case .Denied:
-//                HudUtil.displayErrorHUD(self.view, displayText: "Access Denied", displayTime: 1.5)
+                HudUtil.showErrorHUD("Please grant access in settings")
                 break
             case .NotDetermined:
                 eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
@@ -114,7 +114,7 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
                         if granted {
                             self!.insertEvent(eventStore)
                         } else {
-//                            HudUtil.displayErrorHUD(self!.view, displayText: "Access Denied", displayTime: 1.5)
+                            HudUtil.showErrorHUD("Please grant access in settings")
                         }
                     })
                 break
@@ -129,8 +129,6 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
         
         if let summary = todo[PF_TODOS_SUMMARY] as? String, descrip = todo[PF_TODOS_DESCRIPTION] as? String, dueDate = todo[PF_TODOS_DUE_DATE] as? NSDate, contactEmail = todo[PF_TODOS_CREATED_BY_EMAIL] as? String, contactPerson = todo[PF_TODOS_CREATED_BY_PERSON] as? String {
             event.title = "[LEAP-TODO] \(summary)"
-            let identifier = summary + descrip + Utilities.getFormattedTextFromDate(dueDate)
-//            event.eventIdentifier = identifier
             event.allDay = true
             event.startDate = dueDate
             event.endDate = dueDate
@@ -144,11 +142,10 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
             if result == false {
                 if let theError = error {
                     println("Failed to save to calendar: \(theError.description)")
-//                    HudUtil.displayErrorHUD(self.view, displayText: "Failed", displayTime: 1.5)
+                    HudUtil.showErrorHUD("Failed")
                 }
             } else {
-//                HudUtil.displaySuccessHUD(self.view, displayText: "Saved to Default Calendar", displayTime: 1.5)
-                println("Successfully saved to calendar")
+                HudUtil.showSuccessHUD("Saved")
             }
         }
     }

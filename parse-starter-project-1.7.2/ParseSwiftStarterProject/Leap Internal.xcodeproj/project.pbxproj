@@ -20,6 +20,13 @@
 		81BA817D1A49E0EA00E65899 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817C1A49E0EA00E65899 /* MobileCoreServices.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
+		AA43AF8E1B10420800164404 /* PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF8D1B10420800164404 /* PKHUD.swift */; };
+		AA43AF901B10422C00164404 /* PKHUDAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF8F1B10422C00164404 /* PKHUDAssets.swift */; };
+		AA43AF921B10424700164404 /* PKHUDContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF911B10424700164404 /* PKHUDContentView.swift */; };
+		AA43AF961B1042A000164404 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF951B1042A000164404 /* FrameView.swift */; };
+		AA43AF981B1042B400164404 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF971B1042B400164404 /* Window.swift */; };
+		AA43AF9A1B1042C700164404 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF991B1042C700164404 /* WindowRootViewController.swift */; };
+		AA43AF9C1B10457D00164404 /* HudUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA43AF9B1B10457D00164404 /* HudUtil.swift */; };
 		AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */; };
 		AA83EA9C1B071129002A6B5F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9B1B071129002A6B5F /* Accounts.framework */; };
 		AA83EA9E1B07112F002A6B5F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA83EA9D1B07112F002A6B5F /* Social.framework */; };
@@ -64,6 +71,14 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* ParseStarterProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA43AF8D1B10420800164404 /* PKHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUD.swift; sourceTree = "<group>"; };
+		AA43AF8F1B10422C00164404 /* PKHUDAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAssets.swift; sourceTree = "<group>"; };
+		AA43AF911B10424700164404 /* PKHUDContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDContentView.swift; sourceTree = "<group>"; };
+		AA43AF931B10426500164404 /* PKHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
+		AA43AF951B1042A000164404 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		AA43AF971B1042B400164404 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		AA43AF991B1042C700164404 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
+		AA43AF9B1B10457D00164404 /* HudUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudUtil.swift; sourceTree = "<group>"; };
 		AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		AA83EA9B1B071129002A6B5F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		AA83EA9D1B07112F002A6B5F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -135,6 +150,7 @@
 		81BA81471A49DA1800E65899 /* DevCode */ = {
 			isa = PBXGroup;
 			children = (
+				AA43AF8C1B1041F800164404 /* PKHUD */,
 				AA83EAAF1B07EB8B002A6B5F /* RecordEdit */,
 				AA83EAA71B072D48002A6B5F /* GenEdit */,
 				AA83EAA41B072C43002A6B5F /* TodoEdit */,
@@ -193,6 +209,28 @@
 			name = "System Frameworks";
 			sourceTree = "<group>";
 		};
+		AA43AF8C1B1041F800164404 /* PKHUD */ = {
+			isa = PBXGroup;
+			children = (
+				AA43AF941B10428000164404 /* Internal */,
+				AA43AF8D1B10420800164404 /* PKHUD.swift */,
+				AA43AF8F1B10422C00164404 /* PKHUDAssets.swift */,
+				AA43AF911B10424700164404 /* PKHUDContentView.swift */,
+				AA43AF931B10426500164404 /* PKHUD.h */,
+			);
+			name = PKHUD;
+			sourceTree = "<group>";
+		};
+		AA43AF941B10428000164404 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				AA43AF951B1042A000164404 /* FrameView.swift */,
+				AA43AF971B1042B400164404 /* Window.swift */,
+				AA43AF991B1042C700164404 /* WindowRootViewController.swift */,
+			);
+			name = Internal;
+			sourceTree = "<group>";
+		};
 		AA83EAA41B072C43002A6B5F /* TodoEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +276,7 @@
 				AABB02E81B006827006C212C /* Constants.swift */,
 				AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */,
 				AA83EAC01B0DBC74002A6B5F /* CalendarUtil.swift */,
+				AA43AF9B1B10457D00164404 /* HudUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -351,13 +390,17 @@
 				AA83EAB71B080149002A6B5F /* SelectMultipleViewController.swift in Sources */,
 				AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */,
 				AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */,
+				AA43AF961B1042A000164404 /* FrameView.swift in Sources */,
+				AA43AF901B10422C00164404 /* PKHUDAssets.swift in Sources */,
 				AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */,
 				AA83EAAC1B072D6F002A6B5F /* EditNumberViewController.swift in Sources */,
 				AA83EAC11B0DBC74002A6B5F /* CalendarUtil.swift in Sources */,
 				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
 				AA83EAAA1B072D63002A6B5F /* EditTextViewController.swift in Sources */,
 				AA83EABD1B0C453E002A6B5F /* EditBigTextViewController.swift in Sources */,
+				AA43AF9A1B1042C700164404 /* WindowRootViewController.swift in Sources */,
 				AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */,
+				AA43AF8E1B10420800164404 /* PKHUD.swift in Sources */,
 				AABB02E31B005971006C212C /* Utilities.swift in Sources */,
 				AA83EAB11B07EB9F002A6B5F /* SelectSingleViewController.swift in Sources */,
 				AA83EABB1B0AF9C3002A6B5F /* TodoShowTableViewController.swift in Sources */,
@@ -365,8 +408,11 @@
 				AA83EABF1B0C4548002A6B5F /* EditChoiceViewController.swift in Sources */,
 				AA83EAB91B088E6A002A6B5F /* RecordCell.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				AA43AF9C1B10457D00164404 /* HudUtil.swift in Sources */,
 				AA83EAB31B07FAF0002A6B5F /* EditRecordViewController.swift in Sources */,
 				AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */,
+				AA43AF921B10424700164404 /* PKHUDContentView.swift in Sources */,
+				AA43AF981B1042B400164404 /* Window.swift in Sources */,
 				AA83EAAE1B072D7A002A6B5F /* EditDateViewController.swift in Sources */,
 				AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */,
 				AA83EAA61B072C6B002A6B5F /* EditTodoViewController.swift in Sources */,
