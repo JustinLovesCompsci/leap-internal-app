@@ -30,6 +30,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     var isToEditRecord = false
     var isToCreateRecord = false
     
+    var isRefreshing = false
+    
     //SelectMultipleDelegate
     var newRecord: PFObject!
     var selectedNewUsers = [PFUser]()
@@ -40,20 +42,48 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl!.attributedTitle = NSAttributedString(string: "Syncing...")
+        refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+        endRefreshData()
+        loadDataFromNetwork()
+    }
+    
+    func refreshData(sender: AnyObject) {
+        isRefreshing = true
+        loadDataFromNetwork()
+    }
+    
+    func loadDataFromNetwork() {
+        PFObject.unpinAllObjectsInBackgroundWithName(MY_RECORDS_TAG)
+        if !isRefreshing {
+            HudUtil.showProgressHUD()
+        }
+        loadGains()
+        loadLosses()
+        loadReimburse()
+        if !isRefreshing {
+            HudUtil.hidHUD()
+        } else {
+            endRefreshData()
+        }
+    }
+    
+    func endRefreshData() {
+        isRefreshing = false
+        refreshControl?.endRefreshing()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.navBar.leftBarButtonItem?.enabled = false
         if Utilities.isExecUser() {
             self.navBar.leftBarButtonItem?.enabled = true
         }
         
-        HudUtil.showProgressHUD()
-        loadGains()
-        loadLosses()
-        loadReimburse()
-        HudUtil.hidHUD()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        //TODO: load from local
     }
     
     @IBAction func newPressed(sender: AnyObject) {
@@ -179,11 +209,14 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 self.gains.removeAll(keepCapacity: false)
                 if objects != nil && objects?.count > 0 {
                     self.gains.extend(objects as! [PFObject]!)
+                    for object in objects as! [PFObject]! {
+                        object.pinInBackgroundWithName(MY_RECORDS_TAG)
+                    }
                 }
                 self.calculateNet()
                 self.tableView.reloadData()
             } else {
-                //TODO: show error
+                HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
         }
@@ -199,11 +232,14 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 self.losses.removeAll(keepCapacity: false)
                 if objects != nil && objects?.count > 0 {
                     self.losses.extend(objects as! [PFObject]!)
+                    for object in objects as! [PFObject]! {
+                        object.pinInBackgroundWithName(MY_RECORDS_TAG)
+                    }
                 }
                 self.calculateNet()
                 self.tableView.reloadData()
             } else {
-                //TODO: show error
+                HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
         }
@@ -219,11 +255,14 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 self.reimburses.removeAll(keepCapacity: false)
                 if objects != nil && objects?.count > 0 {
                     self.reimburses.extend(objects as! [PFObject]!)
+                    for object in objects as! [PFObject]! {
+                        object.pinInBackgroundWithName(MY_RECORDS_TAG)
+                    }
                 }
                 self.calculateNet()
                 self.tableView.reloadData()
             } else {
-                //TODO: show error
+                HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
         }

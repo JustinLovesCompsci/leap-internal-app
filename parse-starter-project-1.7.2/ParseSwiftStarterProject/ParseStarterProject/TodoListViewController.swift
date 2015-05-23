@@ -28,9 +28,9 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         super.viewDidLoad()
         
         refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl!.attributedTitle = NSAttributedString(string: "Syncing...")
         refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.addSubview(refreshControl!)
+        endRefreshData() 
         loadGenTodosFromNetwork()
     }
     
@@ -86,6 +86,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     }
     
     func loadGenTodosFromNetwork() {
+        PFObject.unpinAllObjectsInBackgroundWithName(TODO_DATA_TAG)
         var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
         query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
         
@@ -102,7 +103,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             }
             if error == nil {
                 self.genTodos.removeAll(keepCapacity: false)
-                if objects?.count != 0 {
+                if objects != nil && objects?.count > 0 {
                     self.genTodos.extend(objects as! [PFObject]!)
                     for object in objects as! [PFObject]! {
                         object.pinInBackgroundWithName(TODO_DATA_TAG)
@@ -128,13 +129,11 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
         query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
         
-        HudUtil.showProgressHUD()
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
-            HudUtil.hidHUD()
             if error == nil {
                 self.genTodos.removeAll(keepCapacity: false)
-                if objects?.count != 0 {
+                if objects != nil && objects?.count > 0 {
                     self.genTodos.extend(objects as! [PFObject]!)
                 }
                 self.tableView.reloadData()
