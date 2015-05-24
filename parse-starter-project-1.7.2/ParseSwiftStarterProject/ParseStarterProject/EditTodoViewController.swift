@@ -21,10 +21,32 @@ class EditTodoViewController: UITableViewController {
             popIncorrectFieldsAlert()
             return
         }
+        HudUtil.showProgressHUD()
         let user = PFUser.currentUser()!
         editObject[PF_TODOS_CREATED_BY_PERSON] = user[PF_USER_NAME] as? String
-        editObject.saveEventually()
-        navigationController?.popViewControllerAnimated(true)
+        editObject.ACL = Utilities.getAllPublicACL()
+        editObject.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            HudUtil.hidHUD()
+            if success {
+                self.editObject.pinInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.navigationController?.popViewControllerAnimated(true)
+                    } else {
+                        if let error = error {
+                            NSLog("%@", error)
+                        }
+                        HudUtil.showErrorHUD("Cannot save to phone")
+                    }
+                }
+            } else {
+                if let error = error {
+                    NSLog("%@", error)
+                }
+                HudUtil.showErrorHUD("Check your network settings")
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

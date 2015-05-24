@@ -78,8 +78,29 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
             NSLog("Cancelled log out")
         }))
         deleteAlert.addAction(UIAlertAction(title: "Remove", style: .Default, handler: { (action:UIAlertAction!) in
-            self.todo.deleteEventually()
-            self.navigationController?.popViewControllerAnimated(true)
+            HudUtil.showProgressHUD()
+            self.todo.deleteInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                HudUtil.hidHUD()
+                if success {
+                    self.todo.unpinInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                        if success {
+                            self.navigationController?.popViewControllerAnimated(true)
+                        } else {
+                            if let error = error {
+                                NSLog("%@", error)
+                            }
+                            HudUtil.showErrorHUD("Cannot save to phone")
+                        }
+                    }
+                } else {
+                    if let error = error {
+                        NSLog("%@", error)
+                    }
+                    HudUtil.showErrorHUD("Check your network settings")
+                }
+            }
         }))
         
         presentViewController(deleteAlert, animated: true, completion: nil)

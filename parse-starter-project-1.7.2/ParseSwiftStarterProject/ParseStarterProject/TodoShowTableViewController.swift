@@ -153,13 +153,13 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
     func askQuestionAction(sender: UIButton!) {
         var picker = MFMailComposeViewController()
         picker.mailComposeDelegate = self
-        var subject = "[Question]"
+        var subject = QUESTION_EMAIL_TAG
         if let summary = todo[PF_TODOS_SUMMARY] as? String {
             subject += " \(summary)"
         }
         picker.setSubject(subject)
         if let user = PFUser.currentUser(), createPerson = todo[PF_TODOS_CREATED_BY_PERSON] as? String {
-            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThanks,\r\n\r\nBy \(user[PF_USER_NAME] as! String)"
+            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
             picker.setMessageBody(messageBody, isHTML: false)
         }
         if let email = todo[PF_TODOS_CREATED_BY_EMAIL] as? String {

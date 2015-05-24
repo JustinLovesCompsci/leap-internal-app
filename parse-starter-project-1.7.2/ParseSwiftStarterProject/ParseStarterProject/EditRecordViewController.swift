@@ -9,11 +9,12 @@
 import Foundation
 import Parse
 import UIKit
+import MessageUI
 
-class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
+class EditRecordViewController: UITableViewController, SelectMultipleDelegate, MFMailComposeViewControllerDelegate {
     
     var record:PFObject!
-    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_USER_LIST, RECORD_EMAIL]
+    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_EMAIL, RECORD_USER_LIST]
     var isEditingMode = false
     var toEditAttribute: String!
     
@@ -38,10 +39,32 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
             popIncorrectFieldsAlert()
             return
         }
+        HudUtil.showProgressHUD()
         let user = PFUser.currentUser()!
         record[PF_RECORD_CREATED_BY] = user[PF_USER_NAME] as? String
-        record.saveEventually()
-        navigationController?.popViewControllerAnimated(true)
+        record.ACL = Utilities.getAllPublicACL()
+        record.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            HudUtil.hidHUD()
+            if success {
+                self.record.pinInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.navigationController?.popViewControllerAnimated(true)
+                    } else {
+                        if let error = error {
+                            NSLog("%@", error)
+                        }
+                        HudUtil.showErrorHUD("Cannot save to phone")
+                    }
+                }
+            } else {
+                if let error = error {
+                    NSLog("%@", error)
+                }
+                HudUtil.showErrorHUD("Check your network settings")
+            }
+        }
     }
     
     func popIncorrectFieldsAlert() {
@@ -114,8 +137,17 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
             cell.textLabel?.text = RECORD_END_DATE
             cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(record[PF_RECORD_END_DATE] as! NSDate)
         case RECORD_USER_LIST:
-            cell.textLabel?.text = RECORD_USER_LIST
-            cell.detailTextLabel?.text = String(getNumUsers()) + " people"
+            if isEditingMode {
+                cell.textLabel?.text = RECORD_USER_LIST
+                cell.detailTextLabel?.text = String(getNumUsers()) + " people"
+            } else {
+                cell.textLabel?.text = ""
+                cell.detailTextLabel?.text = ""
+                let button = makeRowButton("Ask a Question")
+                button.addTarget(self, action: "askQuestionAction:", forControlEvents: UIControlEvents.TouchUpInside)
+                cell.addSubview(button)
+                button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
+            }
         case RECORD_EMAIL:
             cell.textLabel?.text = RECORD_EMAIL
             cell.detailTextLabel?.text = record[PF_RECORD_CONTACT_EMAIL] as? String
@@ -124,6 +156,32 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
         }
         
         return cell
+    }
+    
+    func makeRowButton(item:String) -> UIButton {
+        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        button.frame = CGRectMake(0, 0, 150, 44)
+        button.setTitle(item, forState: UIControlState.Normal)
+        return button
+    }
+    
+    func askQuestionAction(sender: UIButton!) {
+        var picker = MFMailComposeViewController()
+        picker.mailComposeDelegate = self
+        var subject = QUESTION_EMAIL_TAG
+        if let summary = record[PF_RECORD_SUMMARY] as? String {
+            subject += " \(summary)"
+        }
+        picker.setSubject(subject)
+        if let user = PFUser.currentUser(), createPerson = record[PF_RECORD_CREATED_BY] as? String {
+            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
+            picker.setMessageBody(messageBody, isHTML: false)
+        }
+        if let email = record[PF_RECORD_CONTACT_EMAIL] as? String {
+            picker.setToRecipients([email])
+        }
+        picker.setEditing(true, animated: true)
+        presentViewController(picker, animated: true, completion: nil)
     }
     
     // MARK: - Table view delegate
@@ -192,6 +250,12 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate {
             record.addObject(user, forKey: PF_RECORD_USER_LIST)
         }
         tableView.reloadData()
+    }
+    
+    // MARK: MFMail Delegate
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

@@ -44,7 +44,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         super.viewDidLoad()
         
         refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "Syncing...")
+        refreshControl!.attributedTitle = NSAttributedString(string: "")
         refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
         endRefreshData()
         loadDataFromNetwork()
@@ -56,17 +56,17 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     }
     
     func loadDataFromNetwork() {
-        PFObject.unpinAllObjectsInBackgroundWithName(MY_RECORDS_TAG)
-        if !isRefreshing {
-            HudUtil.showProgressHUD()
-        }
-        loadGains()
-        loadLosses()
-        loadReimburse()
-        if !isRefreshing {
-            HudUtil.hidHUD()
-        } else {
-            endRefreshData()
+        PFObject.unpinAllObjectsInBackgroundWithName(MY_RECORDS_TAG) {
+            (success: Bool, error: NSError?) -> Void in
+            if !self.isRefreshing {
+                HudUtil.showProgressHUD()
+            }
+            self.loadGains()
+            self.loadLosses()
+            self.loadReimburse()
+            if !self.isRefreshing {
+                HudUtil.hidHUD()
+            }
         }
     }
     
@@ -219,6 +219,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
+            if self.isRefreshing {
+                self.endRefreshData()
+            }
         }
     }
     
@@ -242,6 +245,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 HudUtil.showErrorHUD("Check your network settings")
                 println(error)
             }
+            if self.isRefreshing {
+                self.endRefreshData()
+            }
         }
     }
     
@@ -264,6 +270,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             } else {
                 HudUtil.showErrorHUD("Check your network settings")
                 println(error)
+            }
+            if self.isRefreshing {
+                self.endRefreshData()
             }
         }
     }

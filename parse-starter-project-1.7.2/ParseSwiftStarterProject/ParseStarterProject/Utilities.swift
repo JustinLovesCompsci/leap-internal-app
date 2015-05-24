@@ -97,4 +97,11 @@ class Utilities {
         return dateFrom.compare(dateTo) == NSComparisonResult.OrderedSame
     }
     
+    class func getAllPublicACL() -> PFACL {
+        let acl = PFACL()
+        acl.setPublicReadAccess(true)
+        acl.setPublicWriteAccess(true)
+        return acl
+    }
+    
 }

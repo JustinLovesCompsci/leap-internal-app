@@ -152,3 +152,6 @@ let MARKETING_EMAIL                         = "marketing@leap-usa.com"
 let TODO_DATA_TAG                               = "ToDoTag"
 let MY_RECORDS_TAG                              = "RecordTag"
 
+/* Email Tag */
+let QUESTION_EMAIL_TAG                      = "[LEAP-Question]"
+
