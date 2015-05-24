@@ -31,4 +31,10 @@ class HudUtil {
         PKHUD.sharedHUD.show()
         PKHUD.sharedHUD.hide(afterDelay: 2.0)
     }
+    
+    class func showWarningHUD(title: String, subtitle: String) {
+        PKHUD.sharedHUD.contentView = PKHUDStatusView(title: title, subtitle: subtitle, image: PKHUDAssets.bundledImage(named: "warning"))
+        PKHUD.sharedHUD.show()
+        PKHUD.sharedHUD.hide(afterDelay: 1.5)
+    }
 }

@@ -50,6 +50,7 @@
 		AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E41B005AE1006C212C /* TodoListViewController.swift */; };
 		AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E61B005B2C006C212C /* ProfileViewController.swift */; };
 		AABB02E91B006827006C212C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E81B006827006C212C /* Constants.swift */; };
+		AAC3CD8D1B1199EF0096AFBB /* InternetUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */; };
 		AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B61B03025600145F56 /* TodoDetailViewController.swift */; };
 		AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		AABB02E41B005AE1006C212C /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		AABB02E61B005B2C006C212C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AABB02E81B006827006C212C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetUtil.swift; sourceTree = "<group>"; };
 		AAD609B61B03025600145F56 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -277,6 +279,7 @@
 				AA5D5A7C1B01BFC00004DD5F /* PushNotification.swift */,
 				AA83EAC01B0DBC74002A6B5F /* CalendarUtil.swift */,
 				AA43AF9B1B10457D00164404 /* HudUtil.swift */,
+				AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				AA83EAB11B07EB9F002A6B5F /* SelectSingleViewController.swift in Sources */,
 				AA83EABB1B0AF9C3002A6B5F /* TodoShowTableViewController.swift in Sources */,
 				AABB02E91B006827006C212C /* Constants.swift in Sources */,
+				AAC3CD8D1B1199EF0096AFBB /* InternetUtil.swift in Sources */,
 				AA83EABF1B0C4548002A6B5F /* EditChoiceViewController.swift in Sources */,
 				AA83EAB91B088E6A002A6B5F /* RecordCell.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,

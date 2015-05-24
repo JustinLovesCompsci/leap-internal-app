@@ -36,8 +36,13 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     }
     
     func refreshData(sender: AnyObject) {
-        isRefreshing = true
-        loadGenTodosFromNetwork()
+        if InternetUtil.isConnectedToNetwork() {
+            isRefreshing = true
+            loadGenTodosFromNetwork()
+        } else {
+            InternetUtil.showNoInternetDialog(self)
+            endRefreshData()
+        }
     }
     
     func endRefreshData() {
@@ -48,18 +53,19 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 70.0;
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 70.0;
         
         if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
             presentLogIn()
         }
         else {
-            if Utilities.isExecUser() {
-                loadExecTodos()
+            let connected = InternetUtil.isConnectedToNetwork()
+            if !connected {
+                InternetUtil.showNoInternetHUD(self)
             }
             
-            if isFirstLoading {
+            if isFirstLoading && connected {
                 loadGenTodosFromNetwork()
                 isFirstLoading = false
             } else {
@@ -67,9 +73,9 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             }
             
             if Utilities.isExecUser() {
-                self.navBar.rightBarButtonItem?.enabled = true
+                navBar.rightBarButtonItem?.enabled = true
             } else {
-                self.navBar.rightBarButtonItem?.enabled = false
+                navBar.rightBarButtonItem?.enabled = false
             }
         }
     }

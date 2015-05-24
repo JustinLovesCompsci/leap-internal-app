@@ -47,12 +47,19 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         refreshControl!.attributedTitle = NSAttributedString(string: "")
         refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
         endRefreshData()
-        loadDataFromNetwork()
+        if InternetUtil.isConnectedToNetwork() {
+            loadDataFromNetwork()
+        }
     }
     
     func refreshData(sender: AnyObject) {
-        isRefreshing = true
-        loadDataFromNetwork()
+        if InternetUtil.isConnectedToNetwork() {
+            isRefreshing = true
+            loadDataFromNetwork()
+        } else {
+            endRefreshData()
+            InternetUtil.showNoInternetDialog(self)
+        }
     }
     
     func loadDataFromNetwork() {
