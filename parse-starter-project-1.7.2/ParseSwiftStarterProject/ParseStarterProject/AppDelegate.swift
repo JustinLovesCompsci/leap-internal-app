@@ -76,6 +76,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
             application.registerForRemoteNotificationTypes(types)
         }
+        
+        // Extract the notification data
+//        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+//            
+//            // Create a pointer to the Photo object
+//            let photoId = notificationPayload["p"] as? NSString
+//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: "xWMyZ4YEGZ")
+//            
+//            // Fetch photo object
+//            targetPhoto.fetchIfNeededInBackgroundWithBlock {
+//                (object: PFObject?, error:NSError?) -> Void in
+//                if error == nil {
+//                    // Show photo view controller
+//                    let viewController = PhotoVC(photo: object);
+//                    self.navController.pushViewController(viewController, animated: true);
+//                }
+//            }
+//        }
 
         return true
     }
@@ -111,6 +129,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
+        
+//        if let photoId: String = userInfo["p"] as? String {
+//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: photoId)
+//            targetPhoto.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+//                // Show photo view controller
+//                if error != nil {
+//                    completionHandler(UIBackgroundFetchResult.Failed)
+//                } else if PFUser.currentUser() != nil {
+//                    let viewController = PhotoVC(withPhoto: object)
+//                    self.navController.pushViewController(viewController, animated: true)
+//                    completionHandler(UIBackgroundFetchResult.NewData)
+//                } else {
+//                    completionHandler(UIBackgroundFetchResult.NoData)
+//                }
+//            }
+//        }
+//        handler(UIBackgroundFetchResult.NoData)
     }
 
     ///////////////////////////////////////////////////////////
