@@ -17,7 +17,11 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var descriptionText: UITextView!
     
     @IBAction func changePressed(sender: AnyObject) {
-        showChangeActionSheet()
+        if InternetUtil.isConnectedToNetwork() {
+            showChangeActionSheet()
+        } else {
+            InternetUtil.showNoInternetDialog(self)
+        }
     }
     
     func showChangeActionSheet() {

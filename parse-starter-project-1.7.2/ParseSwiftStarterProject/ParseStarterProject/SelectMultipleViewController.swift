@@ -52,23 +52,27 @@ class SelectMultipleViewController: UITableViewController {
     }
     
     func loadUsers() {
-        let user = PFUser.currentUser()
-        var query = PFQuery(className: PF_USER_CLASS_NAME)
-        query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
-        query.limit = 1000
-        query.orderByAscending(PF_USER_NAME)
-        
-        HudUtil.showProgressHUD()
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            HudUtil.hidHUD()
-            if error == nil {
-                self.users.removeAll(keepCapacity: false)
-                self.users += objects as! [PFUser]!
-                self.tableView.reloadData()
-            } else {
-                HudUtil.showErrorHUD("Failed to load users")
+        if InternetUtil.isConnectedToNetwork() {
+            let user = PFUser.currentUser()
+            var query = PFQuery(className: PF_USER_CLASS_NAME)
+            query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
+            query.limit = 1000
+            query.orderByAscending(PF_USER_NAME)
+            
+            HudUtil.showProgressHUD()
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                HudUtil.hidHUD()
+                if error == nil {
+                    self.users.removeAll(keepCapacity: false)
+                    self.users += objects as! [PFUser]!
+                    self.tableView.reloadData()
+                } else {
+                    HudUtil.showErrorHUD("Failed to load users")
+                }
             }
+        } else {
+            InternetUtil.showNoInternetHUD(self)
         }
     }
     

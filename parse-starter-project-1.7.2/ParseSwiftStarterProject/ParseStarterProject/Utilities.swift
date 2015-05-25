@@ -37,6 +37,15 @@ class Utilities {
         return dateStr.substringToIndex(dateStr.rangeOfString(",")!.startIndex)
     }
     
+    // no time
+    class func getLongTextFromDate(date: NSDate) -> String {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        let dateStr = dateFormatter.stringFromDate(date)
+        return dateStr
+    }
+    
     class func isExecUser() -> Bool {
         if PFUser.currentUser() == nil {
             return false

@@ -18,6 +18,7 @@ let PF_IS_STUDENT_REP                   = 3
 /* Installation */
 let PF_INSTALLATION_CLASS_NAME			= "_Installation"           //	Class name
 let PF_INSTALLATION_OBJECTID			= "objectId"				//	String
+let PF_INSTALLATION_USER                = "User"                    //  Pointer
 
 /* User */
 let PF_USER_CLASS_NAME					= "_User"                   //	Class name
@@ -155,3 +156,8 @@ let MY_RECORDS_TAG                              = "RecordTag"
 /* Email Tag */
 let QUESTION_EMAIL_TAG                      = "[LEAP-Question]"
 
+/* Notification Channels */
+let EXEC_CHANNEL                        = "Execs"
+let MENTORS_CHANNEL                     = "Mentors"
+let STUDENT_REP_CHANNEL                 = "StudentReps"
+let PF_CHANNEL                          = "channels"

@@ -11,26 +11,32 @@ import Parse
 
 class PushNotication {
     
-//    class func parsePushUserAssign() {
-//        var installation = PFInstallation.currentInstallation()
-//        installation[PF_INSTALLATION_USER] = PFUser.currentUser()
-//        installation.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
-//            if error != nil {
-//                println("parsePushUserAssign save error.")
-//            }
-//        }
-//    }
-//    
-//    class func parsePushUserResign() {
-//        var installation = PFInstallation.currentInstallation()
-//        installation.removeObjectForKey(PF_INSTALLATION_USER)
-//        installation.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError!) -> Void in
-//            if error != nil {
-//                println("parsePushUserResign save error")
-//            }
-//        }
-//    }
-//    
+    class func installUserForPush() {
+        var installation = PFInstallation.currentInstallation()
+        installation[PF_INSTALLATION_USER] = PFUser.currentUser()
+        if Utilities.isExecUser() {
+            installation.addUniqueObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
+        }
+        installation.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError?) -> Void in
+            if error != nil {
+                println("parsePushUserAssign save error.")
+            }
+        }
+    }
+
+    class func uninstallUserForPush() {
+        var installation = PFInstallation.currentInstallation()
+        installation.removeObjectForKey(PF_INSTALLATION_USER)
+        installation.removeObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
+        installation.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError?) -> Void in
+            if error != nil {
+                println("parsePushUserResign save error")
+            }
+        }
+    }
+
 //    class func sendPushNotification(groupId: String, text: String) {
 //        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)
 //        query.whereKey(PF_MESSAGES_GROUPID, equalTo: groupId)

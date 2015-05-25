@@ -39,6 +39,12 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             popIncorrectFieldsAlert()
             return
         }
+        
+        if !InternetUtil.isConnectedToNetwork() {
+            InternetUtil.showNoInternetDialog(self)
+            return
+        }
+        
         HudUtil.showProgressHUD()
         let user = PFUser.currentUser()!
         record[PF_RECORD_CREATED_BY] = user[PF_USER_NAME] as? String
@@ -203,7 +209,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
                 performSegueWithIdentifier("editDateSegue", sender: self)
             case RECORD_END_DATE:
                 toEditAttribute = PF_RECORD_END_DATE
-                performSegueWithIdentifier("editDateSegue", sender: self)
+                performSegueWithIdentifier("editDateChoiceSegue", sender: self)
             case RECORD_USER_LIST:
                 toEditAttribute = PF_RECORD_USER_LIST
                 performSegueWithIdentifier("editRecipientSegue", sender: self)
@@ -241,6 +247,15 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             createVC.editObject = record
             createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
             createVC.items += Utilities.getEmailItems()
+        } else if segue.identifier == "editDateChoiceSegue" {
+            let createVC = segue.destinationViewController as! EditDateChoiceViewController
+            createVC.editAttribute = toEditAttribute
+            createVC.editObject = record
+            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            let currentComps = FinanceUtil.getCurrentComponents()
+            createVC.items.append(FinanceUtil.getCurrentFinancialPeriodDate(currentComps))
+            createVC.items.append(FinanceUtil.getNextFinancialPeriodDate(currentComps))
+            createVC.items.append(FinanceUtil.getFurtherFinancialPeriodDate(currentComps))
         }
     }
     

@@ -21,6 +21,12 @@ class EditTodoViewController: UITableViewController {
             popIncorrectFieldsAlert()
             return
         }
+        
+        if !InternetUtil.isConnectedToNetwork() {
+            InternetUtil.showNoInternetDialog(self)
+            return
+        }
+        
         HudUtil.showProgressHUD()
         let user = PFUser.currentUser()!
         editObject[PF_TODOS_CREATED_BY_PERSON] = user[PF_USER_NAME] as? String

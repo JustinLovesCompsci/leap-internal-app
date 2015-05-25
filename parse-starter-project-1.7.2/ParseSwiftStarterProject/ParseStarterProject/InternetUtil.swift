@@ -42,6 +42,8 @@ class InternetUtil {
     
     class func showNoInternetHUD(controller: UIViewController) {
         HudUtil.showWarningHUD("No Internet", subtitle: "Connect to Internet or via VPN if in China")
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
+        PKHUD.sharedHUD.dimsBackground = false
     }
 
 }

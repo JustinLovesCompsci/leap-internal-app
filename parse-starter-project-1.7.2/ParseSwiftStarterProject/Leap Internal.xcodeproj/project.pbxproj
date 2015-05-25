@@ -51,6 +51,8 @@
 		AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E61B005B2C006C212C /* ProfileViewController.swift */; };
 		AABB02E91B006827006C212C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E81B006827006C212C /* Constants.swift */; };
 		AAC3CD8D1B1199EF0096AFBB /* InternetUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */; };
+		AAC3CD8F1B12F7E50096AFBB /* FinanceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */; };
+		AAC3CD911B13005D0096AFBB /* EditDateChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD901B13005D0096AFBB /* EditDateChoiceViewController.swift */; };
 		AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B61B03025600145F56 /* TodoDetailViewController.swift */; };
 		AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		AABB02E61B005B2C006C212C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AABB02E81B006827006C212C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetUtil.swift; sourceTree = "<group>"; };
+		AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceUtil.swift; sourceTree = "<group>"; };
+		AAC3CD901B13005D0096AFBB /* EditDateChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDateChoiceViewController.swift; sourceTree = "<group>"; };
 		AAD609B61B03025600145F56 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +253,7 @@
 				AA83EAAD1B072D7A002A6B5F /* EditDateViewController.swift */,
 				AA83EABC1B0C453E002A6B5F /* EditBigTextViewController.swift */,
 				AA83EABE1B0C4548002A6B5F /* EditChoiceViewController.swift */,
+				AAC3CD901B13005D0096AFBB /* EditDateChoiceViewController.swift */,
 			);
 			name = GenEdit;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				AA83EAC01B0DBC74002A6B5F /* CalendarUtil.swift */,
 				AA43AF9B1B10457D00164404 /* HudUtil.swift */,
 				AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */,
+				AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -420,6 +426,8 @@
 				AA83EAAE1B072D7A002A6B5F /* EditDateViewController.swift in Sources */,
 				AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */,
 				AA83EAA61B072C6B002A6B5F /* EditTodoViewController.swift in Sources */,
+				AAC3CD8F1B12F7E50096AFBB /* FinanceUtil.swift in Sources */,
+				AAC3CD911B13005D0096AFBB /* EditDateChoiceViewController.swift in Sources */,
 				AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
