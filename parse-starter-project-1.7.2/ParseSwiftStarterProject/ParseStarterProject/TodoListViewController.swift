@@ -60,6 +60,9 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             presentLogIn()
         }
         else {
+            PushNotication.installUserForPush()
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0 //TODO: may move to AppDelegate.swift
+            
             let connected = InternetUtil.isConnectedToNetwork()
             if !connected {
                 InternetUtil.showNoInternetHUD(self)

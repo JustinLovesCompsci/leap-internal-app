@@ -78,22 +78,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Extract the notification data
-//        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
-//            
-//            // Create a pointer to the Photo object
-//            let photoId = notificationPayload["p"] as? NSString
-//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: "xWMyZ4YEGZ")
-//            
-//            // Fetch photo object
-//            targetPhoto.fetchIfNeededInBackgroundWithBlock {
-//                (object: PFObject?, error:NSError?) -> Void in
-//                if error == nil {
-//                    // Show photo view controller
-//                    let viewController = PhotoVC(photo: object);
-//                    self.navController.pushViewController(viewController, animated: true);
-//                }
-//            }
-//        }
+        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            
+            if let id = notificationPayload[PUSH_FIELD_ID] as? NSString, type = notificationPayload[PUSH_FIELD_TYPE] as? NSString {
+                if type.compare(PF_GEN_TODOS_CLASS_NAME) == NSComparisonResult.OrderedSame {
+                      updateTodos()
+//                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
+//                    todo.fetchIfNeededInBackgroundWithBlock {
+//                        (object: PFObject?, error:NSError?) -> Void in
+//                        if error == nil {
+//                        }
+//                    }
+                }
+                
+//                            case PF_GAINS_CLASS_NAME:
+//                            case PF_LOSSES_CLASS_NAME:
+//                            case PF_REIMBURSE_CLASS_NAME:
+            }
+        }
 
         return true
     }
@@ -130,22 +132,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         
-//        if let photoId: String = userInfo["p"] as? String {
-//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: photoId)
-//            targetPhoto.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
-//                // Show photo view controller
-//                if error != nil {
-//                    completionHandler(UIBackgroundFetchResult.Failed)
-//                } else if PFUser.currentUser() != nil {
-//                    let viewController = PhotoVC(withPhoto: object)
-//                    self.navController.pushViewController(viewController, animated: true)
-//                    completionHandler(UIBackgroundFetchResult.NewData)
-//                } else {
-//                    completionHandler(UIBackgroundFetchResult.NoData)
+        if let id = userInfo[PUSH_FIELD_ID] as? String, type = userInfo[PUSH_FIELD_TYPE] as? String, action = userInfo[PUSH_FIELD_ACTION] as? String {
+            
+            if type == PF_GEN_TODOS_CLASS_NAME {
+                updateTodos()
+                
+//                if action == PUSH_FIELD_ACTION_UPDATE {
+//                    
+//                } else if action == PUSH_FIELD_ACTION_DELETE {
+//                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
+//                    todo.fetchInBackgroundWithBlock {
+//                        (object: PFObject?, error:NSError?) -> Void in
+//                        if error == nil {
+//                            todo.unpinInBackground()
+//                        }
+//                    }
 //                }
-//            }
-//        }
-//        handler(UIBackgroundFetchResult.NoData)
+            } else if type == PF_GAINS_CLASS_NAME {
+                
+            } else if type == PF_LOSSES_CLASS_NAME {
+                
+            } else if type == PF_REIMBURSE_CLASS_NAME {
+                
+            }
+        }
+    }
+    
+    func updateTodos() {
+        let tabController = self.window?.rootViewController as! UITabBarController
+        let navController = tabController.childViewControllers[0] as! UINavigationController
+        let todoVC = navController.childViewControllers[0] as! TodoListViewController
+        todoVC.loadGenTodosFromNetwork()
     }
 
     ///////////////////////////////////////////////////////////

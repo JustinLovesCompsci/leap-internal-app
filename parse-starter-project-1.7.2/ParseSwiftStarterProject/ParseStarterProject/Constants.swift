@@ -161,3 +161,10 @@ let EXEC_CHANNEL                        = "Execs"
 let MENTORS_CHANNEL                     = "Mentors"
 let STUDENT_REP_CHANNEL                 = "StudentReps"
 let PF_CHANNEL                          = "channels"
+
+/* Notification data fields */
+let PUSH_FIELD_ID               = "id"
+let PUSH_FIELD_TYPE             = "type"
+let PUSH_FIELD_ACTION           = "action"
+let PUSH_FIELD_ACTION_UPDATE    = "Update"
+let PUSH_FIELD_ACTION_DELETE    = "Delete"

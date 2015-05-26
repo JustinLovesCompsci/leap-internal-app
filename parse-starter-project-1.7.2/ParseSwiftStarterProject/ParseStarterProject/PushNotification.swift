@@ -36,6 +36,31 @@ class PushNotication {
             }
         }
     }
+    
+    class func updateTodos() {
+        PFObject.unpinAllObjectsInBackgroundWithName(TODO_DATA_TAG) {
+            (success: Bool, error: NSError?) -> Void in
+            
+            var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
+            query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
+            
+            query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+            query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+            
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if objects != nil && objects?.count > 0 {
+                        for object in objects as! [PFObject]! {
+                            object.pinInBackgroundWithName(TODO_DATA_TAG)
+                        }
+                    }
+                } else {
+                    println(error)
+                }
+            }
+        }
+    }
 
 //    class func sendPushNotification(groupId: String, text: String) {
 //        var query = PFQuery(className: PF_MESSAGES_CLASS_NAME)

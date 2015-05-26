@@ -200,6 +200,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         
         logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler: { (action:UIAlertAction!) in
             PFUser.logOut()
+            PushNotication.uninstallUserForPush()
             self.tabBarController?.selectedIndex = 0
         }))
 
