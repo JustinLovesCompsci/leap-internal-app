@@ -148,11 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                        }
 //                    }
 //                }
-            } else if type == PF_GAINS_CLASS_NAME {
-                
-            } else if type == PF_LOSSES_CLASS_NAME {
-                
-            } else if type == PF_REIMBURSE_CLASS_NAME {
+            } else if type == PF_RECORD_CLASS_NAME {
                 
             }
         }

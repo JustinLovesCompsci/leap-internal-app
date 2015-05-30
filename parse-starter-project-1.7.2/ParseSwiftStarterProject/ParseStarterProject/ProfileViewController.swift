@@ -68,9 +68,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             if !self.isRefreshing {
                 HudUtil.showProgressHUD()
             }
-            self.loadGains()
-            self.loadLosses()
-            self.loadReimburse()
+            self.loadRecords()
             if !self.isRefreshing {
                 HudUtil.hidHUD()
             }
@@ -141,21 +139,22 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             
             if isToEditRecord {
                 
+                newRecord = PFObject(className: PF_RECORD_CLASS_NAME)
                 if isToCreateRecord {
                     switch buttonIndex {
                     case 1:
-                        newRecord = PFObject(className: PF_GAINS_CLASS_NAME)
+                        newRecord[PF_RECORD_TYPE] = GAIN_RECORD_TYPE
                     case 2:
-                        newRecord = PFObject(className: PF_LOSSES_CLASS_NAME)
+                        newRecord[PF_RECORD_TYPE] = LOSS_RECORD_TYPE
                     case 3:
-                        newRecord = PFObject(className: PF_REIMBURSE_CLASS_NAME)
+                        newRecord[PF_RECORD_TYPE] = REIMBURSE_RECORD_TYPE
                     default:
                         println("No new type of record selected")
                     }
                     
                     newRecord[PF_RECORD_START_DATE] = NSDate()
                     newRecord[PF_RECORD_SUMMARY] = DEFAULT_RECORD_SUMMARY
-                    newRecord[PF_RECORD_END_DATE] = Utilities.getDueDateLimit()
+                    newRecord[PF_RECORD_END_DATE] = FinanceUtil.getCurrentFinancialPeriodDate(FinanceUtil.getCurrentComponents())
                     newRecord[PF_RECORD_AMOUNT] = 0
                     let user = PFUser.currentUser()!
                     newRecord[PF_RECORD_CONTACT_EMAIL] = user.email
@@ -207,69 +206,30 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         presentViewController(logOutAlert, animated: true, completion: nil)
     }
     
-    func loadGains() {
-        var query = PFQuery(className: PF_GAINS_CLASS_NAME)
-        query.whereKey(PF_GAINS_USER_LIST, equalTo: PFUser.currentUser()!)
-        query.orderByDescending(PF_GAINS_START_DATE)
+    func loadRecords() {
+        var query = PFQuery(className: PF_RECORD_CLASS_NAME)
+        query.whereKey(PF_RECORD_USER_LIST, equalTo: PFUser.currentUser()!)
+        query.orderByDescending(PF_RECORD_START_DATE)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 self.gains.removeAll(keepCapacity: false)
-                if objects != nil && objects?.count > 0 {
-                    self.gains.extend(objects as! [PFObject]!)
-                    for object in objects as! [PFObject]! {
-                        object.pinInBackgroundWithName(MY_RECORDS_TAG)
-                    }
-                }
-                self.calculateNet()
-                self.tableView.reloadData()
-            } else {
-                HudUtil.showErrorHUD("Check your network settings")
-                println(error)
-            }
-            if self.isRefreshing {
-                self.endRefreshData()
-            }
-        }
-    }
-    
-    func loadLosses() {
-        var query = PFQuery(className: PF_LOSSES_CLASS_NAME)
-        query.whereKey(PF_LOSSES_USER_LIST, equalTo: PFUser.currentUser()!)
-        query.orderByDescending(PF_LOSSES_START_DATE)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
                 self.losses.removeAll(keepCapacity: false)
-                if objects != nil && objects?.count > 0 {
-                    self.losses.extend(objects as! [PFObject]!)
-                    for object in objects as! [PFObject]! {
-                        object.pinInBackgroundWithName(MY_RECORDS_TAG)
-                    }
-                }
-                self.calculateNet()
-                self.tableView.reloadData()
-            } else {
-                HudUtil.showErrorHUD("Check your network settings")
-                println(error)
-            }
-            if self.isRefreshing {
-                self.endRefreshData()
-            }
-        }
-    }
-    
-    func loadReimburse() {
-        var query = PFQuery(className: PF_REIMBURSE_CLASS_NAME)
-        query.whereKey(PF_REIMBURSE_USER_LIST, equalTo: PFUser.currentUser()!)
-        query.orderByDescending(PF_REIMBURSE_START_DATE)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
                 self.reimburses.removeAll(keepCapacity: false)
+                
                 if objects != nil && objects?.count > 0 {
-                    self.reimburses.extend(objects as! [PFObject]!)
                     for object in objects as! [PFObject]! {
+                        switch (object[PF_RECORD_TYPE] as! String) {
+                        case GAIN_RECORD_TYPE:
+                            self.gains.append(object)
+                        case LOSS_RECORD_TYPE:
+                            self.losses.append(object)
+                        case REIMBURSE_RECORD_TYPE:
+                            self.reimburses.append(object)
+                        default:
+                            println("should not reach here")
+                        }
+                        
                         object.pinInBackgroundWithName(MY_RECORDS_TAG)
                     }
                 }
@@ -295,13 +255,13 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     func calculateNet() {
         resetFinancialStats()
         for gain in gains {
-            totalGains += gain[PF_GAINS_AMOUNT] as! Int
+            totalGains += gain[PF_RECORD_AMOUNT] as! Int
         }
         for loss in losses {
-            totalLosses += loss[PF_LOSSES_AMOUNT] as! Int
+            totalLosses += loss[PF_RECORD_AMOUNT] as! Int
         }
         for reimburse in reimburses {
-            totalReimburses += reimburse[PF_REIMBURSE_AMOUNT] as! Int
+            totalReimburses += reimburse[PF_RECORD_AMOUNT] as! Int
         }
         totalNet = totalGains - totalLosses + totalReimburses
     }
@@ -453,21 +413,21 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     }
     
     func loadSelectUserRecords() {
-        var query: PFQuery!
+        var query = PFQuery(className: PF_RECORD_CLASS_NAME)
         
         switch (toShowFinanceCategory) {
         case TOTAL_GAIN:
-            query = PFQuery(className: PF_GAINS_CLASS_NAME)
+            query.whereKey(PF_RECORD_TYPE, equalTo: GAIN_RECORD_TYPE)
         case TOTAL_LOSS:
-            query = PFQuery(className: PF_LOSSES_CLASS_NAME)
+            query.whereKey(PF_RECORD_TYPE, equalTo: LOSS_RECORD_TYPE)
         case TOTAL_REIMBURSE:
-            query = PFQuery(className: PF_REIMBURSE_CLASS_NAME)
+            query.whereKey(PF_RECORD_TYPE, equalTo: REIMBURSE_RECORD_TYPE)
         default:
             println("should not reach here")
         }
 
         HudUtil.showProgressHUD()
-        query.whereKey(PF_LOSSES_USER_LIST, equalTo: selectedUser)
+        query.whereKey(PF_RECORD_USER_LIST, equalTo: selectedUser)
         query.orderByDescending(PF_RECORD_START_DATE)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in

@@ -67,44 +67,15 @@ let PF_RECORD_START_DATE                 = "StartDate"               //  Date
 let PF_RECORD_END_DATE                   = "EndDate"                 //  Date
 let PF_RECORD_USER_LIST                  = "UserList"                //  Array
 let PF_RECORD_AMOUNT                     = "Amount"                  //  Number
-let PF_RECORD_CREATED_BY                 = "createdBy"               //  String
+let PF_RECORD_CREATED_BY                 = "CreatedByPerson"         //  String
 let PF_RECORD_CONTACT_EMAIL              = "ContactEmail"            //  String
+let PF_RECORD_TYPE                       = "Type"                    //  String
+let PF_RECORD_CLASS_NAME                 = "Record"
 
-/* Gains */
-let PF_GAINS_CLASS_NAME                 = "Gains"                   //  Class name
-let PF_GAINS_SUMMARY                    = "Summary"                 //  String
-let PF_GAINS_CREATED_AT                 = "createdAt"               //  Date
-let PF_GAINS_UPDATED_AT                 = "updatedAt"               //  Date
-let PF_GAINS_START_DATE                 = "StartDate"               //  Date
-let PF_GAINS_END_DATE                   = "EndDate"                 //  Date
-let PF_GAINS_USER_LIST                  = "UserList"                //  Array
-let PF_GAINS_AMOUNT                     = "Amount"                  //  Number
-let PF_GAINS_CREATED_BY                 = "createdBy"               //  String
-let PF_GAINS_CONTACT_EMAIL              = "ContactEmail"            //  String
-
-/* Losses */
-let PF_LOSSES_CLASS_NAME                 = "Losses"                  //  Class name
-let PF_LOSSES_SUMMARY                    = "Summary"                 //  String
-let PF_LOSSES_CREATED_AT                 = "createdAt"               //  Date
-let PF_LOSSES_UPDATED_AT                 = "updatedAt"               //  Date
-let PF_LOSSES_START_DATE                 = "StartDate"               //  Date
-let PF_LOSSES_END_DATE                   = "EndDate"                 //  Date
-let PF_LOSSES_USER_LIST                  = "UserList"                //  Array
-let PF_LOSSES_AMOUNT                     = "Amount"                  //  Number
-let PF_LOSSES_CREATED_BY                 = "createdBy"               //  String
-let PF_LOSSES_CONTACT_EMAIL              = "ContactEmail"            //  String
-
-/* Reimburse */
-let PF_REIMBURSE_CLASS_NAME              = "Reimburse"               //  Class name
-let PF_REIMBURSE_SUMMARY                 = "Summary"                 //  String
-let PF_REIMBURSE_CREATED_AT              = "createdAt"               //  Date
-let PF_REIMBURSE_UPDATED_AT              = "updatedAt"               //  Date
-let PF_REIMBURSE_START_DATE              = "StartDate"               //  Date
-let PF_REIMBURSE_END_DATE                = "EndDate"                 //  Date
-let PF_REIMBURSE_USER_LIST               = "UserList"                //  Array
-let PF_REIMBURSE_AMOUNT                  = "Amount"                  //  Number
-let PF_REIMBURSE_CREATED_BY              = "createdBy"               //  String
-let PF_REIMBURSE_CONTACT_EMAIL           = "ContactEmail"            //  String
+/* Record Type */
+let GAIN_RECORD_TYPE                    = "gain"
+let LOSS_RECORD_TYPE                    = "loss"
+let REIMBURSE_RECORD_TYPE               = "reimburse"
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"
