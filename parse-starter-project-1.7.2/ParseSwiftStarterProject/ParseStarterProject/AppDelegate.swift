@@ -79,24 +79,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Extract the notification data
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
-            
-            if let id = notificationPayload[PUSH_FIELD_ID] as? NSString, type = notificationPayload[PUSH_FIELD_TYPE] as? NSString {
-                if type.compare(PF_GEN_TODOS_CLASS_NAME) == NSComparisonResult.OrderedSame {
-                      updateTodos()
-//                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
-//                    todo.fetchIfNeededInBackgroundWithBlock {
-//                        (object: PFObject?, error:NSError?) -> Void in
-//                        if error == nil {
-//                        }
-//                    }
-                }
+            if let id = notificationPayload[PUSH_FIELD_ID] as? String, type = notificationPayload[PUSH_FIELD_TYPE] as? String, action = notificationPayload[PUSH_FIELD_ACTION] as? String {
                 
-//                            case PF_GAINS_CLASS_NAME:
-//                            case PF_LOSSES_CLASS_NAME:
-//                            case PF_REIMBURSE_CLASS_NAME:
+                if type == PF_GEN_TODOS_CLASS_NAME {
+                    updateTodos()
+                    
+                } else if type == PF_RECORD_CLASS_NAME {
+                    updateRecords()
+                }
             }
         }
-
         return true
     }
 
@@ -137,28 +129,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if type == PF_GEN_TODOS_CLASS_NAME {
                 updateTodos()
                 
-//                if action == PUSH_FIELD_ACTION_UPDATE {
-//                    
-//                } else if action == PUSH_FIELD_ACTION_DELETE {
-//                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
-//                    todo.fetchInBackgroundWithBlock {
-//                        (object: PFObject?, error:NSError?) -> Void in
-//                        if error == nil {
-//                            todo.unpinInBackground()
-//                        }
-//                    }
-//                }
             } else if type == PF_RECORD_CLASS_NAME {
-                
+                updateRecords()
             }
         }
     }
+    
+    //                if action == PUSH_FIELD_ACTION_UPDATE {
+    //
+    //                } else if action == PUSH_FIELD_ACTION_DELETE {
+    //                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
+    //                    todo.fetchInBackgroundWithBlock {
+    //                        (object: PFObject?, error:NSError?) -> Void in
+    //                        if error == nil {
+    //                            todo.unpinInBackground()
+    //                        }
+    //                    }
+    //                }
     
     func updateTodos() {
         let tabController = self.window?.rootViewController as! UITabBarController
         let navController = tabController.childViewControllers[0] as! UINavigationController
         let todoVC = navController.childViewControllers[0] as! TodoListViewController
         todoVC.loadGenTodosFromNetwork()
+    }
+    
+    func updateRecords() {
+        let tabController = self.window?.rootViewController as! UITabBarController
+        let navController = tabController.childViewControllers[1] as! UINavigationController
+        let profileVC = navController.childViewControllers[0] as! ProfileViewController
+        profileVC.loadDataFromNetwork()
     }
 
     ///////////////////////////////////////////////////////////

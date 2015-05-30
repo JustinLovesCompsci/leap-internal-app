@@ -68,7 +68,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             if !self.isRefreshing {
                 HudUtil.showProgressHUD()
             }
-            self.loadRecords()
+            self.loadRecords(false)
             if !self.isRefreshing {
                 HudUtil.hidHUD()
             }
@@ -88,7 +88,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             self.navBar.leftBarButtonItem?.enabled = true
         }
         
-        //TODO: load from local
+        loadRecords(true)
     }
     
     @IBAction func newPressed(sender: AnyObject) {
@@ -206,8 +206,11 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         presentViewController(logOutAlert, animated: true, completion: nil)
     }
     
-    func loadRecords() {
+    func loadRecords(fromLocal: Bool) {
         var query = PFQuery(className: PF_RECORD_CLASS_NAME)
+        if fromLocal {
+            query.fromLocalDatastore()
+        }
         query.whereKey(PF_RECORD_USER_LIST, equalTo: PFUser.currentUser()!)
         query.orderByDescending(PF_RECORD_START_DATE)
         query.findObjectsInBackgroundWithBlock {
