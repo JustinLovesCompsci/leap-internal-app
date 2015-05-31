@@ -52,6 +52,27 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navBar.leftBarButtonItem?.enabled = false
+        if Utilities.isExecUser() {
+            self.navBar.leftBarButtonItem?.enabled = true
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if InternetUtil.isConnectedToNetwork() {
+            navBar.title = "Profile"
+        } else {
+            navBar.title = "Profile(未连接)"
+        }
+        
+        loadRecords(true)
+    }
+    
     func refreshData(sender: AnyObject) {
         if InternetUtil.isConnectedToNetwork() {
             isRefreshing = true
@@ -78,17 +99,6 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     func endRefreshData() {
         isRefreshing = false
         refreshControl?.endRefreshing()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navBar.leftBarButtonItem?.enabled = false
-        if Utilities.isExecUser() {
-            self.navBar.leftBarButtonItem?.enabled = true
-        }
-        
-        loadRecords(true)
     }
     
     @IBAction func newPressed(sender: AnyObject) {

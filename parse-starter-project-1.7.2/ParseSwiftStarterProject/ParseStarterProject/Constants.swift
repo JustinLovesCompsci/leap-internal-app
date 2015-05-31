@@ -97,7 +97,7 @@ let RECORD_START_DATE                       = "Start Date"
 let RECORD_END_DATE                         = "End Date"
 let RECORD_USER_LIST                        = "Recipients"
 let RECORD_AMOUNT                           = "Amount"
-let RECORD_EMAIL                            = "Contact Email"
+let RECORD_EMAIL                            = "Contact"
 
 /* New Record */
 let DEFAULT_RECORD_SUMMARY                  = "New Record"

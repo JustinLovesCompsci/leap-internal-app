@@ -35,6 +35,45 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         isFirstLoading = true
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 70.0;
+        
+        if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
+            presentLogIn()
+        }
+        else {
+            PushNotication.installUserForPush()
+            
+            if Utilities.isExecUser() {
+                navBar.rightBarButtonItem?.enabled = true
+            } else {
+                navBar.rightBarButtonItem?.enabled = false
+            }
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let user = PFUser.currentUser() {
+            let connected = InternetUtil.isConnectedToNetwork()
+            if connected {
+                navBar.title = "ToDo"
+            } else {
+                navBar.title = "ToDo(未连接)"
+            }
+            
+            if isFirstLoading && connected {
+                loadGenTodosFromNetwork()
+                isFirstLoading = false
+            } else {
+                loadGenTodosFromLocal()
+            }
+        }
+    }
+    
     func refreshData(sender: AnyObject) {
         if InternetUtil.isConnectedToNetwork() {
             isRefreshing = true
@@ -48,41 +87,6 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     func endRefreshData() {
         isRefreshing = false
         refreshControl?.endRefreshing()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tableView.rowHeight = UITableViewAutomaticDimension;
-        tableView.estimatedRowHeight = 70.0;
-        
-        if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
-            presentLogIn()
-        }
-        else {
-            PushNotication.installUserForPush()
-            if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-                UIApplication.sharedApplication().applicationIconBadgeNumber = 0 //TODO: may move to AppDelegate.swift
-            }
-            
-            let connected = InternetUtil.isConnectedToNetwork()
-            if !connected {
-                InternetUtil.showNoInternetHUD(self)
-            }
-            
-            if isFirstLoading && connected {
-                loadGenTodosFromNetwork()
-                isFirstLoading = false
-            } else {
-                loadGenTodosFromLocal()
-            }
-            
-            if Utilities.isExecUser() {
-                navBar.rightBarButtonItem?.enabled = true
-            } else {
-                navBar.rightBarButtonItem?.enabled = false
-            }
-        }
     }
     
     func presentLogIn() {
@@ -174,14 +178,19 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     }
     
 //    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "For All Mentors & Student Reps"
+//        if !InternetUtil.isConnectedToNetwork() {
+//            return "No Internet is available"
+//        }
+//        return nil
 //    }
-    
+//    
 //    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView //recast your view as a UITableViewHeaderFooterView
-//        header.contentView.backgroundColor = UIColor(red: 0/255, green: 181/255, blue: 229/255, alpha: 1.0) //make the background color light blue
-//        header.textLabel.textColor = UIColor.whiteColor() //make the text white
-//        header.alpha = 0.5 //make the header transparent
+//        if !InternetUtil.isConnectedToNetwork() {
+//            let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView //recast your view as a UITableViewHeaderFooterView
+//            header.contentView.backgroundColor = UIColor(red: 0/255, green: 181/255, blue: 229/255, alpha: 1.0) //make the background color light blue
+//            header.textLabel.textColor = UIColor.whiteColor() //make the text white
+//            header.alpha = 0.5 //make the header transparent
+//        }
 //    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
