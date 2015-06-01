@@ -28,7 +28,10 @@ class PushNotication {
     class func uninstallUserForPush() {
         var installation = PFInstallation.currentInstallation()
         installation.removeObjectForKey(PF_INSTALLATION_USER)
-        installation.removeObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
+        if Utilities.isExecUser() {
+            installation.removeObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
+        }
+        installation.removeObject(BROADCAST_CHANNEL, forKey: PF_CHANNEL)
         installation.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
             if error != nil {

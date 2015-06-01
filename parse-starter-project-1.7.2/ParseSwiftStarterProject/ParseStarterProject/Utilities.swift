@@ -89,7 +89,7 @@ class Utilities {
     
     class func getDueDateLimit() -> NSDate {
         var components = NSDateComponents()
-        components.setValue(1, forComponent: NSCalendarUnit.CalendarUnitMonth);
+        components.setValue(2, forComponent: NSCalendarUnit.CalendarUnitMonth);
         let date: NSDate = NSDate()
         return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
     }

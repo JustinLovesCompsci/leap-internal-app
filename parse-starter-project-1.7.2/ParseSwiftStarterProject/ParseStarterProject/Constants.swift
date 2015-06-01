@@ -131,6 +131,7 @@ let QUESTION_EMAIL_TAG                      = "[LEAP-Question]"
 let EXEC_CHANNEL                        = "Execs"
 let MENTORS_CHANNEL                     = "Mentors"
 let STUDENT_REP_CHANNEL                 = "StudentReps"
+let BROADCAST_CHANNEL                   = ""
 let PF_CHANNEL                          = "channels"
 
 /* Notification data fields */
