@@ -16,7 +16,6 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     @IBOutlet weak var navBar: UINavigationItem!
     
     var genTodos: [PFObject]! = []
-    var execTodos: [PFObject]! = []
     var toShowTodo: PFObject!
     var isRefreshing = false
     var isFirstLoading = false
@@ -115,11 +114,11 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
 //                return
 //            }
             
-            var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
-            query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
+            var query = PFQuery(className: PF_TODOS_CLASS_NAME)
+            query.orderByAscending(PF_TODOS_DUE_DATE)
             
-            query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
-            query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+            query.whereKey(PF_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+            query.whereKey(PF_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
             
             if !self.isRefreshing {
                 HudUtil.showProgressHUD()
@@ -151,12 +150,12 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     }
     
     func loadGenTodosFromLocal() {
-        var query = PFQuery(className: PF_GEN_TODOS_CLASS_NAME)
-        query.orderByAscending(PF_GEN_TODOS_DUE_DATE)
+        var query = PFQuery(className: PF_TODOS_CLASS_NAME)
+        query.orderByAscending(PF_TODOS_DUE_DATE)
         query.fromLocalDatastore()
         
-        query.whereKey(PF_GEN_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
-        query.whereKey(PF_GEN_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+        query.whereKey(PF_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+        query.whereKey(PF_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
         
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -213,20 +212,12 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         return getGenTodoCell(indexPath)
     }
     
-    func getExecTodoCell(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "todoCell")
-        let todo:PFObject = execTodos[indexPath.row]
-        cell.textLabel?.text = todo[PF_EXEC_TODOS_SUMMARY] as? String
-        cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(todo[PF_EXEC_TODOS_DUE_DATE] as! NSDate)
-        return cell
-    }
-    
     func getGenTodoCell(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "todoCell")
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         let todo:PFObject = genTodos[indexPath.row]
-        cell.textLabel?.text = todo[PF_GEN_TODOS_SUMMARY] as? String
-        cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(todo[PF_GEN_TODOS_DUE_DATE] as! NSDate)
+        cell.textLabel?.text = todo[PF_TODOS_SUMMARY] as? String
+        cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(todo[PF_TODOS_DUE_DATE] as! NSDate)
         return cell
     }
     
@@ -242,7 +233,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             createVC.todo = toShowTodo
             
         } else if segue.identifier == "addTodoSegue" {
-            var newTodo = PFObject(className: PF_GEN_TODOS_CLASS_NAME)
+            var newTodo = PFObject(className: PF_TODOS_CLASS_NAME)
             newTodo[PF_TODOS_SUMMARY] = NEW_TODO_SUMMARY
             newTodo[PF_TODOS_DUE_DATE] = NSDate()
             let current_user:PFObject = PFUser.currentUser()!

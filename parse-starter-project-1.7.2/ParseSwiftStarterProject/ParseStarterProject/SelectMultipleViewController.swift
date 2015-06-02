@@ -19,6 +19,7 @@ class SelectMultipleViewController: UITableViewController {
     var users = [PFUser]()
     var selection = [String]()
     var selectedUsers = [PFUser]()
+    var isIncludeSelf = false
     
     var delegate: SelectMultipleDelegate!
     
@@ -55,7 +56,9 @@ class SelectMultipleViewController: UITableViewController {
         if InternetUtil.isConnectedToNetwork() {
             let user = PFUser.currentUser()
             var query = PFQuery(className: PF_USER_CLASS_NAME)
-            query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
+            if !isIncludeSelf {
+                query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
+            }
             query.limit = 1000
             query.orderByAscending(PF_USER_NAME)
             

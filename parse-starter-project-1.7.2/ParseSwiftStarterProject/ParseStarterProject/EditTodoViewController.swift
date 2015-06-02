@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class EditTodoViewController: UITableViewController {
+class EditTodoViewController: UITableViewController, UIActionSheetDelegate, SelectMultipleDelegate {
     var editObject: PFObject!
     var toEditAttribute: String!
     
@@ -60,6 +60,13 @@ class EditTodoViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func getNumUsers() -> Int {
+        if let users = editObject[PF_TODOS_USER_LIST] as? [PFUser] {
+            return users.count
+        }
+        return 0
+    }
+    
     func popIncorrectFieldsAlert() {
         var alert = UIAlertController(title: "Incorrect Fields", message:"Please fill in all fields correctly", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{ (action:UIAlertAction!) in
@@ -70,7 +77,8 @@ class EditTodoViewController: UITableViewController {
     func allFieldsFilled() -> Bool {
         if let summary = editObject[PF_TODOS_SUMMARY] as? String, descrip = editObject[PF_TODOS_DESCRIPTION] as? String, dueDate = editObject[PF_TODOS_DUE_DATE] as? NSDate {
             
-            if count(summary) == 0 || count(descrip) == 0 || Utilities.isSmallerThanDate(dueDate, dateTo: NSDate()) {
+            let numAssignee = getNumUsers()
+            if numAssignee <= 0 || count(summary) == 0 || count(descrip) == 0 || Utilities.isSmallerThanDate(dueDate, dateTo: NSDate()) {
                 return false
             }
             return true
@@ -92,7 +100,7 @@ class EditTodoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -112,6 +120,17 @@ class EditTodoViewController: UITableViewController {
         case 3:
             cell.textLabel?.text = "Contact Email"
             cell.detailTextLabel?.text = editObject[PF_TODOS_CREATED_BY_EMAIL] as? String
+        case 4:
+            cell.textLabel?.text = "Assignee"
+            if let type = editObject[PF_TODOS_TYPE] as? String {
+                if type == TO_SELECT_TYPE {
+                    cell.detailTextLabel?.text = String(getNumUsers()) + " people"
+                } else {
+                    cell.detailTextLabel?.text = type
+                }
+            } else {
+                cell.detailTextLabel?.text = "Not Defined"
+            }
         default:
             cell.textLabel?.text = ""
             cell.detailTextLabel?.text = ""
@@ -135,6 +154,9 @@ class EditTodoViewController: UITableViewController {
         case 3:
             toEditAttribute = PF_TODOS_CREATED_BY_EMAIL
             performSegueWithIdentifier("editChoiceSegue", sender: self)
+        case 4:
+            toEditAttribute = PF_TODOS_USER_LIST
+            showEditAssigneeSheet()
         default:
             performSegueWithIdentifier("editTodoTextSegue", sender: self)
         }
@@ -145,26 +167,67 @@ class EditTodoViewController: UITableViewController {
         if segue.identifier == "editTodoTextSegue" {
             let createVC = segue.destinationViewController as! EditTextViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
             
         } else if segue.identifier == "editTodoDateSegue" {
             let createVC = segue.destinationViewController as! EditDateViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
         } else if segue.identifier == "editBigTextSegue" {
             let createVC = segue.destinationViewController as! EditBigTextViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
         } else if segue.identifier == "editChoiceSegue" {
             let createVC = segue.destinationViewController as! EditChoiceViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
             createVC.editAttribute = toEditAttribute
             createVC.items += Utilities.getEmailItems()
+        } else if segue.identifier == "editUserListSegue" {
+            let createVC = segue.destinationViewController as! SelectMultipleViewController
+            createVC.isIncludeSelf = true
+            createVC.delegate = self
         }
+    }
+    
+    func showEditAssigneeSheet() {
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: TO_ALL_TYPE, TO_MENTORS_TYPE, TO_EXEC_TYPE, TO_STUDENT_REPS_TYPE, TO_SELECT_TYPE)
+        actionSheet.showFromTabBar(self.tabBarController?.tabBar)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != actionSheet.cancelButtonIndex {
+            switch buttonIndex {
+            case 1:
+                editObject[PF_TODOS_TYPE] = TO_ALL_TYPE
+                editObject.removeObjectForKey(PF_TODOS_USER_LIST)
+            case 2:
+                editObject[PF_TODOS_TYPE] = TO_MENTORS_TYPE
+                editObject.removeObjectForKey(PF_TODOS_USER_LIST)
+            case 3:
+                editObject[PF_TODOS_TYPE] = TO_EXEC_TYPE
+                editObject.removeObjectForKey(PF_TODOS_USER_LIST)
+            case 4:
+                editObject[PF_TODOS_TYPE] = TO_STUDENT_REPS_TYPE
+                editObject.removeObjectForKey(PF_TODOS_USER_LIST)
+            case 5:
+                performSegueWithIdentifier("editUserListSegue", sender: self)
+            default:
+                println("No new type for Todo selected")
+            }
+        }
+    }
+    
+    func didSelectMultipleUsers(selectedUsers: [PFUser]) {
+        editObject.removeObjectForKey(PF_TODOS_USER_LIST)
+        editObject[PF_TODOS_TYPE] = TO_SELECT_TYPE
+        for user in selectedUsers {
+            editObject.addObject(user, forKey: PF_RECORD_USER_LIST)
+        }
+        tableView.reloadData()
     }
     
 }

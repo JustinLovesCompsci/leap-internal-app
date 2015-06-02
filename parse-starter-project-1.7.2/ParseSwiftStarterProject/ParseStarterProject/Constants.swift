@@ -31,6 +31,7 @@ let PF_USER_CATEGORY                    = "Category"                //  Number
 let PF_USER_NAME_LOWER_CASE             = "LowerCaseName"           //  String
 
 /* Todos */
+let PF_TODOS_CLASS_NAME                 = "GenTodos"
 let PF_TODOS_SUMMARY                    = "Summary"                 //  String
 let PF_TODOS_DESCRIPTION                = "Description"             //  String
 let PF_TODOS_DUE_DATE                   = "DueDate"                 //  Date
@@ -38,26 +39,8 @@ let PF_TODOS_CREATED_AT                 = "createdAt"               //  Date
 let PF_TODOS_UPDATED_AT                 = "updatedAt"               //  Date
 let PF_TODOS_CREATED_BY_PERSON          = "createdByPerson"         //  String
 let PF_TODOS_CREATED_BY_EMAIL           = "createdByEmail"          //  String
-
-/* ExecTodos */
-let PF_EXEC_TODOS_CLASS_NAME            = "ExecTodos"               //  Class name
-let PF_EXEC_TODOS_SUMMARY               = "Summary"                 //  String
-let PF_EXEC_TODOS_DESCRIPTION           = "Description"             //  String
-let PF_EXEC_TODOS_DUE_DATE              = "DueDate"                 //  Date
-let PF_EXEC_TODOS_CREATED_AT            = "createdAt"               //  Date
-let PF_EXEC_TODOS_UPDATED_AT            = "updatedAt"               //  Date
-let PF_EXEC_TODOS_CREATED_BY_PERSON     = "createdByPerson"         //  String
-let PF_EXEC_TODOS_CREATED_BY_EMAIL      = "createdByEmail"          //  String
-
-/* GenTodos */
-let PF_GEN_TODOS_CLASS_NAME             = "GenTodos"                //  Class name
-let PF_GEN_TODOS_SUMMARY                = "Summary"                 //  String
-let PF_GEN_TODOS_DESCRIPTION            = "Description"             //  String
-let PF_GEN_TODOS_DUE_DATE               = "DueDate"                 //  Date
-let PF_GEN_TODOS_CREATED_AT             = "createdAt"               //  Date
-let PF_GEN_TODOS_UPDATED_AT             = "updatedAt"               //  Date
-let PF_GEN_TODOS_CREATED_BY_PERSON      = "createdByPerson"         //  String
-let PF_GEN_TODOS_CREATED_BY_EMAIL       = "createdByEmail"          //  String
+let PF_TODOS_USER_LIST                  = "UserList"                //  Array
+let PF_TODOS_TYPE                       = "Type"                    //  String
 
 /* Financial Records */
 let PF_RECORD_SUMMARY                    = "Summary"                 //  String
@@ -71,6 +54,13 @@ let PF_RECORD_CREATED_BY                 = "CreatedByPerson"         //  String
 let PF_RECORD_CONTACT_EMAIL              = "ContactEmail"            //  String
 let PF_RECORD_TYPE                       = "Type"                    //  String
 let PF_RECORD_CLASS_NAME                 = "Record"
+
+/* Assignee Type */
+let TO_ALL_TYPE                         = "To All"
+let TO_EXEC_TYPE                        = "To Exec"
+let TO_STUDENT_REPS_TYPE                = "To Student Reps"
+let TO_MENTORS_TYPE                     = "To Mentors"
+let TO_SELECT_TYPE                      = "Select Multiple"
 
 /* Record Type */
 let GAIN_RECORD_TYPE                    = "gain"

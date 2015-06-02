@@ -551,6 +551,7 @@
                         <segue destination="13B-Yj-fdm" kind="show" identifier="editTodoDateSegue" id="RWp-yF-gaP"/>
                         <segue destination="hah-Iz-xMq" kind="show" identifier="editBigTextSegue" id="6R3-fD-Jdf"/>
                         <segue destination="P1T-Gz-cBo" kind="show" identifier="editChoiceSegue" id="5lY-8A-NQ7"/>
+                        <segue destination="QvI-Tw-QHZ" kind="show" identifier="editUserListSegue" id="uGl-id-RAS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXf-dh-WV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1484,12 +1485,12 @@
         <image name="welcome.JPG" width="3648" height="2736"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uGl-id-RAS"/>
         <segue reference="09P-hh-33n"/>
         <segue reference="lhp-Pq-K87"/>
         <segue reference="b93-eg-Bhn"/>
-        <segue reference="yk5-W4-qzs"/>
-        <segue reference="p9v-dL-Uhr"/>
-        <segue reference="IYO-Ok-K1C"/>
-        <segue reference="ecN-ip-XbZ"/>
+        <segue reference="Hda-nZ-fh2"/>
+        <segue reference="5lY-8A-NQ7"/>
+        <segue reference="RWp-yF-gaP"/>
     </inferredMetricsTieBreakers>
 </document>

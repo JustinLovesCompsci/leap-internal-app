@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
             if let id = notificationPayload[PUSH_FIELD_ID] as? String, type = notificationPayload[PUSH_FIELD_TYPE] as? String, action = notificationPayload[PUSH_FIELD_ACTION] as? String {
                 
-                if type == PF_GEN_TODOS_CLASS_NAME {
+                if type == PF_TODOS_CLASS_NAME {
                     updateTodos()
                     
                 } else if type == PF_RECORD_CLASS_NAME {
@@ -130,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let id = userInfo[PUSH_FIELD_ID] as? String, type = userInfo[PUSH_FIELD_TYPE] as? String, action = userInfo[PUSH_FIELD_ACTION] as? String {
             
-            if type == PF_GEN_TODOS_CLASS_NAME {
+            if type == PF_TODOS_CLASS_NAME {
                 updateTodos()
                 
             } else if type == PF_RECORD_CLASS_NAME {

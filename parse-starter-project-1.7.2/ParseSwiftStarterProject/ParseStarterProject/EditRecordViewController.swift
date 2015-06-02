@@ -84,7 +84,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         if let summary = record[PF_RECORD_SUMMARY] as? String, startDate = record[PF_RECORD_START_DATE] as? NSDate,  endDate = record[PF_RECORD_END_DATE] as? NSDate, amount = record[PF_RECORD_AMOUNT] as? Int {
             
             let countUsers = getNumUsers()
-            if count(summary) == 0 || amount <= 0 || countUsers == 0 {
+            if count(summary) == 0 || amount <= 0 || countUsers <= 0 {
                 return false
             }
             return true
@@ -227,17 +227,17 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             let createVC = segue.destinationViewController as! EditTextViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
         } else if segue.identifier == "editNumSegue" {
             let createVC = segue.destinationViewController as! EditNumberViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
         } else if segue.identifier == "editDateSegue" {
             let createVC = segue.destinationViewController as! EditDateViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
         } else if segue.identifier == "editRecipientSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
             createVC.delegate = self
@@ -245,13 +245,13 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             let createVC = segue.destinationViewController as! EditChoiceViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
             createVC.items += Utilities.getEmailItems()
         } else if segue.identifier == "editDateChoiceSegue" {
             let createVC = segue.destinationViewController as! EditDateChoiceViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_GEN_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
             let currentComps = FinanceUtil.getCurrentComponents()
             createVC.items.append(FinanceUtil.getCurrentFinancialPeriodDate(currentComps))
             createVC.items.append(FinanceUtil.getNextFinancialPeriodDate(currentComps))
