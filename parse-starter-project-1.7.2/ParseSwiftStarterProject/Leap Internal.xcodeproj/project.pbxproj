@@ -53,6 +53,7 @@
 		AAC3CD8D1B1199EF0096AFBB /* InternetUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */; };
 		AAC3CD8F1B12F7E50096AFBB /* FinanceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */; };
 		AAC3CD911B13005D0096AFBB /* EditDateChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD901B13005D0096AFBB /* EditDateChoiceViewController.swift */; };
+		AAC3CD931B1ECBCD0096AFBB /* ShowAllTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD921B1ECBCD0096AFBB /* ShowAllTodoViewController.swift */; };
 		AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B61B03025600145F56 /* TodoDetailViewController.swift */; };
 		AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetUtil.swift; sourceTree = "<group>"; };
 		AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceUtil.swift; sourceTree = "<group>"; };
 		AAC3CD901B13005D0096AFBB /* EditDateChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDateChoiceViewController.swift; sourceTree = "<group>"; };
+		AAC3CD921B1ECBCD0096AFBB /* ShowAllTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAllTodoViewController.swift; sourceTree = "<group>"; };
 		AAD609B61B03025600145F56 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +176,7 @@
 				AAD609B61B03025600145F56 /* TodoDetailViewController.swift */,
 				AA83EA9F1B0714AF002A6B5F /* MyPFLogInViewController.swift */,
 				AA83EABA1B0AF9C3002A6B5F /* TodoShowTableViewController.swift */,
+				AAC3CD921B1ECBCD0096AFBB /* ShowAllTodoViewController.swift */,
 			);
 			name = DevCode;
 			path = ParseStarterProject;
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA83EAB71B080149002A6B5F /* SelectMultipleViewController.swift in Sources */,
+				AAC3CD931B1ECBCD0096AFBB /* ShowAllTodoViewController.swift in Sources */,
 				AA83EAA01B0714AF002A6B5F /* MyPFLogInViewController.swift in Sources */,
 				AA5D5A7D1B01BFC00004DD5F /* PushNotification.swift in Sources */,
 				AA43AF961B1042A000164404 /* FrameView.swift in Sources */,

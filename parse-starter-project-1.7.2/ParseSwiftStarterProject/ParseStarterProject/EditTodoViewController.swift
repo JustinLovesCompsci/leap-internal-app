@@ -35,17 +35,7 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
             (success: Bool, error: NSError?) -> Void in
             HudUtil.hidHUD()
             if success {
-                self.editObject.pinInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.navigationController?.popViewControllerAnimated(true)
-                    } else {
-                        if let error = error {
-                            NSLog("%@", error)
-                        }
-                        HudUtil.showErrorHUD("Cannot save to phone")
-                    }
-                }
+                self.navigationController?.popViewControllerAnimated(true)
             } else {
                 if let error = error {
                     NSLog("%@", error)
@@ -67,6 +57,11 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
         return 0
     }
     
+    func hasSelectedAssignee() -> Bool {
+        let numAssignee = getNumUsers()
+        return numAssignee > 0 || editObject[PF_TODOS_TYPE] as? String != TO_SELECT_TYPE
+    }
+    
     func popIncorrectFieldsAlert() {
         var alert = UIAlertController(title: "Incorrect Fields", message:"Please fill in all fields correctly", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{ (action:UIAlertAction!) in
@@ -77,8 +72,7 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
     func allFieldsFilled() -> Bool {
         if let summary = editObject[PF_TODOS_SUMMARY] as? String, descrip = editObject[PF_TODOS_DESCRIPTION] as? String, dueDate = editObject[PF_TODOS_DUE_DATE] as? NSDate {
             
-            let numAssignee = getNumUsers()
-            if numAssignee <= 0 || count(summary) == 0 || count(descrip) == 0 || Utilities.isSmallerThanDate(dueDate, dateTo: NSDate()) {
+            if !hasSelectedAssignee() || count(summary) == 0 || count(descrip) == 0 || Utilities.isSmallerThanDate(dueDate, dateTo: NSDate()) {
                 return false
             }
             return true
@@ -218,6 +212,7 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
             default:
                 println("No new type for Todo selected")
             }
+            tableView.reloadData()
         }
     }
     

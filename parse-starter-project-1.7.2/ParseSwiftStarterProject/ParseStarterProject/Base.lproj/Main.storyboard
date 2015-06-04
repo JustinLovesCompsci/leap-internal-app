@@ -298,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABx-6N-Kp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441" y="242.25"/>
+            <point key="canvasLocation" x="655.5" y="3"/>
         </scene>
         <!--Login-->
         <scene sceneID="5MI-j0-LAz">
@@ -479,7 +479,7 @@
             </objects>
             <point key="canvasLocation" x="-501" y="1389"/>
         </scene>
-        <!--ToDo's-->
+        <!--Your ToDo's-->
         <scene sceneID="mTE-Rt-ocv">
             <objects>
                 <tableViewController id="gkQ-RX-mLC" customClass="TodoListViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
@@ -500,7 +500,12 @@
                             <outlet property="delegate" destination="gkQ-RX-mLC" id="G5Q-Xz-vP0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDo's" id="86p-io-iv9">
+                    <navigationItem key="navigationItem" title="Your ToDo's" id="86p-io-iv9">
+                        <barButtonItem key="leftBarButtonItem" title="All" id="sdf-jB-hOS">
+                            <connections>
+                                <segue destination="iXG-hM-fu9" kind="show" identifier="showAllSegue" id="Zdv-cF-mht"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="New" id="uiC-yy-9HU">
                             <connections>
                                 <action selector="newPressed:" destination="gkQ-RX-mLC" id="yzF-Z4-5ij"/>
@@ -1442,41 +1447,35 @@
             </objects>
             <point key="canvasLocation" x="418.5" y="2021.25"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="yZN-vK-GXw">
+        <!--All Todo's-->
+        <scene sceneID="875-GX-WY5">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mrm-Ka-nvu" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fJv-iX-cIv"/>
-                        <viewControllerLayoutGuide type="bottom" id="Lwq-7p-BK1"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oaH-El-mfj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableViewController id="iXG-hM-fu9" customClass="ShowAllTodoViewController" customModule="Leap_Internal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qdI-eP-4Ak">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="92y-PN-t45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Bga-ic-rAX">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bga-ic-rAX" id="0AK-jo-cxx">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iXG-hM-fu9" id="AIx-Ij-sNX"/>
+                            <outlet property="delegate" destination="iXG-hM-fu9" id="xNU-0U-ViY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="All Todo's" id="ylc-Us-sCl"/>
+                    <connections>
+                        <outlet property="navBar" destination="ylc-Us-sCl" id="ZE0-Dk-0rm"/>
+                        <segue destination="nQ1-Lh-9g8" kind="show" identifier="detailSegue" id="1xF-Sc-VDn"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWY-Oe-9p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="DpI-DW-0Xv">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="hAy-79-8rp" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WqF-Pf-zWy"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Nt-kG-kb7"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ep8-Sm-cUD">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YaS-b9-xg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
+            <point key="canvasLocation" x="-304.5" y="951.75"/>
         </scene>
     </scenes>
     <resources>
@@ -1486,9 +1485,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uGl-id-RAS"/>
-        <segue reference="09P-hh-33n"/>
+        <segue reference="t3g-aj-MA3"/>
         <segue reference="lhp-Pq-K87"/>
         <segue reference="b93-eg-Bhn"/>
+        <segue reference="1xF-Sc-VDn"/>
         <segue reference="Hda-nZ-fh2"/>
         <segue reference="5lY-8A-NQ7"/>
         <segue reference="RWp-yF-gaP"/>

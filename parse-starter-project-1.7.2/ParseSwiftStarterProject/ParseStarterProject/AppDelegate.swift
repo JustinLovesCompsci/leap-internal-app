@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
 
-        PFUser.enableAutomaticUser()
+//        PFUser.enableAutomaticUser()
 
         let defaultACL = PFACL();
 
@@ -142,18 +142,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         }
     }
-    
-    //                if action == PUSH_FIELD_ACTION_UPDATE {
-    //
-    //                } else if action == PUSH_FIELD_ACTION_DELETE {
-    //                    let todo = PFObject(withoutDataWithClassName: PF_GEN_TODOS_CLASS_NAME, objectId: id as String)
-    //                    todo.fetchInBackgroundWithBlock {
-    //                        (object: PFObject?, error:NSError?) -> Void in
-    //                        if error == nil {
-    //                            todo.unpinInBackground()
-    //                        }
-    //                    }
-    //                }
     
     func updateTodos() {
         let tabController = self.window?.rootViewController as! UITabBarController

@@ -13,12 +13,17 @@ import ParseUI
 
 class TodoListViewController: UITableViewController, PFLogInViewControllerDelegate {
     
+    let EXEC_TODO_TYPES = [TO_ALL_TYPE, TO_EXEC_TYPE]
+    let MENTORS_TODO_TYPES = [TO_ALL_TYPE, TO_EXEC_TYPE]
+    let STUDENT_REPS_TODO_TYPES = [TO_ALL_TYPE, TO_STUDENT_REPS_TYPE]
+    
     @IBOutlet weak var navBar: UINavigationItem!
     
     var genTodos: [PFObject]! = []
     var toShowTodo: PFObject!
     var isRefreshing = false
     var isFirstLoading = false
+    var isPresentingLogIn = false
     
     @IBAction func newPressed(sender: AnyObject) {
         performSegueWithIdentifier("addTodoSegue", sender: self)
@@ -36,32 +41,40 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 70.0
         
-        tableView.rowHeight = UITableViewAutomaticDimension;
-        tableView.estimatedRowHeight = 70.0;
-        
-        if PFUser.currentUser() == nil || PFUser.currentUser()?.objectId == nil {
-            presentLogIn()
-        }
-        else {
+        if let user = PFUser.currentUser() {
             PushNotication.installUserForPush()
-            
+
             if Utilities.isExecUser() {
                 navBar.rightBarButtonItem?.enabled = true
             } else {
                 navBar.rightBarButtonItem?.enabled = false
             }
         }
+        else {
+            presentLogIn()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if isPresentingLogIn {
+            return
+        } else {
+            loadViewContent()
+        }
+    }
+    
+    func loadViewContent() {
         if let user = PFUser.currentUser() {
             let connected = InternetUtil.isConnectedToNetwork()
             if connected {
-                navBar.title = "ToDo"
+                navBar.title = "Ur ToDo"
             } else {
-                navBar.title = "ToDo(未连接)"
+                navBar.title = "Ur ToDo(未连接)"
             }
             
             if isFirstLoading && connected {
@@ -71,6 +84,22 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
                 loadGenTodosFromLocal()
             }
         }
+    }
+    
+    func presentLogIn() {
+        var logInController = MyPFLogInViewController()
+        logInController.fields = (PFLogInFields.UsernameAndPassword
+            | PFLogInFields.LogInButton
+            | PFLogInFields.PasswordForgotten)
+        logInController.delegate = self
+        isPresentingLogIn = true
+        self.presentViewController(logInController, animated: true, completion: nil)
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        isPresentingLogIn = false
+        loadViewContent()
     }
     
     func refreshData(sender: AnyObject) {
@@ -88,19 +117,6 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         refreshControl?.endRefreshing()
     }
     
-    func presentLogIn() {
-        var logInController = MyPFLogInViewController()
-        logInController.fields = (PFLogInFields.UsernameAndPassword
-                                | PFLogInFields.LogInButton
-                                | PFLogInFields.PasswordForgotten)
-        logInController.delegate = self
-        self.presentViewController(logInController, animated: true, completion: nil)
-    }
-    
-    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -114,15 +130,31 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
 //                return
 //            }
             
-            var query = PFQuery(className: PF_TODOS_CLASS_NAME)
-            query.orderByAscending(PF_TODOS_DUE_DATE)
+            var typeQuery = PFQuery(className: PF_TODOS_CLASS_NAME)
+            typeQuery.whereKey(PF_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+            typeQuery.whereKey(PF_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
             
-            query.whereKey(PF_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
-            query.whereKey(PF_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+            if Utilities.isExecUser() {
+                typeQuery.whereKey(PF_TODOS_TYPE, containedIn: self.EXEC_TODO_TYPES)
+            } else if Utilities.isMentorUser() {
+                typeQuery.whereKey(PF_TODOS_TYPE, containedIn: self.MENTORS_TODO_TYPES)
+            } else if Utilities.isStudentRepUser() {
+                typeQuery.whereKey(PF_TODOS_TYPE, containedIn: self.STUDENT_REPS_TODO_TYPES)
+            }
             
             if !self.isRefreshing {
                 HudUtil.showProgressHUD()
             }
+            
+            let user = PFUser.currentUser()!
+            
+            var selectQuery = PFQuery(className: PF_TODOS_CLASS_NAME)
+            selectQuery.whereKey(PF_TODOS_DUE_DATE, greaterThanOrEqualTo: NSDate())
+            selectQuery.whereKey(PF_TODOS_DUE_DATE, lessThanOrEqualTo: Utilities.getDueDateLimit())
+            selectQuery.whereKey(PF_TODOS_USER_LIST, equalTo: user)
+
+            var query = PFQuery.orQueryWithSubqueries([typeQuery, selectQuery])
+            query.orderByAscending(PF_TODOS_DUE_DATE)
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
                 if !self.isRefreshing {
@@ -170,10 +202,6 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
                 println(error)
             }
         }
-    }
-    
-    func loadExecTodos() {
-        
     }
     
 //    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
