@@ -47,32 +47,28 @@ class Utilities {
     }
     
     class func isExecUser() -> Bool {
-        if PFUser.currentUser() == nil {
-            return false
+        if let user:PFObject = PFUser.currentUser() {
+            if let types = user[PF_USER_TYPES] as? [String] {
+                return contains(types, PF_TYPE_EXEC)
+            }
         }
-        var user:PFObject = PFUser.currentUser()!
-        var category = user[PF_USER_CATEGORY] as? Int
-        return category == PF_IS_EXEC
+        return false
     }
     
     class func isMentorUser() -> Bool {
-        if PFUser.currentUser() == nil {
-            return false
-        }
-        var user:PFObject = PFUser.currentUser()!
-        if let category = user[PF_USER_CATEGORY] as? Int {
-            return category == PF_IS_MENTOR
+        if let user:PFObject = PFUser.currentUser() {
+            if let types = user[PF_USER_TYPES] as? [String] {
+                return contains(types, PF_TYPE_MENTOR)
+            }
         }
         return false
     }
     
     class func isStudentRepUser() -> Bool {
-        if PFUser.currentUser() == nil {
-            return false
-        }
-        var user:PFObject = PFUser.currentUser()!
-        if let category = user[PF_USER_CATEGORY] as? Int {
-            return category == PF_IS_STUDENT_REP
+        if let user:PFObject = PFUser.currentUser() {
+            if let types = user[PF_USER_TYPES] as? [String] {
+                return contains(types, PF_TYPE_STUDENT_REP)
+            }
         }
         return false
     }

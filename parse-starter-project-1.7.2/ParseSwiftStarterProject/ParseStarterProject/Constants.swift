@@ -11,9 +11,9 @@ import Foundation
 let DEFAULT_TAB							= 0
 
 /* User Category */
-let PF_IS_EXEC                          = 1
-let PF_IS_MENTOR                        = 2
-let PF_IS_STUDENT_REP                   = 3
+let PF_TYPE_EXEC                          = "exec"
+let PF_TYPE_MENTOR                        = "mentor"
+let PF_TYPE_STUDENT_REP                   = "studentRep"
 
 /* Installation */
 let PF_INSTALLATION_CLASS_NAME			= "_Installation"           //	Class name
@@ -27,7 +27,7 @@ let PF_USER_USERNAME					= "username"				//	String
 let PF_USER_PASSWORD					= "password"				//	String
 let PF_USER_NAME                        = "Name"                    //  String
 let PF_USER_EMAIL                       = "email"                   //  String
-let PF_USER_CATEGORY                    = "Category"                //  Number
+let PF_USER_TYPES                       = "Types"                   //  String Array
 let PF_USER_NAME_LOWER_CASE             = "LowerCaseName"           //  String
 
 /* Todos */
