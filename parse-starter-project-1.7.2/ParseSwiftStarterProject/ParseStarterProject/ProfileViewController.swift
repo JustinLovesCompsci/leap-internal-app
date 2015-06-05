@@ -442,6 +442,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         HudUtil.showProgressHUD()
         query.whereKey(PF_RECORD_USER_LIST, equalTo: selectedUser)
         query.orderByDescending(PF_RECORD_START_DATE)
+        query.includeKey(PF_RECORD_USER_LIST)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
             HudUtil.hidHUD()

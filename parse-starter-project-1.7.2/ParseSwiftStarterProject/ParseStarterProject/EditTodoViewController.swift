@@ -182,7 +182,6 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
             createVC.items += Utilities.getEmailItems()
         } else if segue.identifier == "editUserListSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
-            createVC.isIncludeSelf = true
             createVC.delegate = self
         }
     }

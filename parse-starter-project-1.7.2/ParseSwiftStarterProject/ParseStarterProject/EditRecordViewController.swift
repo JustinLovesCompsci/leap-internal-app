@@ -241,6 +241,11 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         } else if segue.identifier == "editRecipientSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
             createVC.delegate = self
+            if let recipients = record[PF_TODOS_USER_LIST] as? [PFUser] {
+                for recipient in recipients {
+                    createVC.selection.append(recipient.objectId!)
+                }
+            }
         } else if segue.identifier == "editChoiceSegue" {
             let createVC = segue.destinationViewController as! EditChoiceViewController
             createVC.editAttribute = toEditAttribute

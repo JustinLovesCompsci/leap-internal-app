@@ -19,7 +19,7 @@ class SelectMultipleViewController: UITableViewController {
     var users = [PFUser]()
     var selection = [String]()
     var selectedUsers = [PFUser]()
-    var isIncludeSelf = false
+    var isIncludeSelf = true
     
     var delegate: SelectMultipleDelegate!
     

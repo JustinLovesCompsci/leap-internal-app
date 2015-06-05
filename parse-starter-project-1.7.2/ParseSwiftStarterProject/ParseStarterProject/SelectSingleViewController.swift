@@ -21,6 +21,7 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
     var users = [PFUser]()
     var selectedUser: PFUser!
     var delegate: SelectSingleDelegate!
+    var isIncludeSelf = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,9 @@ class SelectSingleViewController: UITableViewController, UISearchBarDelegate {
         if InternetUtil.isConnectedToNetwork() {
             let user = PFUser.currentUser()
             var query = PFQuery(className: PF_USER_CLASS_NAME)
-            query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
+            if !isIncludeSelf {
+                query.whereKey(PF_USER_OBJECTID, notEqualTo: user!.objectId!)
+            }
             query.orderByAscending(PF_USER_NAME)
             query.limit = 1000
             
