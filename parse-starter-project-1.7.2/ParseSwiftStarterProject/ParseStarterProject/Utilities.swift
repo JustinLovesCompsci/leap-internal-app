@@ -109,4 +109,10 @@ class Utilities {
         return acl
     }
     
+    class func makeRowButton(item:String, type: UIButtonType) -> UIButton {
+        let button = UIButton.buttonWithType(type) as! UIButton
+        button.frame = CGRectMake(0, 0, 150, 44)
+        button.setTitle(item, forState: UIControlState.Normal)
+        return button
+    }
 }

@@ -161,23 +161,23 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
         if segue.identifier == "editTodoTextSegue" {
             let createVC = segue.destinationViewController as! EditTextViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             createVC.editAttribute = toEditAttribute
             
         } else if segue.identifier == "editTodoDateSegue" {
             let createVC = segue.destinationViewController as! EditDateViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             createVC.editAttribute = toEditAttribute
         } else if segue.identifier == "editBigTextSegue" {
             let createVC = segue.destinationViewController as! EditBigTextViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             createVC.editAttribute = toEditAttribute
         } else if segue.identifier == "editChoiceSegue" {
             let createVC = segue.destinationViewController as! EditChoiceViewController
             createVC.editObject = editObject
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             createVC.editAttribute = toEditAttribute
             createVC.items += Utilities.getEmailItems()
         } else if segue.identifier == "editUserListSegue" {

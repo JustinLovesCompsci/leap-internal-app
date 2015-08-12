@@ -47,12 +47,12 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch (item) {
         case SAVE_TO_CALENDAR:
-            let button = makeRowButton(item)
+            let button = Utilities.makeRowButton(item, type: UIButtonType.System)
             button.addTarget(self, action: "saveCalendarAction:", forControlEvents: UIControlEvents.TouchUpInside)
             cell.addSubview(button)
             button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
         case ASK_QUESTION:
-            let button = makeRowButton(item)
+            let button = Utilities.makeRowButton(item, type: UIButtonType.System)
             button.addTarget(self, action: "askQuestionAction:", forControlEvents: UIControlEvents.TouchUpInside)
             cell.addSubview(button)
             button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
@@ -78,13 +78,6 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    func makeRowButton(item:String) -> UIButton {
-        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.frame = CGRectMake(0, 0, 150, 44)
-        button.setTitle(item, forState: UIControlState.Normal)
-        return button
     }
     
     func saveCalendarAction(sender: UIButton!) {

@@ -15,15 +15,17 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     @IBOutlet weak var navBar: UINavigationItem!
     
     let generalItems = [NAME, EMAIL, PASSWORD]
-    let financialItems = [TOTAL_GAIN, TOTAL_LOSS, TOTAL_REIMBURSE, TOTAL_NET]
+    let financialItems = [TOTAL_GAIN, TOTAL_LOSS, TOTAL_REIMBURSE, TOTAL_LOSS_CANCEL, TOTAL_NET]
     
     var gains:[PFObject] = []
     var losses:[PFObject] = []
     var reimburses:[PFObject] = []
+    var lossCancels:[PFObject] = []
     
     var totalGains = 0
     var totalLosses = 0
     var totalReimburses = 0
+    var totalLossCancel = 0
     var totalNet = 0
     
     var toShowFinanceCategory = ""
@@ -123,14 +125,14 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     }
     
     func showNewRecordSheet() {
-        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "New Gain", "New Loss", "New Reimburse")
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "New Gain", "New Loss", "New Reimburse", "新罚款抵用劵")
         isToEditRecord  = true
         isToCreateRecord = true
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
     }
     
     func showEditRecordSheet() {
-        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Edit Gain", "Edit Loss", "Edit Reimburse")
+        var actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Edit Gain", "Edit Loss", "Edit Reimburse", "修改罚款抵用劵")
         isToEditRecord = true
         isToCreateRecord = false
         actionSheet.showFromTabBar(self.tabBarController?.tabBar)
@@ -149,8 +151,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             
             if isToEditRecord {
                 
-                newRecord = PFObject(className: PF_RECORD_CLASS_NAME)
                 if isToCreateRecord {
+                    newRecord = PFObject(className: PF_RECORD_CLASS_NAME)
+                    
                     switch buttonIndex {
                     case 1:
                         newRecord[PF_RECORD_TYPE] = GAIN_RECORD_TYPE
@@ -158,6 +161,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                         newRecord[PF_RECORD_TYPE] = LOSS_RECORD_TYPE
                     case 3:
                         newRecord[PF_RECORD_TYPE] = REIMBURSE_RECORD_TYPE
+                    case 4:
+                        newRecord[PF_RECORD_TYPE] = LOSS_CANCEL_RECORD_TYPE
                     default:
                         println("No new type of record selected")
                     }
@@ -181,6 +186,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                         toShowFinanceCategory = TOTAL_LOSS
                     case 3:
                         toShowFinanceCategory = TOTAL_REIMBURSE
+                    case 4:
+                        toShowFinanceCategory = TOTAL_LOSS_CANCEL
                     default:
                         println("No new type of record selected")
                     }
@@ -229,6 +236,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 self.gains.removeAll(keepCapacity: false)
                 self.losses.removeAll(keepCapacity: false)
                 self.reimburses.removeAll(keepCapacity: false)
+                self.lossCancels.removeAll(keepCapacity: false)
                 
                 if objects != nil && objects?.count > 0 {
                     for object in objects as! [PFObject]! {
@@ -239,6 +247,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                             self.losses.append(object)
                         case REIMBURSE_RECORD_TYPE:
                             self.reimburses.append(object)
+                        case LOSS_CANCEL_RECORD_TYPE:
+                            self.lossCancels.append(object)
                         default:
                             println("should not reach here")
                         }
@@ -262,6 +272,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         totalGains = 0
         totalLosses = 0
         totalReimburses = 0
+        totalLossCancel = 0
         totalNet = 0
     }
     
@@ -276,7 +287,14 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         for reimburse in reimburses {
             totalReimburses += reimburse[PF_RECORD_AMOUNT] as! Int
         }
-        totalNet = totalGains - totalLosses + totalReimburses
+        for lossCancel in lossCancels {
+            totalLossCancel += lossCancel[PF_RECORD_AMOUNT] as! Int
+        }
+        if totalLosses > totalLossCancel {
+            totalNet = totalGains - totalLosses + totalLossCancel + totalReimburses
+        } else {
+            totalNet = totalGains + totalReimburses
+        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -301,9 +319,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { /* General */
-            return 3
+            return generalItems.count
         } else { /* Financials */
-            return 4 //total gains, total losses, total reimburse, net
+            return financialItems.count
         }
     }
     
@@ -344,6 +362,9 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                 cell.detailTextLabel?.textColor = UIColor.redColor()
             case TOTAL_REIMBURSE:
                 cell.detailTextLabel?.text = totalReimburses.description
+            case TOTAL_LOSS_CANCEL:
+                cell.detailTextLabel?.text = totalLossCancel.description
+                cell.detailTextLabel?.textColor = UIColor.blackColor()
             case TOTAL_NET:
                 cell.detailTextLabel?.text = totalNet.description
                 cell.detailTextLabel?.textColor = UIColor.blueColor()
@@ -398,6 +419,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
                     createVC.records.extend(losses)
                 case TOTAL_REIMBURSE:
                     createVC.records.extend(reimburses)
+                case TOTAL_LOSS_CANCEL:
+                    createVC.records.extend(lossCancels)
                 default:
                     createVC.records.extend(gains)
                 }
@@ -411,6 +434,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             let createVC = segue.destinationViewController as! EditRecordViewController
             createVC.record = newRecord
             createVC.isEditingMode = true
+            createVC.isNewMode = true
             
         } else if segue.identifier == "editRecordSegue" {
             let createVC = segue.destinationViewController as! SelectSingleViewController
@@ -435,6 +459,8 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             query.whereKey(PF_RECORD_TYPE, equalTo: LOSS_RECORD_TYPE)
         case TOTAL_REIMBURSE:
             query.whereKey(PF_RECORD_TYPE, equalTo: REIMBURSE_RECORD_TYPE)
+        case TOTAL_LOSS_CANCEL:
+            query.whereKey(PF_RECORD_TYPE, equalTo: LOSS_CANCEL_RECORD_TYPE)
         default:
             println("should not reach here")
         }

@@ -81,7 +81,7 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
         deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action:UIAlertAction!) in
             NSLog("Cancelled log out")
         }))
-        deleteAlert.addAction(UIAlertAction(title: "Remove", style: .Default, handler: { (action:UIAlertAction!) in
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action:UIAlertAction!) in
             HudUtil.showProgressHUD()
             self.todo.deleteInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
@@ -95,7 +95,7 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
                             if let error = error {
                                 NSLog("%@", error)
                             }
-                            HudUtil.showErrorHUD("Cannot save to phone")
+                            HudUtil.showErrorHUD("Cannot delete from local datastore")
                         }
                     }
                 } else {

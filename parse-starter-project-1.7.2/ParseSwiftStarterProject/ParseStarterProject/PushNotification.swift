@@ -17,6 +17,12 @@ class PushNotication {
         if Utilities.isExecUser() {
             installation.addUniqueObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
         }
+        if Utilities.isStudentRepUser() {
+            installation.addUniqueObject(STUDENT_REP_CHANNEL, forKey: PF_CHANNEL)
+        }
+        if Utilities.isMentorUser() {
+            installation.addUniqueObject(MENTORS_CHANNEL, forKey: PF_CHANNEL)
+        }
         installation.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
             if error != nil {

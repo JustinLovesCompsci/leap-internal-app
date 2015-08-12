@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class AmountDetailViewController: UITableViewController {
+class AmountDetailViewController: UITableViewController, DeleteRecordDelegate {
     
     @IBOutlet weak var navBar: UINavigationItem!
     var category = ""
@@ -69,7 +69,14 @@ class AmountDetailViewController: UITableViewController {
             let createVC = segue.destinationViewController as! EditRecordViewController
             createVC.record = toShowRecord
             createVC.isEditingMode = self.isEditingMode
+            createVC.deleteDelegate = self
         }
+    }
+    
+    // DeleteRecordDelegate
+    func didDeleteRecord(record: PFObject) {
+        records.removeAtIndex(find(records, record)!)
+        tableView.reloadData()
     }
     
 }

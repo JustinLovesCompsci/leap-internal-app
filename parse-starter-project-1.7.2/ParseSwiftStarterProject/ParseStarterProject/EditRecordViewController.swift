@@ -11,12 +11,20 @@ import Parse
 import UIKit
 import MessageUI
 
+protocol DeleteRecordDelegate {
+    func didDeleteRecord(record:PFObject)
+}
+
 class EditRecordViewController: UITableViewController, SelectMultipleDelegate, MFMailComposeViewControllerDelegate {
     
     var record:PFObject!
-    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_EMAIL, RECORD_USER_LIST]
+    let items = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_EMAIL, RECORD_ASK_QUESTION_ACTION]
+    let itemsWithEditingMode = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_EMAIL, RECORD_USER_LIST, RECORD_DELETE_ACTION]
+    let itemsWithNewMode = [RECORD_SUMMARY, RECORD_AMOUNT, RECORD_START_DATE, RECORD_END_DATE, RECORD_EMAIL, RECORD_USER_LIST]
     var isEditingMode = false
+    var isNewMode = false
     var toEditAttribute: String!
+    var deleteDelegate: DeleteRecordDelegate!
     
     @IBOutlet weak var saveButto: UIBarButtonItem!
     
@@ -116,18 +124,30 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isEditingMode && !isNewMode {
+            return itemsWithEditingMode.count
+        } else if isNewMode {
+            return itemsWithNewMode.count
+        }
         return items.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "cell")
+        var item = ""
+        
         if isEditingMode {
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            if isNewMode {
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                item = itemsWithNewMode[indexPath.row]
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                item = itemsWithEditingMode[indexPath.row]
+            }
         } else {
             cell.accessoryType = UITableViewCellAccessoryType.None
+            item = items[indexPath.row]
         }
-        
-        var item = items[indexPath.row]
         
         switch (item) {
         case RECORD_SUMMARY:
@@ -143,32 +163,32 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             cell.textLabel?.text = RECORD_END_DATE
             cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(record[PF_RECORD_END_DATE] as! NSDate)
         case RECORD_USER_LIST:
-            if isEditingMode {
-                cell.textLabel?.text = RECORD_USER_LIST
-                cell.detailTextLabel?.text = String(getNumUsers()) + " people"
-            } else {
-                cell.textLabel?.text = ""
-                cell.detailTextLabel?.text = ""
-                let button = makeRowButton("Ask a Question")
-                button.addTarget(self, action: "askQuestionAction:", forControlEvents: UIControlEvents.TouchUpInside)
-                cell.addSubview(button)
-                button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
-            }
+            cell.textLabel?.text = RECORD_USER_LIST
+            cell.detailTextLabel?.text = String(getNumUsers()) + " people"
         case RECORD_EMAIL:
             cell.textLabel?.text = RECORD_EMAIL
             cell.detailTextLabel?.text = record[PF_RECORD_CONTACT_EMAIL] as? String
+        case RECORD_ASK_QUESTION_ACTION:
+            cell.textLabel?.text = ""
+            cell.detailTextLabel?.text = ""
+            let button = Utilities.makeRowButton("Ask a Question", type: UIButtonType.System)
+            button.addTarget(self, action: "askQuestionAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.addSubview(button)
+            button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
+        case RECORD_DELETE_ACTION:
+            cell.textLabel?.text = ""
+            cell.detailTextLabel?.text = ""
+            let button = Utilities.makeRowButton("Delete", type: UIButtonType.System)
+            button.addTarget(self, action: "deleteAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.addSubview(button)
+            button.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2)
+            button.titleLabel?.textColor = UIColor.redColor()
+            cell.accessoryType = UITableViewCellAccessoryType.None
         default:
             println("should not reach here")
         }
         
         return cell
-    }
-    
-    func makeRowButton(item:String) -> UIButton {
-        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.frame = CGRectMake(0, 0, 150, 44)
-        button.setTitle(item, forState: UIControlState.Normal)
-        return button
     }
     
     func askQuestionAction(sender: UIButton!) {
@@ -190,12 +210,31 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         presentViewController(picker, animated: true, completion: nil)
     }
     
+    func deleteAction(sender: UIButton!) {
+        var logOutAlert = UIAlertController(title: "Delete This Record", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
+        }))
+        
+        logOutAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action:UIAlertAction!) in
+            DataUtil.deleteRecord(self.record, controller: self)
+            self.deleteDelegate.didDeleteRecord(self.record)
+        }))
+        
+        presentViewController(logOutAlert, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         if isEditingMode {
-            var item = items[indexPath.row]
+            var item = ""
+            if isNewMode {
+                item = itemsWithNewMode[indexPath.row]
+            } else {
+                item = itemsWithEditingMode[indexPath.row]
+            }
             
             switch (item) {
             case RECORD_SUMMARY:
@@ -217,7 +256,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
                 toEditAttribute = PF_RECORD_CONTACT_EMAIL
                 performSegueWithIdentifier("editChoiceSegue", sender: self)
             default:
-                println("should not reach here")
+                println("should not reach here in didSelectRow")
             }
         }
     }
@@ -227,17 +266,17 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             let createVC = segue.destinationViewController as! EditTextViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
         } else if segue.identifier == "editNumSegue" {
             let createVC = segue.destinationViewController as! EditNumberViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
         } else if segue.identifier == "editDateSegue" {
             let createVC = segue.destinationViewController as! EditDateViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
         } else if segue.identifier == "editRecipientSegue" {
             let createVC = segue.destinationViewController as! SelectMultipleViewController
             createVC.delegate = self
@@ -250,13 +289,13 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             let createVC = segue.destinationViewController as! EditChoiceViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             createVC.items += Utilities.getEmailItems()
         } else if segue.identifier == "editDateChoiceSegue" {
             let createVC = segue.destinationViewController as! EditDateChoiceViewController
             createVC.editAttribute = toEditAttribute
             createVC.editObject = record
-            createVC.objectClass = PF_TODOS_CLASS_NAME //TODO: allow exec todo as well
+            createVC.objectClass = PF_TODOS_CLASS_NAME
             let currentComps = FinanceUtil.getCurrentComponents()
             createVC.items.append(FinanceUtil.getCurrentFinancialPeriodDate(currentComps))
             createVC.items.append(FinanceUtil.getNextFinancialPeriodDate(currentComps))

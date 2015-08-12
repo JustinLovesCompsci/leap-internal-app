@@ -56,6 +56,7 @@
 		AAC3CD931B1ECBCD0096AFBB /* ShowAllTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC3CD921B1ECBCD0096AFBB /* ShowAllTodoViewController.swift */; };
 		AAD609B71B03025600145F56 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B61B03025600145F56 /* TodoDetailViewController.swift */; };
 		AAD609BA1B044A7900145F56 /* AmountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */; };
+		AAE61E0C1B241EBA00B543E4 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE61E0B1B241EBA00B543E4 /* DataUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		AAC3CD921B1ECBCD0096AFBB /* ShowAllTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAllTodoViewController.swift; sourceTree = "<group>"; };
 		AAD609B61B03025600145F56 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		AAD609B91B044A7900145F56 /* AmountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountDetailViewController.swift; sourceTree = "<group>"; };
+		AAE61E0B1B241EBA00B543E4 /* DataUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 				AA43AF9B1B10457D00164404 /* HudUtil.swift */,
 				AAC3CD8C1B1199EF0096AFBB /* InternetUtil.swift */,
 				AAC3CD8E1B12F7E50096AFBB /* FinanceUtil.swift */,
+				AAE61E0B1B241EBA00B543E4 /* DataUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */,
 				AA83EAAC1B072D6F002A6B5F /* EditNumberViewController.swift in Sources */,
 				AA83EAC11B0DBC74002A6B5F /* CalendarUtil.swift in Sources */,
+				AAE61E0C1B241EBA00B543E4 /* DataUtil.swift in Sources */,
 				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
 				AA83EAAA1B072D63002A6B5F /* EditTextViewController.swift in Sources */,
 				AA83EABD1B0C453E002A6B5F /* EditBigTextViewController.swift in Sources */,

@@ -67,11 +67,13 @@ let TO_SELECT_TYPE                      = "Select Multiple"
 let GAIN_RECORD_TYPE                    = "gain"
 let LOSS_RECORD_TYPE                    = "loss"
 let REIMBURSE_RECORD_TYPE               = "reimburse"
+let LOSS_CANCEL_RECORD_TYPE             = "lossCancel"
 
 /* Financials */
 let TOTAL_GAIN                           = "Total Gains"
 let TOTAL_LOSS                           = "Total Losses"
 let TOTAL_REIMBURSE                      = "Total Reimburse"
+let TOTAL_LOSS_CANCEL                    = "罚款抵用劵"
 let TOTAL_NET                            = "Net Income"
 
 /* General Profile */
@@ -89,6 +91,8 @@ let RECORD_END_DATE                         = "End Date"
 let RECORD_USER_LIST                        = "Recipients"
 let RECORD_AMOUNT                           = "Amount"
 let RECORD_EMAIL                            = "Contact"
+let RECORD_DELETE_ACTION                    = "Delete"
+let RECORD_ASK_QUESTION_ACTION              = "Ask Questions"
 
 /* New Record */
 let DEFAULT_RECORD_SUMMARY                  = "New Record"
@@ -109,7 +113,8 @@ let MANAGE_EMAIL                            = "management@leap-usa.com"
 let SALES_EMAIL                             = "mentors@leap-usa.com"
 let SERVICE_EMAIL                           = "service@leap-usa.com"
 let MARKETING_EMAIL                         = "marketing@leap-usa.com"
-
+let FINANCE_EMAIL                           = "finance@leap-usa.com"
+let DEVELOPMENT_EMAIL                       = "development@leap-usa.com"
 
 /* Local DataStore Tag */
 let TODO_DATA_TAG                               = "ToDoTag"
@@ -131,3 +136,6 @@ let PUSH_FIELD_TYPE             = "type"
 let PUSH_FIELD_ACTION           = "action"
 let PUSH_FIELD_ACTION_UPDATE    = "Update"
 let PUSH_FIELD_ACTION_DELETE    = "Delete"
+
+/* Cloud Functions */
+let CLOUD_SEND_EMAIL            = "SendEmail"
