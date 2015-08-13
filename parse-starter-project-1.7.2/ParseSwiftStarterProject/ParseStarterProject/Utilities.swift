@@ -75,7 +75,7 @@ class Utilities {
     
     class func getEmailItems() -> [String] {
         var total_items = [String]()
-        let emailItems = [ADMIN_EMAIL, MANAGE_EMAIL, SALES_EMAIL, SERVICE_EMAIL, MARKETING_EMAIL]
+        let emailItems = [ADMIN_EMAIL, MANAGE_EMAIL, SALES_EMAIL, SERVICE_EMAIL, MARKETING_EMAIL, FINANCE_EMAIL, DEVELOPMENT_EMAIL]
         total_items += emailItems
         if let user: PFObject = PFUser.currentUser() {
             total_items.append(user[PF_USER_EMAIL] as! String)

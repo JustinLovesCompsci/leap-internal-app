@@ -22,12 +22,10 @@ class EditNumberViewController: UIViewController {
             if attribute > 0 {
                 editObject[editAttribute] = attribute
                 self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                popInvalidNumAlert()
+                return
             }
-        } else {
-            popInvalidNumAlert()
         }
+        popInvalidNumAlert()
     }
     
     override func viewDidLoad() {
