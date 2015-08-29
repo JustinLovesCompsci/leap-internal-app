@@ -54,8 +54,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         }
         
         HudUtil.showProgressHUD()
-        let user = PFUser.currentUser()!
-        record[PF_RECORD_CREATED_BY] = user[PF_USER_NAME] as? String
+        record[PF_RECORD_CREATOR] = PFUser.currentUser()
         record.ACL = Utilities.getAllPublicACL()
         record.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
@@ -199,8 +198,8 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
             subject += " \(summary)"
         }
         picker.setSubject(subject)
-        if let user = PFUser.currentUser(), createPerson = record[PF_RECORD_CREATED_BY] as? String {
-            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
+        if let user = PFUser.currentUser(), createPerson = record[PF_RECORD_CREATOR] as? PFObject {
+            var messageBody = "Hi \(createPerson[PF_USER_NAME]),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
             picker.setMessageBody(messageBody, isHTML: false)
         }
         if let email = record[PF_RECORD_CONTACT_EMAIL] as? String {

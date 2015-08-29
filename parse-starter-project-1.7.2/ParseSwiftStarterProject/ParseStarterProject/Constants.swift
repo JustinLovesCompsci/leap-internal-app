@@ -51,9 +51,9 @@ let PF_RECORD_START_DATE                 = "StartDate"               //  Date
 let PF_RECORD_END_DATE                   = "EndDate"                 //  Date
 let PF_RECORD_USER_LIST                  = "UserList"                //  Array
 let PF_RECORD_AMOUNT                     = "Amount"                  //  Number
-let PF_RECORD_CREATED_BY                 = "CreatedByPerson"         //  String
 let PF_RECORD_CONTACT_EMAIL              = "ContactEmail"            //  String
 let PF_RECORD_TYPE                       = "Type"                    //  String
+let PF_RECORD_CREATOR                    = "Creator"                 //  Pointer
 let PF_RECORD_CLASS_NAME                 = "Record"
 
 /* Assignee Type */

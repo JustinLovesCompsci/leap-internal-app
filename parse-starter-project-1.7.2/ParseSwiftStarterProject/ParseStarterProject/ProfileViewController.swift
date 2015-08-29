@@ -230,6 +230,7 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
         }
         query.whereKey(PF_RECORD_USER_LIST, equalTo: PFUser.currentUser()!)
         query.whereKey(PF_RECORD_END_DATE, greaterThanOrEqualTo: FinanceUtil.getCurrentFinancialPeriodStartDate(FinanceUtil.getCurrentComponents()))
+        query.includeKey(PF_RECORD_CREATOR)
         query.orderByDescending(PF_RECORD_START_DATE)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
