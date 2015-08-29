@@ -44,13 +44,19 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 70.0
         
+        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        }
+        
         if let user = PFUser.currentUser() {
             PushNotication.installUserForPush()
 
             if Utilities.isExecUser() {
                 navBar.rightBarButtonItem?.enabled = true
+                navBar.leftBarButtonItem?.enabled = true
             } else {
                 navBar.rightBarButtonItem?.enabled = false
+                navBar.leftBarButtonItem?.enabled = false
             }
         }
         else {
@@ -72,9 +78,9 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
         if let user = PFUser.currentUser() {
             let connected = InternetUtil.isConnectedToNetwork()
             if connected {
-                navBar.title = "Ur ToDo"
+                navBar.title = "ToDo"
             } else {
-                navBar.title = "Ur ToDo(未连接)"
+                navBar.title = "ToDo (未连接)"
             }
             
             if isFirstLoading && connected {
@@ -93,7 +99,8 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             | PFLogInFields.PasswordForgotten)
         logInController.delegate = self
         isPresentingLogIn = true
-        self.presentViewController(logInController, animated: true, completion: nil)
+        self.navigationController?.presentViewController(logInController, animated: true, completion: nil)
+//        self.presentViewController(logInController, animated: true, completion: nil)
     }
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {

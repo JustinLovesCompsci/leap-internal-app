@@ -89,10 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
-        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-        }
         return true
     }
 
@@ -136,10 +132,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if type == PF_RECORD_CLASS_NAME {
                 updateRecords()
             }
-        }
-        
-        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         }
     }
     

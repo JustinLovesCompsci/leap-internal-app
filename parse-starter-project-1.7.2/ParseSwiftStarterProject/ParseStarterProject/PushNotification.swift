@@ -14,6 +14,7 @@ class PushNotication {
     class func installUserForPush() {
         var installation = PFInstallation.currentInstallation()
         installation[PF_INSTALLATION_USER] = PFUser.currentUser()
+        installation.removeObjectForKey(PF_CHANNEL)
         if Utilities.isExecUser() {
             installation.addUniqueObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
         }
