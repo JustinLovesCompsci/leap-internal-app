@@ -50,7 +50,6 @@ class FinanceUtil {
         
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
-        println("Current Finance Period ends on \(Utilities.getLongTextFromDate(date!))")
         return date!
     }
     
@@ -76,7 +75,6 @@ class FinanceUtil {
         
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
-        println("Next Finance Period ends on \(Utilities.getLongTextFromDate(date!))")
         return date!
     }
     
@@ -103,8 +101,32 @@ class FinanceUtil {
         
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
-        println("Next next Finance Period ends on \(Utilities.getLongTextFromDate(date!))")
         return date!
     }
     
+    class func getCurrentFinancialPeriodStartDate(currentComps: NSDateComponents) -> NSDate {
+        let components = NSDateComponents()
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        
+        if FinanceUtil.isMonthInMidYearPeriod(currentComps.month) {
+            components.year = currentComps.year
+            components.month = 3
+            components.day = 1
+        } else {
+            if isMonthAtFirstHalfOfYear(currentComps.month) {
+                components.year = currentComps.year
+            } else {
+                components.year = currentComps.year + 1
+            }
+            components.month = 9
+            components.day = 1
+        }
+        
+        let gregorian = NSCalendar(identifier: NSGregorianCalendar)
+        let date = gregorian!.dateFromComponents(components)
+        println("Current Finance Period starts on \(Utilities.getLongTextFromDate(date!))")
+        return date!
+    }
 }
