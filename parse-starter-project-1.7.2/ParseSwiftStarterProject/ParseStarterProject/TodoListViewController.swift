@@ -13,8 +13,8 @@ import ParseUI
 
 class TodoListViewController: UITableViewController, PFLogInViewControllerDelegate {
     
-    let EXEC_TODO_TYPES = [TO_ALL_TYPE, TO_EXEC_TYPE]
-    let MENTORS_TODO_TYPES = [TO_ALL_TYPE, TO_EXEC_TYPE]
+    let EXEC_TODO_TYPES = [TO_ALL_TYPE, TO_MENTORS_TYPE, TO_EXEC_TYPE]
+    let MENTORS_TODO_TYPES = [TO_ALL_TYPE, TO_MENTORS_TYPE]
     let STUDENT_REPS_TODO_TYPES = [TO_ALL_TYPE, TO_STUDENT_REPS_TYPE]
     
     @IBOutlet weak var navBar: UINavigationItem!

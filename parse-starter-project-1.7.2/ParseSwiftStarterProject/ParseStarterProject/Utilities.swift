@@ -83,6 +83,7 @@ class Utilities {
         return total_items
     }
     
+    // Due date limit is 2 months
     class func getDueDateLimit() -> NSDate {
         var components = NSDateComponents()
         components.setValue(2, forComponent: NSCalendarUnit.CalendarUnitMonth);
