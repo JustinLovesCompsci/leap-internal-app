@@ -77,7 +77,7 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     }
     
     func popDeleteAlert() {
-        var deleteAlert = UIAlertController(title: "Delete This ToDo", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        var deleteAlert = UIAlertController(title: "Are you sure?", message: "Delete this ToDo from all assignees", preferredStyle: UIAlertControllerStyle.Alert)
         deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action:UIAlertAction!) in
             NSLog("Cancelled log out")
         }))

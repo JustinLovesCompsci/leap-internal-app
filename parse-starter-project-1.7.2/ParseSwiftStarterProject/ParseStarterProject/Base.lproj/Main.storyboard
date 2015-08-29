@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qqw-Ow-sh5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qqw-Ow-sh5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1245,6 +1245,7 @@
                         <segue destination="kCi-8y-bKZ" kind="show" identifier="editRecordSegue" id="dFg-YL-ue5"/>
                         <segue destination="QvI-Tw-QHZ" kind="show" identifier="selectMultipleSegue" id="XBA-z5-wnW"/>
                         <segue destination="tMz-RA-jEZ" kind="show" identifier="editNewRecordSegue" id="Mzz-OE-leD"/>
+                        <segue destination="Qvs-i9-l6O" kind="show" identifier="showInfoSegue" id="JXd-bm-qW1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-9g-mdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1353,6 +1354,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz1-rg-9n7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2115" y="2021.25"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="keV-q7-jYC">
+            <objects>
+                <viewController id="Qvs-i9-l6O" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I7T-2S-dZv"/>
+                        <viewControllerLayoutGuide type="bottom" id="CkR-E4-On5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i1K-Vx-NOD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Income可能会与你本管理阶段的总分成不同。因为Net Income只包含了未结算的收入和罚款。部分收入和罚款可能会在之后的管理阶段结算，根据客户单合同的结束日期而定。" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-6t-t8H">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qzs-6t-t8H" firstAttribute="leading" secondItem="i1K-Vx-NOD" secondAttribute="leading" id="C2E-2t-bWb"/>
+                            <constraint firstItem="Qzs-6t-t8H" firstAttribute="top" secondItem="I7T-2S-dZv" secondAttribute="bottom" constant="63" id="MCk-bI-gRC"/>
+                            <constraint firstAttribute="trailing" secondItem="Qzs-6t-t8H" secondAttribute="trailing" id="wj8-id-zi5"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Qzs-6t-t8H"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="C2E-2t-bWb"/>
+                                <exclude reference="MCk-bI-gRC"/>
+                                <exclude reference="wj8-id-zi5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Qzs-6t-t8H"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="C2E-2t-bWb"/>
+                                <include reference="MCk-bI-gRC"/>
+                                <include reference="wj8-id-zi5"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3YL-3R-a3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="757.5" y="2703"/>
         </scene>
         <!--Select Single-->
         <scene sceneID="ZDn-Y5-A6W">
@@ -1477,7 +1529,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWY-Oe-9p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-304.5" y="951.75"/>
+            <point key="canvasLocation" x="-429" y="906"/>
         </scene>
     </scenes>
     <resources>
@@ -1486,13 +1538,13 @@
         <image name="welcome.JPG" width="3648" height="2736"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BYM-1P-8qm"/>
+        <segue reference="lhp-Pq-K87"/>
+        <segue reference="Mzz-OE-leD"/>
+        <segue reference="XBA-z5-wnW"/>
         <segue reference="t3g-aj-MA3"/>
+        <segue reference="1xF-Sc-VDn"/>
+        <segue reference="RWp-yF-gaP"/>
         <segue reference="Hda-nZ-fh2"/>
         <segue reference="5lY-8A-NQ7"/>
-        <segue reference="uGl-id-RAS"/>
-        <segue reference="RWp-yF-gaP"/>
-        <segue reference="lhp-Pq-K87"/>
-        <segue reference="b93-eg-Bhn"/>
     </inferredMetricsTieBreakers>
 </document>

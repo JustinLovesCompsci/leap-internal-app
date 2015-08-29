@@ -397,11 +397,17 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
             toShowFinanceCategory = financialItems[indexPath.row]
             if toShowFinanceCategory != TOTAL_NET {
                 performSegueWithIdentifier("amountDetailSegue", sender: self)
+            } else {
+                performSegueWithIdentifier("showInfoSegue", sender: self)
             }
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showInfoSegue" {
+            return
+        }
+        
         if segue.identifier == "amountDetailSegue" {
             let createVC = segue.destinationViewController as! AmountDetailViewController
             createVC.category = toShowFinanceCategory
