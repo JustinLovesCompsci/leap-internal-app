@@ -15,7 +15,7 @@ import MessageUI
 class TodoShowTableViewController: UITableViewController, MFMailComposeViewControllerDelegate  {
     
     var todo: PFObject!
-    let items = [PF_TODOS_SUMMARY, PF_TODOS_DUE_DATE, PF_TODOS_CREATED_BY_PERSON, PF_TODOS_CREATED_BY_EMAIL, SAVE_TO_CALENDAR, ASK_QUESTION]
+    let items = [PF_TODOS_SUMMARY, PF_TODOS_DUE_DATE, PF_TODOS_CREATOR, PF_TODOS_CREATED_BY_EMAIL, SAVE_TO_CALENDAR, ASK_QUESTION]
     let displayTexts = [TODOS_DISPLAY_SUMMARY, TODOS_DISPLAY_DUE_DATE, TODOS_DISPLAY_CREATED_PERSON, TODOS_DISPLAY_CONTACT_EMAIL]
     
     override func viewDidAppear(animated: Bool) {
@@ -61,6 +61,12 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
             if item == PF_TODOS_DUE_DATE {
                 if let date = todo[PF_TODOS_DUE_DATE] as? NSDate {
                     cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(date)
+                } else {
+                    cell.detailTextLabel?.text = ""
+                }
+            } else if item == PF_TODOS_CREATOR {
+                if let creator = todo[PF_TODOS_CREATOR] as? PFObject {
+                    cell.detailTextLabel?.text = creator[PF_USER_NAME] as? String
                 } else {
                     cell.detailTextLabel?.text = ""
                 }
@@ -120,12 +126,12 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
     func insertEvent(store: EKEventStore) {
         var event:EKEvent = EKEvent(eventStore: store)
         
-        if let summary = todo[PF_TODOS_SUMMARY] as? String, descrip = todo[PF_TODOS_DESCRIPTION] as? String, dueDate = todo[PF_TODOS_DUE_DATE] as? NSDate, contactEmail = todo[PF_TODOS_CREATED_BY_EMAIL] as? String, contactPerson = todo[PF_TODOS_CREATED_BY_PERSON] as? String {
+        if let summary = todo[PF_TODOS_SUMMARY] as? String, descrip = todo[PF_TODOS_DESCRIPTION] as? String, dueDate = todo[PF_TODOS_DUE_DATE] as? NSDate, contactEmail = todo[PF_TODOS_CREATED_BY_EMAIL] as? String, contactPerson = todo[PF_TODOS_CREATOR] as? PFObject {
             event.title = "[LEAP-TODO] \(summary)"
             event.allDay = true
             event.startDate = dueDate
             event.endDate = dueDate
-            event.notes = "\(descrip) \r\nPlease contact \(contactPerson) via \(contactEmail) for questions."
+            event.notes = "\(descrip) \r\nPlease contact \(contactPerson[PF_USER_NAME]) via \(contactEmail) for questions."
             event.location = "Leap Consulting Co., Ltd."
             event.calendar = store.defaultCalendarForNewEvents
             
@@ -151,8 +157,8 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
             subject += " \(summary)"
         }
         picker.setSubject(subject)
-        if let user = PFUser.currentUser(), createPerson = todo[PF_TODOS_CREATED_BY_PERSON] as? String {
-            var messageBody = "Hi \(createPerson),\r\n\r\n\r\n\r\nThank you very much!\r\n\r\n\(user[PF_USER_NAME] as! String)"
+        if let user = PFUser.currentUser(), createPerson = todo[PF_TODOS_CREATOR] as? PFObject {
+            var messageBody = "Hi \(createPerson[PF_USER_NAME]),\r\n\r\n\r\n\r\nThank you very much!\r\n\r\n\(user[PF_USER_NAME] as! String)"
             picker.setMessageBody(messageBody, isHTML: false)
         }
         if let email = todo[PF_TODOS_CREATED_BY_EMAIL] as? String {

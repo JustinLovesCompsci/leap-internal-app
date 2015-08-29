@@ -28,8 +28,7 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
         }
         
         HudUtil.showProgressHUD()
-        let user = PFUser.currentUser()!
-        editObject[PF_TODOS_CREATED_BY_PERSON] = user[PF_USER_NAME] as? String
+        editObject[PF_TODOS_CREATOR] = PFUser.currentUser()
         editObject.ACL = Utilities.getAllPublicACL()
         editObject.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in

@@ -154,6 +154,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             selectQuery.whereKey(PF_TODOS_USER_LIST, equalTo: user)
 
             var query = PFQuery.orQueryWithSubqueries([typeQuery, selectQuery])
+            query.includeKey(PF_TODOS_CREATOR)
             query.orderByAscending(PF_TODOS_DUE_DATE)
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -266,7 +267,7 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
             newTodo[PF_TODOS_DUE_DATE] = NSDate()
             let current_user:PFObject = PFUser.currentUser()!
             let user_name = current_user[PF_USER_NAME] as? String
-            newTodo[PF_TODOS_CREATED_BY_PERSON] = user_name
+            newTodo[PF_TODOS_CREATOR] = current_user
             newTodo[PF_TODOS_CREATED_BY_EMAIL] = current_user[PF_USER_EMAIL] as? String
             
             let createVC = segue.destinationViewController as! EditTodoViewController
