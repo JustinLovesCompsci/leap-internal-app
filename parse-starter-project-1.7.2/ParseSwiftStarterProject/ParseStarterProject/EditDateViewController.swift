@@ -19,7 +19,7 @@ class EditDateViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func savePressed(sender: AnyObject) {
-        editObject[editAttribute] = datePicker.date
+        editObject[editAttribute] = CalendarUtil.setTimeZone(datePicker.date)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
@@ -29,5 +29,4 @@ class EditDateViewController: UIViewController {
             datePicker.date = date
         }
     }
-    
 }

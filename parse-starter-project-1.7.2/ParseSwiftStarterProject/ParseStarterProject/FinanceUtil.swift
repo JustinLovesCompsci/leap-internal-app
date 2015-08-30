@@ -25,7 +25,8 @@ class FinanceUtil {
     class func getCurrentComponents() -> NSDateComponents {
         let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
         let currentDate = NSDate()
-        return NSCalendar.currentCalendar().components(flags, fromDate: currentDate)
+        let timeZone = NSTimeZone(name: EST_ZONE)
+        return NSCalendar.currentCalendar().componentsInTimeZone(timeZone!, fromDate: currentDate)
     }
     
     class func getCurrentFinancialPeriodDate(currentComps: NSDateComponents) -> NSDate {
@@ -48,6 +49,7 @@ class FinanceUtil {
             components.day = 28
         }
         
+        components.timeZone = NSTimeZone(name: EST_ZONE)
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
         return date!
@@ -73,6 +75,7 @@ class FinanceUtil {
             components.day = 31
         }
         
+        components.timeZone = NSTimeZone(name: EST_ZONE)
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
         return date!
@@ -99,6 +102,7 @@ class FinanceUtil {
             components.day = 28
         }
         
+        components.timeZone = NSTimeZone(name: EST_ZONE)
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
         return date!
@@ -124,6 +128,7 @@ class FinanceUtil {
             components.day = 1
         }
         
+        components.timeZone = NSTimeZone(name: EST_ZONE)
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
         println("Current Finance Period starts on \(Utilities.getLongTextFromDate(date!))")

@@ -139,3 +139,6 @@ let PUSH_FIELD_ACTION_DELETE    = "Delete"
 
 /* Cloud Functions */
 let CLOUD_SEND_EMAIL            = "SendEmail"
+
+/* Time Zone Name */
+let EST_ZONE                    = "US/Eastern"

@@ -127,14 +127,14 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
         var event:EKEvent = EKEvent(eventStore: store)
         
         if let summary = todo[PF_TODOS_SUMMARY] as? String, descrip = todo[PF_TODOS_DESCRIPTION] as? String, dueDate = todo[PF_TODOS_DUE_DATE] as? NSDate, contactEmail = todo[PF_TODOS_CREATED_BY_EMAIL] as? String, contactPerson = todo[PF_TODOS_CREATOR] as? PFObject {
-            event.title = "[LEAP-TODO] \(summary)"
+            event.title = "[LEAP] ToDo: \(summary)"
             event.allDay = true
             event.startDate = dueDate
             event.endDate = dueDate
-            event.notes = "\(descrip) \r\nPlease contact \(contactPerson[PF_USER_NAME]) via \(contactEmail) for questions."
+            event.notes = "\(descrip) \r\nPlease contact \(contactPerson[PF_USER_NAME] as! String) via \(contactEmail) for questions."
             event.location = "Leap Consulting Co., Ltd."
             event.calendar = store.defaultCalendarForNewEvents
-            
+            event.timeZone = NSTimeZone(name: EST_ZONE)
             var error: NSError?
             let result = store.saveEvent(event, span: EKSpanThisEvent, error: &error)
             

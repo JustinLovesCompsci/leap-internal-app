@@ -15,22 +15,22 @@ class EditDateChoiceViewController: UIViewController, UIPickerViewDataSource, UI
     var objectClass: String!
     var editAttribute: String!
     var items = [NSDate]()
-    var selectedAttribute: NSDate!
+    var selectedDate: NSDate!
     
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBAction func donePressed(sender: AnyObject) {
-        editObject[editAttribute] = selectedAttribute
+        editObject[editAttribute] = selectedDate
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        selectedAttribute = editObject[editAttribute] as? NSDate
+        selectedDate = editObject[editAttribute] as? NSDate
         var selectedIndex = 0
         var currentIndex = 0
         for item in items {
-            if Utilities.isSameAsDate(item, dateTo: selectedAttribute) {
+            if Utilities.isSameAsDate(item, dateTo: selectedDate) {
                 selectedIndex = currentIndex
                 break
             }
@@ -49,11 +49,10 @@ class EditDateChoiceViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedAttribute = items[row]
+        selectedDate = items[row]
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return Utilities.getLongTextFromDate(items[row])
     }
-    
 }

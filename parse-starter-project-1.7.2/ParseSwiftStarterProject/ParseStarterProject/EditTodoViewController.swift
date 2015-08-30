@@ -108,10 +108,10 @@ class EditTodoViewController: UITableViewController, UIActionSheetDelegate, Sele
             cell.textLabel?.text = "Description"
             cell.detailTextLabel?.text = editObject[PF_TODOS_DESCRIPTION] as? String
         case 2:
-            cell.textLabel?.text = "Due Date"
+            cell.textLabel?.text = "Due Date (EST)"
             cell.detailTextLabel?.text = Utilities.getFormattedTextFromDate(editObject[PF_TODOS_DUE_DATE] as! NSDate)
         case 3:
-            cell.textLabel?.text = "Contact Email"
+            cell.textLabel?.text = "Contact"
             cell.detailTextLabel?.text = editObject[PF_TODOS_CREATED_BY_EMAIL] as? String
         case 4:
             cell.textLabel?.text = "Assignee"
