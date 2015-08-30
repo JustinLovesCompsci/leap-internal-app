@@ -59,7 +59,7 @@ let PF_RECORD_CLASS_NAME                 = "Record"
 /* Assignee Type */
 let TO_ALL_TYPE                         = "To All"
 let TO_EXEC_TYPE                        = "To Exec"
-let TO_STUDENT_REPS_TYPE                = "To Student Reps"
+let TO_STUDENT_REPS_TYPE                = "To High School Reps"
 let TO_MENTORS_TYPE                     = "To Mentors"
 let TO_SELECT_TYPE                      = "Select Multiple"
 
@@ -121,7 +121,7 @@ let TODO_DATA_TAG                               = "ToDoTag"
 let MY_RECORDS_TAG                              = "RecordTag"
 
 /* Email Tag */
-let QUESTION_EMAIL_TAG                      = "[LEAP-Question]"
+let QUESTION_EMAIL_TAG                      = "[LEAP] Question:"
 
 /* Notification Channels */
 let EXEC_CHANNEL                        = "Execs"

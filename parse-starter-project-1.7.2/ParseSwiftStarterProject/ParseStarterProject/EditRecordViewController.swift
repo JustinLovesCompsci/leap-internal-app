@@ -201,7 +201,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         }
         picker.setSubject(subject)
         if let user = PFUser.currentUser(), createPerson = record[PF_RECORD_CREATOR] as? PFObject {
-            var messageBody = "Hi \(createPerson[PF_USER_NAME]),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
+            var messageBody = "Hi \(createPerson[PF_USER_NAME] as! String),\r\n\r\n\r\n\r\nThanks,\r\n\r\n\(user[PF_USER_NAME] as! String)"
             picker.setMessageBody(messageBody, isHTML: false)
         }
         if let email = record[PF_RECORD_CONTACT_EMAIL] as? String {
