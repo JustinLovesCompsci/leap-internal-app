@@ -57,9 +57,12 @@ class ProfileViewController: UITableViewController, UIActionSheetDelegate, Selec
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navBar.leftBarButtonItem?.enabled = false
         if Utilities.isExecUser() {
-            self.navBar.leftBarButtonItem?.enabled = true
+            navBar.leftBarButtonItem?.enabled = true
+            navBar.leftBarButtonItem?.title = "Add"
+        } else {
+            navBar.leftBarButtonItem?.enabled = false
+            navBar.leftBarButtonItem?.title = ""
         }
     }
     

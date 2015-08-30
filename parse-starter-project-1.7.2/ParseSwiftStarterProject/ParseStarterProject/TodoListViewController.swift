@@ -53,10 +53,14 @@ class TodoListViewController: UITableViewController, PFLogInViewControllerDelega
 
             if Utilities.isExecUser() {
                 navBar.rightBarButtonItem?.enabled = true
+                navBar.rightBarButtonItem?.title = "Add"
                 navBar.leftBarButtonItem?.enabled = true
+                navBar.leftBarButtonItem?.title = "All"
             } else {
                 navBar.rightBarButtonItem?.enabled = false
+                navBar.rightBarButtonItem?.title = ""
                 navBar.leftBarButtonItem?.enabled = false
+                navBar.leftBarButtonItem?.title = ""
             }
         }
         else {
