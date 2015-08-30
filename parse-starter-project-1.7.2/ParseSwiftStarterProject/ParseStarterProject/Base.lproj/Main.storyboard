@@ -647,7 +647,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="HpX-Lu-ojV">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Yt0-7m-c5Z">
+                        <barButtonItem key="rightBarButtonItem" id="Yt0-7m-c5Z">
                             <connections>
                                 <action selector="savePressed:" destination="tMz-RA-jEZ" id="W9D-Pd-j5O"/>
                             </connections>
@@ -999,7 +999,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="6Rj-8n-ieg">
-                        <barButtonItem key="rightBarButtonItem" title="Change" id="owg-RR-wuO">
+                        <barButtonItem key="rightBarButtonItem" id="owg-RR-wuO">
                             <connections>
                                 <action selector="changePressed:" destination="nQ1-Lh-9g8" id="mLk-lc-oOL"/>
                             </connections>
@@ -1538,13 +1538,13 @@
         <image name="welcome.JPG" width="3648" height="2736"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XBA-z5-wnW"/>
         <segue reference="lhp-Pq-K87"/>
         <segue reference="Mzz-OE-leD"/>
+        <segue reference="ecN-ip-XbZ"/>
+        <segue reference="IYO-Ok-K1C"/>
+        <segue reference="yk5-W4-qzs"/>
+        <segue reference="p9v-dL-Uhr"/>
         <segue reference="BYM-1P-8qm"/>
-        <segue reference="t3g-aj-MA3"/>
-        <segue reference="5lY-8A-NQ7"/>
-        <segue reference="RWp-yF-gaP"/>
-        <segue reference="Hda-nZ-fh2"/>
+        <segue reference="09P-hh-33n"/>
     </inferredMetricsTieBreakers>
 </document>

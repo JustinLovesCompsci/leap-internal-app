@@ -32,8 +32,10 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
         super.viewDidLoad()
         if isEditingMode {
             saveButto.enabled = true
+            saveButto.title = "Save"
         } else {
             saveButto.enabled = false
+            saveButto.title = ""
         }
     }
     

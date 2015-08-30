@@ -45,9 +45,11 @@ class TodoDetailViewController: UIViewController, UIActionSheetDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Utilities.isExecUser() {
-            self.navBar.rightBarButtonItem?.enabled = true
+            navBar.rightBarButtonItem?.enabled = true
+            navBar.rightBarButtonItem?.title = "Edit"
         } else {
-            self.navBar.rightBarButtonItem?.enabled = false
+            navBar.rightBarButtonItem?.enabled = false
+            navBar.rightBarButtonItem?.title = ""
         }
     }
     
