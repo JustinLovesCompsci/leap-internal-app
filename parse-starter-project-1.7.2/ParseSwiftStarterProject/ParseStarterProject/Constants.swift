@@ -86,10 +86,10 @@ let NEW_TODO_SUMMARY                     = "New ToDo"
 
 /* Edit Record */
 let RECORD_SUMMARY                          = "Summary"
-let RECORD_START_DATE                       = "Start Date"
-let RECORD_END_DATE                         = "End Date"
+let RECORD_START_DATE                       = "Start Date (EST)"
+let RECORD_END_DATE                         = "End Date (EST)"
 let RECORD_USER_LIST                        = "Recipients"
-let RECORD_AMOUNT                           = "Amount"
+let RECORD_AMOUNT                           = "Amount (RMB)"
 let RECORD_EMAIL                            = "Contact"
 let RECORD_DELETE_ACTION                    = "Delete"
 let RECORD_ASK_QUESTION_ACTION              = "Ask Questions"
@@ -103,7 +103,7 @@ let ASK_QUESTION                            = " Ask a Question"
 
 /* Todos Row Display */
 let TODOS_DISPLAY_SUMMARY                   = "Summary"
-let TODOS_DISPLAY_DUE_DATE                  = "Due By"
+let TODOS_DISPLAY_DUE_DATE                  = "Due on (EST)"
 let TODOS_DISPLAY_CREATED_PERSON            = "Created By"
 let TODOS_DISPLAY_CONTACT_EMAIL             = "Contact"
 
