@@ -110,9 +110,9 @@ class FinanceUtil {
     
     class func getCurrentFinancialPeriodStartDate(currentComps: NSDateComponents) -> NSDate {
         let components = NSDateComponents()
-        components.hour = 23
-        components.minute = 59
-        components.second = 59
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
         
         if FinanceUtil.isMonthInMidYearPeriod(currentComps.month) {
             components.year = currentComps.year
@@ -120,9 +120,9 @@ class FinanceUtil {
             components.day = 1
         } else {
             if isMonthAtFirstHalfOfYear(currentComps.month) {
-                components.year = currentComps.year
+                components.year = currentComps.year - 1
             } else {
-                components.year = currentComps.year + 1
+                components.year = currentComps.year
             }
             components.month = 9
             components.day = 1
