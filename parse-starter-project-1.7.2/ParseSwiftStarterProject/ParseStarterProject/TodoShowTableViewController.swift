@@ -158,7 +158,7 @@ class TodoShowTableViewController: UITableViewController, MFMailComposeViewContr
         }
         picker.setSubject(subject)
         if let user = PFUser.currentUser(), createPerson = todo[PF_TODOS_CREATOR] as? PFObject {
-            var messageBody = "Hi \(createPerson[PF_USER_NAME]),\r\n\r\n\r\n\r\nThank you very much!\r\n\r\n\(user[PF_USER_NAME] as! String)"
+            var messageBody = "Hi \(createPerson[PF_USER_NAME] as! String),\r\n\r\n\r\n\r\nThank you very much!\r\n\r\n\(user[PF_USER_NAME] as! String)"
             picker.setMessageBody(messageBody, isHTML: false)
         }
         if let email = todo[PF_TODOS_CREATED_BY_EMAIL] as? String {

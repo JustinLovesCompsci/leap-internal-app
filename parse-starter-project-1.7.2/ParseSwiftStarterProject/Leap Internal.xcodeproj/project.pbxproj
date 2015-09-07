@@ -44,8 +44,6 @@
 		AA83EABF1B0C4548002A6B5F /* EditChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EABE1B0C4548002A6B5F /* EditChoiceViewController.swift */; };
 		AA83EAC11B0DBC74002A6B5F /* CalendarUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83EAC01B0DBC74002A6B5F /* CalendarUtil.swift */; };
 		AABB02DA1AFF3E9F006C212C /* welcome.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AABB02D91AFF3E9F006C212C /* welcome.JPG */; };
-		AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */; };
-		AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02DF1B0057FD006C212C /* LoginViewController.swift */; };
 		AABB02E31B005971006C212C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E21B005971006C212C /* Utilities.swift */; };
 		AABB02E51B005AE1006C212C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E41B005AE1006C212C /* TodoListViewController.swift */; };
 		AABB02E71B005B2C006C212C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB02E61B005B2C006C212C /* ProfileViewController.swift */; };
@@ -101,8 +99,6 @@
 		AA83EABE1B0C4548002A6B5F /* EditChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditChoiceViewController.swift; sourceTree = "<group>"; };
 		AA83EAC01B0DBC74002A6B5F /* CalendarUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUtil.swift; sourceTree = "<group>"; };
 		AABB02D91AFF3E9F006C212C /* welcome.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.JPG; sourceTree = "<group>"; };
-		AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		AABB02DF1B0057FD006C212C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AABB02E21B005971006C212C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AABB02E41B005AE1006C212C /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		AABB02E61B005B2C006C212C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -171,8 +167,6 @@
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
-				AABB02DD1B0057D0006C212C /* WelcomeViewController.swift */,
-				AABB02DF1B0057FD006C212C /* LoginViewController.swift */,
 				AABB02E41B005AE1006C212C /* TodoListViewController.swift */,
 				AABB02E61B005B2C006C212C /* ProfileViewController.swift */,
 				AAD609B61B03025600145F56 /* TodoDetailViewController.swift */,
@@ -412,11 +406,9 @@
 				AA83EAAC1B072D6F002A6B5F /* EditNumberViewController.swift in Sources */,
 				AA83EAC11B0DBC74002A6B5F /* CalendarUtil.swift in Sources */,
 				AAE61E0C1B241EBA00B543E4 /* DataUtil.swift in Sources */,
-				AABB02E01B0057FD006C212C /* LoginViewController.swift in Sources */,
 				AA83EAAA1B072D63002A6B5F /* EditTextViewController.swift in Sources */,
 				AA83EABD1B0C453E002A6B5F /* EditBigTextViewController.swift in Sources */,
 				AA43AF9A1B1042C700164404 /* WindowRootViewController.swift in Sources */,
-				AABB02DE1B0057D0006C212C /* WelcomeViewController.swift in Sources */,
 				AA43AF8E1B10420800164404 /* PKHUD.swift in Sources */,
 				AABB02E31B005971006C212C /* Utilities.swift in Sources */,
 				AA83EAB11B07EB9F002A6B5F /* SelectSingleViewController.swift in Sources */,
@@ -547,10 +539,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Leap Internal";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -566,10 +560,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Leap Internal";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

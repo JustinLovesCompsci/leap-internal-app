@@ -131,7 +131,6 @@ class FinanceUtil {
         components.timeZone = NSTimeZone(name: EST_ZONE)
         let gregorian = NSCalendar(identifier: NSGregorianCalendar)
         let date = gregorian!.dateFromComponents(components)
-        println("Current Finance Period starts on \(Utilities.getLongTextFromDate(date!))")
         return date!
     }
 }
