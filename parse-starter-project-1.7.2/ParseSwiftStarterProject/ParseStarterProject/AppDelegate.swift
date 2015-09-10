@@ -133,6 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 updateRecords()
             }
         }
+        
+        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+        }
     }
     
     func updateTodos() {
