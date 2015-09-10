@@ -31,10 +31,9 @@ class Utilities {
     
     class func getFormattedTextFromDate(date:NSDate) -> String {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        let dateStr = dateFormatter.stringFromDate(date)
-        return dateStr.substringToIndex(dateStr.rangeOfString(",")!.startIndex)
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        return dateFormatter.stringFromDate(date)
     }
     
     // no time
