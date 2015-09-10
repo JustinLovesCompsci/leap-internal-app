@@ -24,6 +24,7 @@ class PushNotication {
         if Utilities.isMentorUser() {
             installation.addUniqueObject(MENTORS_CHANNEL, forKey: PF_CHANNEL)
         }
+        installation.addUniqueObject(BROADCAST_CHANNEL, forKey: PF_CHANNEL)
         installation.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
             if error != nil {
@@ -38,6 +39,12 @@ class PushNotication {
         if Utilities.isExecUser() {
             installation.removeObject(EXEC_CHANNEL, forKey: PF_CHANNEL)
         }
+        if Utilities.isStudentRepUser() {
+            installation.removeObject(STUDENT_REP_CHANNEL, forKey: PF_CHANNEL)
+        }
+        if Utilities.isMentorUser() {
+            installation.removeObject(MENTORS_CHANNEL, forKey: PF_CHANNEL)
+        }
         installation.removeObject(BROADCAST_CHANNEL, forKey: PF_CHANNEL)
         installation.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
@@ -46,5 +53,4 @@ class PushNotication {
             }
         }
     }
-    
 }

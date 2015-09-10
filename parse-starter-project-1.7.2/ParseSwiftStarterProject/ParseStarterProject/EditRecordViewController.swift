@@ -212,7 +212,7 @@ class EditRecordViewController: UITableViewController, SelectMultipleDelegate, M
     }
     
     func deleteAction(sender: UIButton!) {
-        var logOutAlert = UIAlertController(title: "Delete This Record", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        var logOutAlert = UIAlertController(title: "Are you sure?", message:"Delete this record from all recipients", preferredStyle: UIAlertControllerStyle.Alert)
         logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler:{ (action:UIAlertAction!) in
         }))
         
